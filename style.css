@@ -66,7 +66,7 @@ body {
 /* Header (already dark) */
 .directory-header {
     background-color: var(--header-bg);
-    padding: 15px 30px;
+    padding: 20px 30px; /* Increased top/bottom padding slightly */
     display: flex;
     justify-content: space-between;
     align-items: center;
@@ -75,9 +75,10 @@ body {
 }
 
 #mall-logo {
-    height: 60px;
+    height: 55px; /* Original height, ensure it's not too tall for new padding */
     max-width: 300px;
     object-fit: contain;
+    /* display: block; */ /* Sometimes helps with vertical alignment oddities */
 }
 
 .search-container {
@@ -117,23 +118,21 @@ body {
     flex-grow: 1;
     display: flex;
     flex-direction: column;
-    overflow: hidden;
+    overflow: hidden; /* Important */
     position: relative;
     padding: 20px;
     background-color: var(--kiosk-content-bg); /* Consistent dark bg */
 }
 
 #map-svg-container {
-    flex-grow: 1;
-    background-color: #202020; /* Your dark map background */
+    flex-grow: 1; /* Takes up available vertical space in .directory-main */
+    display: flex; /* Added to help center svg-render-area if needed */
+    flex-direction: column; /* Added */
+    position: relative;
+    background-color: #202020; /* Your map area background */
     border: 1px solid var(--border-color-dark-theme);
     border-radius: var(--border-radius-lg);
-    overflow: hidden; /* Important */
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    box-shadow: var(--shadow-sm-dark);
-    position: relative; /* Make this a positioning context for the button */
+    overflow: hidden; /* Important to clip SVG if it tries to be too big */
 }
 .loading-indicator {
     font-size: 1.2rem;
@@ -164,7 +163,16 @@ body {
 }
 
 /* SVG specific styles */
-#mall-svg-element .store-shape {
+#mall-svg-element { /* Your actual <svg> element (id set in JS) */
+    /* Critical scaling properties */
+    width: 100%;
+    height: 100%;
+    object-fit: contain; /* Preserve aspect ratio, fit entirely within bounds */
+                           /* Alternatives: 'cover' (might crop), 'fill' (might distort) */
+    max-width: 100%;   /* Redundant if width:100% but good practice */
+    max-height: 100%;  /* Redundant if height:100% but good practice */
+}
+.store-shape {
     stroke: #606060; /* Lighter stroke for definition on dark map bg */
     stroke-width: 1px;
     transition: fill 0.2s ease-in-out, opacity 0.2s ease-in-out, stroke 0.2s ease-in-out;
@@ -208,17 +216,24 @@ body {
 /* Footer - Categories and Vendor List */
 .directory-footer {
     display: flex;
-    height: 380px;
+    height: 400px; /* << CONTROLS FOOTER HEIGHT - Adjust this for mockup proportion */ /* 300px, 350px, etc. */
     flex-shrink: 0;
     background-color: #161616; /* Slightly different dark for footer */
     border-top: 1px solid var(--border-color-dark-theme);
 }
 
-.categories-zone, .vendors-zone {
-    padding: 0;
+.categories-zone {
+    flex-basis: 33%; /* << CONTROLS CATEGORY WIDTH - Adjust for mockup */ 
+    /* ... other styles ... */
     display: flex;
     flex-direction: column;
-    overflow: hidden;
+}
+
+.vendors-zone {
+    flex-basis: 67%; /* << CONTROLS VENDOR LIST WIDTH - Adjust for mockup */
+    /* ... other styles ... */
+    display: flex;
+    flex-direction: column;
 }
 .footer-zone-header {
     padding: 15px 20px;
@@ -240,12 +255,6 @@ body {
 .scrollable-content::-webkit-scrollbar-track { background: #202020; border-radius: 10px; }
 .scrollable-content::-webkit-scrollbar-thumb { background: #4A4A4A; border-radius: 10px; }
 .scrollable-content::-webkit-scrollbar-thumb:hover { background: #6A6A6A; }
-
-.categories-zone {
-    flex-basis: 38%;
-    border-right: 1px solid var(--border-color-dark-theme);
-}
-.vendors-zone { flex-basis: 62%; }
 
 #category-filters {
     display: flex;
@@ -481,4 +490,21 @@ body {
     .scrollable-content { padding: 10px 15px; }
     .modal-content { width: 95%; padding: 20px; max-height: 90vh; overflow-y: auto; }
     #modal-name { font-size: 1.6rem; }
+}
+
+/* Optional: Specific tweaks for very narrow screens if needed */
+@media (max-width: 400px) {
+    .directory-header {
+        padding: 10px;
+    }
+    #mall-logo {
+        height: 35px;
+    }
+    .search-container {
+        padding: 6px 12px;
+    }
+    #search-bar {
+        font-size: 0.9rem;
+    }
+    /* Further reduce font sizes if needed */
 }

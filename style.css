@@ -1,0 +1,484 @@
+:root {
+    --primary-purple: #B599FF;
+    --primary-purple-darker: #9370DB;
+    --logo-black: #000000;
+
+    /* Dark Theme Palette */
+    --body-bg: #0A0A0A; /* Even darker body background */
+    --kiosk-content-bg: #1A1A1A; /* Main dark background for content areas */
+    --element-bg-dark: #2C2C2C; /* Background for cards, list items */
+    --element-bg-dark-hover: #383838; /* Hover state for dark elements */
+    --header-bg: var(--logo-black);
+
+    --text-on-dark-primary: #EAEAEA; /* Primary light text */
+    --text-on-dark-secondary: #A8A8A8; /* Muted light text */
+    --text-on-dark-headings: var(--primary-purple); /* Purple for key headings */
+
+    --border-color-dark-theme: #3F3F3F; /* Borders within the dark theme */
+    --border-color-dark-theme-light: #505050; /* Slightly lighter border */
+
+    --accent-highlight: var(--primary-purple);
+    --dimmed-map-fill: #efe0e0; /* For dimmed shapes on map (dark theme) */
+
+    /* Kiosk Dimensions & General */
+    --kiosk-width: 1080px;
+    --kiosk-height: 1920px;
+    --hover-highlight-list-dark: #302840; /* Dark purpleish for list hover */
+    --shadow-sm-dark: 0 2px 4px rgba(0,0,0,0.2); /* Shadows on dark theme need to be subtle */
+    --shadow-md-dark: 0 5px 15px rgba(0,0,0,0.25);
+    --border-radius-md: 8px;
+    --border-radius-lg: 12px;
+    --font-primary: 'Montserrat', 'Roboto', sans-serif;
+}
+
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    font-family: var(--font-primary);
+    background-color: var(--body-bg);
+    color: var(--text-on-dark-primary); /* Default text for dark theme */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    overflow: hidden;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+}
+
+.kiosk-container {
+    width: var(--kiosk-width);
+    height: var(--kiosk-height);
+    max-width: 100vw;
+    max-height: 100vh;
+    background-color: var(--kiosk-content-bg); /* Main dark bg for kiosk content */
+    border-radius: var(--border-radius-lg);
+    box-shadow: 0 20px 60px rgba(0,0,0,0.4); /* More pronounced shadow */
+    display: flex;
+    flex-direction: column;
+    overflow: hidden;
+}
+
+/* Header (already dark) */
+.directory-header {
+    background-color: var(--header-bg);
+    padding: 15px 30px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-shrink: 0;
+    /* border-bottom: 1px solid var(--border-color-dark-theme); Optional border */
+}
+
+#mall-logo {
+    height: 60px;
+    max-width: 300px;
+    object-fit: contain;
+}
+
+.search-container {
+    display: flex;
+    align-items: center;
+    background-color: #252525; /* Darker input bg on black header */
+    border-radius: 25px;
+    padding: 8px 15px;
+    width: 320px;
+    border: 1px solid var(--border-color-dark-theme); /* Subtle border */
+}
+.search-icon {
+    color: var(--primary-purple);
+    margin-right: 10px;
+}
+#search-bar {
+    padding: 8px 0;
+    border: none;
+    background-color: transparent;
+    font-size: 1rem;
+    outline: none;
+    flex-grow: 1;
+    color: var(--text-on-dark-primary);
+}
+#search-bar::placeholder {
+    color: var(--text-on-dark-secondary);
+}
+#clear-search-btn {
+    background: none; border: none;
+    font-size: 1.3rem; color: #999;
+    cursor: pointer; padding: 0 5px; line-height: 1;
+}
+#clear-search-btn:hover { color: var(--text-on-dark-primary); }
+
+/* Main Map Area */
+.directory-main {
+    flex-grow: 1;
+    display: flex;
+    flex-direction: column;
+    overflow: hidden;
+    position: relative;
+    padding: 20px;
+    background-color: var(--kiosk-content-bg); /* Consistent dark bg */
+}
+
+#map-svg-container {
+    flex-grow: 1;
+    background-color: #202020; /* Your dark map background */
+    border: 1px solid var(--border-color-dark-theme);
+    border-radius: var(--border-radius-lg);
+    overflow: hidden; /* Important */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    box-shadow: var(--shadow-sm-dark);
+    position: relative; /* Make this a positioning context for the button */
+}
+.loading-indicator {
+    font-size: 1.2rem;
+    color: var(--primary-purple);
+}
+.map-overlay-button {
+    position: absolute;
+    bottom: 20px;
+    right: 20px;
+    padding: 10px 18px;
+    background-color: rgba(45, 45, 45, 0.9); /* Dark translucent background */
+    color: var(--text-on-dark-primary);
+    border: 1px solid var(--border-color-dark-theme-light);
+    border-radius: var(--border-radius-md);
+    font-family: var(--font-primary);
+    font-size: 0.9rem;
+    font-weight: 500;
+    cursor: pointer;
+    box-shadow: var(--shadow-md-dark);
+    z-index: 10; /* Ensure it's above the map SVG content */
+    transition: background-color 0.2s ease, color 0.2s ease;
+}
+.map-overlay-button:hover {
+    background-color: rgba(60, 60, 60, 0.95);
+}
+.map-overlay-button:active {
+    background-color: rgba(30, 30, 30, 0.95);
+}
+
+/* SVG specific styles */
+#mall-svg-element .store-shape {
+    stroke: #606060; /* Lighter stroke for definition on dark map bg */
+    stroke-width: 1px;
+    transition: fill 0.2s ease-in-out, opacity 0.2s ease-in-out, stroke 0.2s ease-in-out;
+    cursor: pointer;
+}
+#mall-svg-element .store-map-content {
+    pointer-events: none; /* <<< THIS IS KEY FOR CLICK-THROUGH */
+}
+#mall-svg-element .store-shape:hover:not(.dimmed) {
+    opacity: 0.9;
+    stroke: var(--accent-highlight);
+    stroke-width: 2px;
+}
+#mall-svg-element .store-text {
+    /* font-family: var(--font-primary); */
+    font-family: Arial, Helvetica, sans-serif;
+    text-anchor: middle;
+    dominant-baseline: middle;
+    pointer-events: none;
+    fill: var(--text-on-dark-primary); /* Using your dark theme's primary light text color */
+    font-weight: 600;
+    font-size: 8px; /* << SET YOUR DESIRED FIXED FONT SIZE HERE (e.g., 8px, 10px, 12px) */
+    paint-order: stroke;
+    stroke: rgba(0,0,0,0.7); /* Stronger dark outline for readability on various fills */
+    stroke-width: 0.3em;
+    stroke-linejoin: round;
+}
+#mall-svg-element .highlighted {
+    stroke: var(--accent-highlight) !important;
+    stroke-width: 3.5px !important;
+    opacity: 1 !important;
+}
+#mall-svg-element .dimmed {
+    opacity: 0.25 !important; /* More dim for dark mode */
+    fill: var(--dimmed-map-fill) !important;
+    cursor: default;
+    stroke: #303030 !important; /* Very dim stroke */
+}
+
+
+/* Footer - Categories and Vendor List */
+.directory-footer {
+    display: flex;
+    height: 380px;
+    flex-shrink: 0;
+    background-color: #161616; /* Slightly different dark for footer */
+    border-top: 1px solid var(--border-color-dark-theme);
+}
+
+.categories-zone, .vendors-zone {
+    padding: 0;
+    display: flex;
+    flex-direction: column;
+    overflow: hidden;
+}
+.footer-zone-header {
+    padding: 15px 20px;
+    border-bottom: 1px solid var(--border-color-dark-theme);
+    flex-shrink: 0;
+}
+.footer-zone-header h3 {
+    color: var(--text-on-dark-headings); /* Purple for footer headers */
+    font-weight: 600;
+    font-size: 1.15rem;
+}
+.scrollable-content {
+    padding: 15px 20px;
+    overflow-y: auto;
+    flex-grow: 1;
+}
+/* Dark theme scrollbar for webkit */
+.scrollable-content::-webkit-scrollbar { width: 8px; }
+.scrollable-content::-webkit-scrollbar-track { background: #202020; border-radius: 10px; }
+.scrollable-content::-webkit-scrollbar-thumb { background: #4A4A4A; border-radius: 10px; }
+.scrollable-content::-webkit-scrollbar-thumb:hover { background: #6A6A6A; }
+
+.categories-zone {
+    flex-basis: 38%;
+    border-right: 1px solid var(--border-color-dark-theme);
+}
+.vendors-zone { flex-basis: 62%; }
+
+#category-filters {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+}
+
+.category-btn {
+    padding: 10px 18px;
+    border: 1px solid var(--primary-purple);
+    border-radius: 25px;
+    cursor: pointer;
+    font-size: 0.9rem;
+    font-weight: 500;
+    transition: all 0.2s ease-in-out;
+    color: var(--primary-purple);
+    background-color: var(--element-bg-dark); /* Dark bg for buttons */
+    box-shadow: var(--shadow-sm-dark);
+    letter-spacing: 0.5px;
+}
+.category-btn:hover:not(.active) {
+    background-color: var(--element-bg-dark-hover);
+    color: var(--primary-purple-darker);
+    border-color: var(--primary-purple-darker);
+    transform: translateY(-1px);
+}
+.category-btn.active {
+    background-color: var(--primary-purple);
+    color: var(--logo-black); /* Black text on solid purple button */
+    border-color: var(--primary-purple);
+    /* font-weight: 700; */
+}
+.category-btn.inactive {
+    opacity: 0.4; /* More opacity for inactive on dark mode */
+    background-color: #202020 !important;
+    color: #777 !important;
+    border-color: #404040 !important;
+    box-shadow: none;
+    cursor: default;
+}
+.category-btn[data-category="all"] {
+    background-color: #4A4A4A; /* Neutral dark grey for "All" button */
+    color: var(--text-on-dark-primary);
+    border-color: #4A4A4A;
+}
+.category-btn[data-category="all"].active {
+    background-color: var(--primary-purple);
+    color: var(--logo-black);
+    border-color: var(--primary-purple);
+}
+.category-btn[data-category="all"]:hover:not(.active) {
+     background-color: #5A5A5A;
+     border-color: #5A5A5A;
+}
+
+/* Vendor List Items */
+.vendor-item {
+    display: flex;
+    align-items: center;
+    padding: 12px 15px;
+    margin-bottom: 10px;
+    border-radius: var(--border-radius-md);
+    background-color: var(--element-bg-dark); /* Dark background for items */
+    cursor: pointer;
+    transition: background-color 0.2s ease, transform 0.2s ease, box-shadow 0.2s ease, opacity 0.3s ease;
+    border: 1px solid var(--border-color-dark-theme);
+}
+.vendor-item:last-child { margin-bottom: 0; }
+
+.vendor-item:hover:not(.dimmed):not(.selected-in-list) {
+    background-color: var(--element-bg-dark-hover);
+    transform: translateY(-2px);
+    box-shadow: var(--shadow-sm-dark);
+    border-color: var(--border-color-dark-theme-light);
+}
+.vendor-item.selected-in-list {
+    background-color: var(--primary-purple);
+    border-color: var(--primary-purple-darker);
+    box-shadow: var(--shadow-md-dark);
+}
+.vendor-item.selected-in-list .vendor-item-name,
+.vendor-item.selected-in-list .vendor-item-categories {
+    color: var(--logo-black); /* Black text on purple selection */
+}
+.vendor-item.selected-in-list .vendor-item-location {
+    background-color: var(--logo-black); /* Black circle */
+    color: var(--primary-purple); /* Purple text in circle */
+}
+.vendor-item.dimmed {
+    opacity: 0.3;
+    pointer-events: none;
+    background-color: #181818; /* Very dark for dimmed items */
+    border-color: #282828;
+}
+
+.vendor-item-logo {
+    width: 45px; height: 45px; object-fit: cover;
+    border-radius: 50%; margin-right: 15px;
+    border: 2px solid var(--element-bg-dark); /* Border matching item bg */
+    box-shadow: var(--shadow-sm-dark);
+    background-color: #404040; /* Darker placeholder bg */
+}
+
+.vendor-item-info { flex-grow: 1; }
+
+.vendor-item-name {
+    font-weight: 600; font-size: 1.05rem;
+    color: var(--text-on-dark-primary);
+    margin-bottom: 2px;
+}
+.vendor-item-categories {
+    font-size: 0.8rem;
+    color: var(--text-on-dark-secondary);
+    overflow: hidden; text-overflow: ellipsis; white-space: nowrap;
+    max-width: 200px;
+}
+
+.vendor-item-location {
+    display: inline-block;
+    background-color: var(--accent-highlight); /* Purple circle */
+    color: var(--logo-black); /* Black text in circle for contrast */
+    font-size: 0.8rem; font-weight: 700;
+    width: 32px; height: 32px; border-radius: 50%;
+    text-align: center; line-height: 32px;
+    margin-left: 15px; flex-shrink: 0;
+    box-shadow: var(--shadow-sm-dark);
+}
+
+/* Modal */
+.modal {
+    display: none; position: fixed; z-index: 1000;
+    left: 0; top: 0; width: 100%; height: 100%;
+    overflow: auto; background-color: rgba(0,0,0,0.85); /* Even darker backdrop */
+    align-items: center; justify-content: center; padding: 20px;
+}
+
+.modal-content {
+    background-color: var(--element-bg-dark); /* Dark modal background */
+    color: var(--text-on-dark-primary); /* Light text in modal */
+    margin: auto; padding: 30px 35px;
+    border-radius: var(--border-radius-lg);
+    width: 90%; max-width: 680px;
+    box-shadow: 0 10px 50px rgba(0,0,0,0.4); /* Shadow for dark modal */
+    position: relative;
+    animation: fadeInModal 0.3s ease-out;
+    border: 1px solid var(--border-color-dark-theme-light);
+}
+
+.modal-close-btn {
+    color: #999; position: absolute;
+    top: 15px; right: 20px; font-size: 32px;
+    font-weight: 300; cursor: pointer; transition: color 0.2s ease;
+}
+.modal-close-btn:hover,
+.modal-close-btn:focus {
+    color: var(--primary-purple);
+}
+
+.modal-header {
+    display: flex; align-items: center;
+    margin-bottom: 25px; padding-bottom: 20px;
+    border-bottom: 1px solid var(--border-color-dark-theme);
+}
+
+#modal-logo {
+    width: 100px; height: 100px; object-fit: contain;
+    margin-right: 25px; border-radius: var(--border-radius-md);
+    background-color: #383838; /* Dark placeholder for logo bg */
+    border: 1px solid var(--border-color-dark-theme);
+}
+
+#modal-name {
+    color: var(--primary-purple);
+    font-size: 2.2rem; font-weight: 700;
+}
+
+.modal-body p, .modal-body ul, .modal-body .modal-section {
+    margin-bottom: 18px; line-height: 1.7; font-size: 1rem;
+}
+.modal-body strong { /* For "Categories:" label */
+    font-weight: 600;
+    color: var(--text-on-dark-primary);
+}
+.modal-section h4 {
+    font-size: 1.15rem; font-weight: 600;
+    color: var(--primary-purple-darker);
+    margin-bottom: 10px; display: flex; align-items: center;
+}
+.modal-section h4 i {
+    margin-right: 10px;
+    color: var(--accent-highlight);
+    font-size: 1.1em;
+}
+#modal-hours { list-style: none; padding-left: 0; }
+#modal-hours li {
+    padding-left: 5px; position: relative;
+    font-size: 0.95rem;
+    color: var(--text-on-dark-secondary);
+}
+#modal-telephone {
+    font-size: 0.95rem;
+    color: var(--text-on-dark-secondary);
+}
+#modal-website {
+    color: var(--accent-highlight);
+    text-decoration: none; font-weight: 500; word-break: break-all;
+    font-size: 0.95rem;
+}
+#modal-website:hover {
+    text-decoration: underline;
+    color: var(--primary-purple-darker);
+}
+
+/* Mobile Friendliness (will adapt to dark theme due to CSS vars) */
+@media (max-width: 768px), (max-height: 800px) {
+    body {
+        align-items: flex-start;
+        overflow-y: auto;
+        background-color: var(--kiosk-content-bg); /* Dark bg for mobile body too */
+    }
+    .kiosk-container {
+        border-radius: 0; width: 100vw; height: auto;
+        min-height: 100vh; box-shadow: none;
+    }
+    .directory-header { flex-direction: column; padding: 15px; }
+    #mall-logo { margin-bottom: 15px; height: 45px; }
+    .search-container { width: 100%; max-width: 400px; }
+    .directory-main { padding: 15px; min-height: 300px; }    
+    .directory-footer { flex-direction: column; height: auto; max-height: 60vh; }
+    .categories-zone, .vendors-zone { flex-basis: auto; border-right: none; }
+    .categories-zone { border-bottom: 1px solid var(--border-color-dark-theme); min-height: 180px; }
+    .vendors-zone { min-height: 250px; }
+    .scrollable-content { padding: 10px 15px; }
+    .modal-content { width: 95%; padding: 20px; max-height: 90vh; overflow-y: auto; }
+    #modal-name { font-size: 1.6rem; }
+}

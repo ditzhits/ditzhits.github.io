@@ -1,1 +1,83 @@
-Hello World!
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+    <title>Cultured Vibe - Mall Directory</title> <!-- Updated Title -->
+    <link rel="stylesheet" href="style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700&family=Montserrat:wght@400;500;600;700&display=swap" rel="stylesheet"> <!-- Added Montserrat -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+</head>
+<body>
+    <div class="kiosk-container">
+        <header class="directory-header">
+            <!-- USE YOUR ACTUAL LOGO FILE HERE -->
+            <img src="cultured_vibe_logo.png" alt="Cultured Vibe Logo" id="mall-logo">
+            <div class="search-container">
+                <i class="fas fa-search search-icon"></i>
+                <input type="search" id="search-bar" placeholder="Search vendors, categories...">
+                <button id="clear-search-btn" style="display: none;">×</button>
+            </div>
+        </header>
+
+        <!-- ... rest of your HTML body from the previous good version ... -->
+        <main class="directory-main">            
+            <div id="map-svg-container">
+                <div class="loading-indicator">Loading Map...</div>
+                <!-- SVG will be loaded here -->
+
+                <!-- NEW Label Toggle Button -->                
+                <button id="map-label-toggle-btn" class="map-overlay-button">Show Names</button>
+                <!-- Initial text will be "Show Names" because default is IDs -->
+            </div>
+        </main>
+
+        <footer class="directory-footer">
+            <div class="categories-zone">
+                <div class="footer-zone-header">
+                    <h3>Categories</h3>
+                </div>
+                <div id="category-filters" class="scrollable-content">
+                    <!-- Category buttons will be generated here -->
+                </div>
+            </div>
+            <div class="vendors-zone">
+                 <div class="footer-zone-header">
+                    <h3>Vendors</h3>
+                </div>
+                <div id="vendor-list-container" class="scrollable-content">
+                    <!-- Vendor list will be generated here -->
+                </div>
+            </div>
+        </footer>
+    </div>
+
+    <div id="vendor-modal" class="modal">
+        <div class="modal-content">
+            <span class="modal-close-btn">×</span>
+            <div class="modal-header">
+                <img id="modal-logo" src="" alt="Vendor Logo">
+                <h2 id="modal-name">Vendor Name</h2>
+            </div>
+            <div class="modal-body">
+                <p><strong>Categories:</strong> <span id="modal-categories"></span></p>
+                <p id="modal-description">Description here.</p>
+                <div class="modal-section">
+                    <h4><i class="fas fa-clock"></i> Hours:</h4>
+                    <ul id="modal-hours"></ul>
+                </div>
+                <div class="modal-section">
+                    <h4><i class="fas fa-phone"></i> Phone:</h4>
+                    <p id="modal-telephone"></p>
+                </div>
+                <div class="modal-section">
+                    <h4><i class="fas fa-globe"></i> Website:</h4>
+                    <p><a id="modal-website" href="#" target="_blank" rel="noopener noreferrer">Visit Website</a></p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>

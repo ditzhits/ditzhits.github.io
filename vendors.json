@@ -2,6 +2,7 @@
   "A55": {
     "name": "Ditz Hits",
     "@type": [
+      "trading cards",
       "toys",
       "collectibles",
       "games",
@@ -17,841 +18,8 @@
     "logo": "https://static.wixstatic.com/media/55dd7b_9954b7617f20491abccb35a6d4c6034a~mv2.png/v1/fill/w_864,h_864,al_c,q_90,enc_avif,quality_auto/Ditz___HITS_transparent.png",
     "description": "We’re passionate about connecting collectors with rare Pokémon Cards, top-tier Sports Cards, and exclusive finds. Stop by, explore our inventory, and level up your collection today!"
   },
-  "A16": {
-    "name": "45 SHIRTS",
-    "@type": [
-      "apparel"
-    ],
-    "url": "",
-    "hours": [
-      "Fri 3pm-9pm",
-      "Sat 10am-9pm",
-      "Sun 11am-7pm"
-    ],
-    "telephone": "",
-    "logo": "",
-    "description": ""
-  },
-  "A18": {
-    "name": "TEE'S 4 JESUS",
-    "@type": [
-      "apparel"
-    ],
-    "url": "",
-    "hours": [
-      "Fri 3pm-9pm",
-      "Sat 10am-9pm",
-      "Sun 11am-7pm"
-    ],
-    "telephone": "",
-    "logo": "",
-    "description": ""
-  },
-  "B5": {
-    "name": "SADSMILE.CO",
-    "@type": [
-      "apparel"
-    ],
-    "url": "",
-    "hours": [
-      "Fri 3pm-9pm",
-      "Sat 10am-9pm",
-      "Sun 11am-7pm"
-    ],
-    "telephone": "",
-    "logo": "",
-    "description": ""
-  },
-  "B1": {
-    "name": "BERRPRINTZ",
-    "@type": [
-      "apparel"
-    ],
-    "url": "",
-    "hours": [
-      "Fri 3pm-9pm",
-      "Sat 10am-9pm",
-      "Sun 11am-7pm"
-    ],
-    "telephone": "",
-    "logo": "",
-    "description": ""
-  },
-  "B9": {
-    "name": "SEÑOR SKANTE",
-    "@type": [
-      "apparel"
-    ],
-    "url": "",
-    "hours": [
-      "Fri 3pm-9pm",
-      "Sat 10am-9pm",
-      "Sun 11am-7pm"
-    ],
-    "telephone": "",
-    "logo": "",
-    "description": ""
-  },
-  "B18": {
-    "name": "SICCA",
-    "@type": [
-      "apparel"
-    ],
-    "url": "",
-    "hours": [
-      "Fri 3pm-9pm",
-      "Sat 10am-9pm",
-      "Sun 11am-7pm"
-    ],
-    "telephone": "",
-    "logo": "",
-    "description": ""
-  },
-  "B20": {
-    "name": "TRENDRBENDR",
-    "@type": [
-      "apparel"
-    ],
-    "url": "",
-    "hours": [
-      "Fri 3pm-9pm",
-      "Sat 10am-9pm",
-      "Sun 11am-7pm"
-    ],
-    "telephone": "",
-    "logo": "",
-    "description": ""
-  },
-  "B25": {
-    "name": "THE WILDLING WARDROBE (CHILDREN'S CLOTHING)",
-    "@type": [
-      "apparel"
-    ],
-    "url": "",
-    "hours": [
-      "Fri 3pm-9pm",
-      "Sat 10am-9pm",
-      "Sun 11am-7pm"
-    ],
-    "telephone": "",
-    "logo": "",
-    "description": ""
-  },
-  "B27": {
-    "name": "MOTIVATIONAL ART CLUB",
-    "@type": [
-      "apparel"
-    ],
-    "url": "",
-    "hours": [
-      "Fri 3pm-9pm",
-      "Sat 10am-9pm",
-      "Sun 11am-7pm"
-    ],
-    "telephone": "",
-    "logo": "",
-    "description": ""
-  },
-  "B41": {
-    "name": "DULCE AMOR TAK",
-    "@type": [
-      "apparel"
-    ],
-    "url": "",
-    "hours": [
-      "Fri 3pm-9pm",
-      "Sat 10am-9pm",
-      "Sun 11am-7pm"
-    ],
-    "telephone": "",
-    "logo": "",
-    "description": ""
-  },
-  "B46": {
-    "name": "THRIFTDGARMENTS",
-    "@type": [
-      "apparel"
-    ],
-    "url": "",
-    "hours": [
-      "Fri 3pm-9pm",
-      "Sat 10am-9pm",
-      "Sun 11am-7pm"
-    ],
-    "telephone": "",
-    "logo": "",
-    "description": ""
-  },
-  "B50": {
-    "name": "IZAN HATS",
-    "@type": [
-      "apparel"
-    ],
-    "url": "",
-    "hours": [
-      "Fri 3pm-9pm",
-      "Sat 10am-9pm",
-      "Sun 11am-7pm"
-    ],
-    "telephone": "",
-    "logo": "",
-    "description": ""
-  },
-  "C2": {
-    "name": "HOUSE OF NEHESI",
-    "@type": [
-      "apparel"
-    ],
-    "url": "",
-    "hours": [
-      "Fri 3pm-9pm",
-      "Sat 10am-9pm",
-      "Sun 11am-7pm"
-    ],
-    "telephone": "",
-    "logo": "",
-    "description": ""
-  },
-  "C16": {
-    "name": "JUNIPER ROSE BOUTIQUE",
-    "@type": [
-      "apparel"
-    ],
-    "url": "",
-    "hours": [
-      "Fri 3pm-9pm",
-      "Sat 10am-9pm",
-      "Sun 11am-7pm"
-    ],
-    "telephone": "",
-    "logo": "",
-    "description": ""
-  },
-  "C26": {
-    "name": "CIRCLE SURF CO",
-    "@type": [
-      "apparel"
-    ],
-    "url": "",
-    "hours": [
-      "Fri 3pm-9pm",
-      "Sat 10am-9pm",
-      "Sun 11am-7pm"
-    ],
-    "telephone": "",
-    "logo": "",
-    "description": ""
-  },
-  "C30": {
-    "name": "ILLA MANILA",
-    "@type": [
-      "apparel"
-    ],
-    "url": "",
-    "hours": [
-      "Fri 3pm-9pm",
-      "Sat 10am-9pm",
-      "Sun 11am-7pm"
-    ],
-    "telephone": "",
-    "logo": "",
-    "description": ""
-  },
-  "C34": {
-    "name": "AZTECA.19",
-    "@type": [
-      "apparel"
-    ],
-    "url": "",
-    "hours": [
-      "Fri 3pm-9pm",
-      "Sat 10am-9pm",
-      "Sun 11am-7pm"
-    ],
-    "telephone": "",
-    "logo": "",
-    "description": ""
-  },
-  "C44": {
-    "name": "MJ GLAM",
-    "@type": [
-      "apparel"
-    ],
-    "url": "",
-    "hours": [
-      "Fri 3pm-9pm",
-      "Sat 10am-9pm",
-      "Sun 11am-7pm"
-    ],
-    "telephone": "",
-    "logo": "",
-    "description": ""
-  },
-  "C50": {
-    "name": "MY BEAUTY'S CONSCIENCE",
-    "@type": [
-      "apparel"
-    ],
-    "url": "",
-    "hours": [
-      "Fri 3pm-9pm",
-      "Sat 10am-9pm",
-      "Sun 11am-7pm"
-    ],
-    "telephone": "",
-    "logo": "",
-    "description": ""
-  },
-  "C62": {
-    "name": "GORRAS_PC",
-    "@type": [
-      "apparel"
-    ],
-    "url": "",
-    "hours": [
-      "Fri 3pm-9pm",
-      "Sat 10am-9pm",
-      "Sun 11am-7pm"
-    ],
-    "telephone": "",
-    "logo": "",
-    "description": ""
-  },
-  "C64": {
-    "name": "COVERTWORLD",
-    "@type": [
-      "apparel"
-    ],
-    "url": "",
-    "hours": [
-      "Fri 3pm-9pm",
-      "Sat 10am-9pm",
-      "Sun 11am-7pm"
-    ],
-    "telephone": "",
-    "logo": "",
-    "description": ""
-  },
-  "D10": {
-    "name": "ROPAM FITNESS",
-    "@type": [
-      "apparel"
-    ],
-    "url": "",
-    "hours": [
-      "Fri 3pm-9pm",
-      "Sat 10am-9pm",
-      "Sun 11am-7pm"
-    ],
-    "telephone": "",
-    "logo": "",
-    "description": ""
-  },
-  "D19": {
-    "name": "FITGODS ATHLETICS",
-    "@type": [
-      "apparel"
-    ],
-    "url": "",
-    "hours": [
-      "Fri 3pm-9pm",
-      "Sat 10am-9pm",
-      "Sun 11am-7pm"
-    ],
-    "telephone": "",
-    "logo": "",
-    "description": ""
-  },
-  "D21": {
-    "name": "VILLA",
-    "@type": [
-      "apparel"
-    ],
-    "url": "",
-    "hours": [
-      "Fri 3pm-9pm",
-      "Sat 10am-9pm",
-      "Sun 11am-7pm"
-    ],
-    "telephone": "",
-    "logo": "",
-    "description": ""
-  },
-  "D37": {
-    "name": "UNDER THE MOON CO",
-    "@type": [
-      "apparel"
-    ],
-    "url": "",
-    "hours": [
-      "Fri 3pm-9pm",
-      "Sat 10am-9pm",
-      "Sun 11am-7pm"
-    ],
-    "telephone": "",
-    "logo": "",
-    "description": ""
-  },
-  "A6": {
-    "name": "CSCS JEWELRY",
-    "@type": [
-      "custom accessories",
-      "jewelry"
-    ],
-    "url": "",
-    "hours": [
-      "Fri 3pm-9pm",
-      "Sat 10am-9pm",
-      "Sun 11am-7pm"
-    ],
-    "telephone": "",
-    "logo": "",
-    "description": ""
-  },
-  "A9": {
-    "name": "MYITTYBITTYKICKZ",
-    "@type": [
-      "custom accessories",
-      "jewelry"
-    ],
-    "url": "",
-    "hours": [
-      "Fri 3pm-9pm",
-      "Sat 10am-9pm",
-      "Sun 11am-7pm"
-    ],
-    "telephone": "",
-    "logo": "",
-    "description": ""
-  },
-  "A15": {
-    "name": "MEGA DIODE",
-    "@type": [
-      "custom accessories",
-      "jewelry"
-    ],
-    "url": "",
-    "hours": [
-      "Fri 3pm-9pm",
-      "Sat 10am-9pm",
-      "Sun 11am-7pm"
-    ],
-    "telephone": "",
-    "logo": "",
-    "description": ""
-  },
-  "A25": {
-    "name": "SOPHIA'S BOWTIQUE CRAFTS & CREATIONS",
-    "@type": [
-      "custom accessories",
-      "jewelry"
-    ],
-    "url": "",
-    "hours": [
-      "Fri 3pm-9pm",
-      "Sat 10am-9pm",
-      "Sun 11am-7pm"
-    ],
-    "telephone": "",
-    "logo": "",
-    "description": ""
-  },
-  "A39": {
-    "name": "ONE MORE LOOK",
-    "@type": [
-      "custom accessories",
-      "jewelry"
-    ],
-    "url": "",
-    "hours": [
-      "Fri 3pm-9pm",
-      "Sat 10am-9pm",
-      "Sun 11am-7pm"
-    ],
-    "telephone": "",
-    "logo": "",
-    "description": ""
-  },
-  "B33": {
-    "name": "OLIMPIAS CREATION",
-    "@type": [
-      "custom accessories",
-      "jewelry"
-    ],
-    "url": "",
-    "hours": [
-      "Fri 3pm-9pm",
-      "Sat 10am-9pm",
-      "Sun 11am-7pm"
-    ],
-    "telephone": "",
-    "logo": "",
-    "description": ""
-  },
-  "B40": {
-    "name": "JESSIA DUONG SHOP",
-    "@type": [
-      "custom accessories",
-      "jewelry"
-    ],
-    "url": "",
-    "hours": [
-      "Fri 3pm-9pm",
-      "Sat 10am-9pm",
-      "Sun 11am-7pm"
-    ],
-    "telephone": "",
-    "logo": "",
-    "description": ""
-  },
-  "B55": {
-    "name": "THE CUTEST THING EVER",
-    "@type": [
-      "custom accessories",
-      "jewelry"
-    ],
-    "url": "",
-    "hours": [
-      "Fri 3pm-9pm",
-      "Sat 10am-9pm",
-      "Sun 11am-7pm"
-    ],
-    "telephone": "",
-    "logo": "",
-    "description": ""
-  },
-  "C6": {
-    "name": "HAPPYYOYOSTUDIO",
-    "@type": [
-      "custom accessories",
-      "jewelry"
-    ],
-    "url": "",
-    "hours": [
-      "Fri 3pm-9pm",
-      "Sat 10am-9pm",
-      "Sun 11am-7pm"
-    ],
-    "telephone": "",
-    "logo": "",
-    "description": ""
-  },
-  "D5": {
-    "name": "MELIBRI JEWELRY",
-    "@type": [
-      "custom accessories",
-      "jewelry"
-    ],
-    "url": "",
-    "hours": [
-      "Fri 3pm-9pm",
-      "Sat 10am-9pm",
-      "Sun 11am-7pm"
-    ],
-    "telephone": "",
-    "logo": "",
-    "description": ""
-  },
-  "D7": {
-    "name": "HAPPYYOYOSTUDIO",
-    "@type": [
-      "custom accessories",
-      "jewelry"
-    ],
-    "url": "",
-    "hours": [
-      "Fri 3pm-9pm",
-      "Sat 10am-9pm",
-      "Sun 11am-7pm"
-    ],
-    "telephone": "",
-    "logo": "",
-    "description": ""
-  },
-  "D28": {
-    "name": "LA LUZ DE LUNA",
-    "@type": [
-      "custom accessories",
-      "jewelry"
-    ],
-    "url": "",
-    "hours": [
-      "Fri 3pm-9pm",
-      "Sat 10am-9pm",
-      "Sun 11am-7pm"
-    ],
-    "telephone": "",
-    "logo": "",
-    "description": ""
-  },
-  "D38": {
-    "name": "LIT UP JEWELRY",
-    "@type": [
-      "custom accessories",
-      "jewelry"
-    ],
-    "url": "",
-    "hours": [
-      "Fri 3pm-9pm",
-      "Sat 10am-9pm",
-      "Sun 11am-7pm"
-    ],
-    "telephone": "",
-    "logo": "",
-    "description": ""
-  },
-  "D40": {
-    "name": "@DOT.BERRIES",
-    "@type": [
-      "custom accessories",
-      "jewelry"
-    ],
-    "url": "",
-    "hours": [
-      "Fri 3pm-9pm",
-      "Sat 10am-9pm",
-      "Sun 11am-7pm"
-    ],
-    "telephone": "",
-    "logo": "",
-    "description": ""
-  },
-  "D50": {
-    "name": "PATCHLAND (COMING SOON)",
-    "@type": [
-      "custom accessories",
-      "jewelry"
-    ],
-    "url": "",
-    "hours": [
-      "Fri 3pm-9pm",
-      "Sat 10am-9pm",
-      "Sun 11am-7pm"
-    ],
-    "telephone": "",
-    "logo": "",
-    "description": ""
-  },
-  "A27": {
-    "name": "RYLOVED VINTAGE",
-    "@type": [
-      "vintage",
-      "apparel"
-    ],
-    "url": "",
-    "hours": [
-      "Fri 3pm-9pm",
-      "Sat 10am-9pm",
-      "Sun 11am-7pm"
-    ],
-    "telephone": "",
-    "logo": "",
-    "description": ""
-  },
-  "A43": {
-    "name": "MILEY Y PAOLA",
-    "@type": [
-      "vintage",
-      "apparel"
-    ],
-    "url": "",
-    "hours": [
-      "Fri 3pm-9pm",
-      "Sat 10am-9pm",
-      "Sun 11am-7pm"
-    ],
-    "telephone": "",
-    "logo": "",
-    "description": ""
-  },
-  "D9": {
-    "name": "TIMELESS FINDS",
-    "@type": [
-      "vintage",
-      "apparel"
-    ],
-    "url": "",
-    "hours": [
-      "Fri 3pm-9pm",
-      "Sat 10am-9pm",
-      "Sun 11am-7pm"
-    ],
-    "telephone": "",
-    "logo": "",
-    "description": ""
-  },
-  "A8": {
-    "name": "EMULATE ECHO",
-    "@type": [
-      "art",
-      "music",
-      "decor"
-    ],
-    "url": "",
-    "hours": [
-      "Fri 3pm-9pm",
-      "Sat 10am-9pm",
-      "Sun 11am-7pm"
-    ],
-    "telephone": "",
-    "logo": "",
-    "description": ""
-  },
-  "A19": {
-    "name": "MAICKASWORLD",
-    "@type": [
-      "art",
-      "music",
-      "decor"
-    ],
-    "url": "",
-    "hours": [
-      "Fri 3pm-9pm",
-      "Sat 10am-9pm",
-      "Sun 11am-7pm"
-    ],
-    "telephone": "",
-    "logo": "",
-    "description": ""
-  },
-  "A30": {
-    "name": "MICHAEL SEEWALD GALLERIES",
-    "@type": [
-      "art",
-      "music",
-      "decor"
-    ],
-    "url": "",
-    "hours": [
-      "Fri 3pm-9pm",
-      "Sat 10am-9pm",
-      "Sun 11am-7pm"
-    ],
-    "telephone": "",
-    "logo": "",
-    "description": ""
-  },
-  "A50": {
-    "name": "MUDDIE BUNNIE",
-    "@type": [
-      "art",
-      "music",
-      "decor"
-    ],
-    "url": "",
-    "hours": [
-      "Fri 3pm-9pm",
-      "Sat 10am-9pm",
-      "Sun 11am-7pm"
-    ],
-    "telephone": "",
-    "logo": "",
-    "description": ""
-  },
-  "B19": {
-    "name": "SOUL SHACK RECORDS",
-    "@type": [
-      "art",
-      "music",
-      "decor"
-    ],
-    "url": "",
-    "hours": [
-      "Fri 3pm-9pm",
-      "Sat 10am-9pm",
-      "Sun 11am-7pm"
-    ],
-    "telephone": "",
-    "logo": "",
-    "description": ""
-  },
-  "B29": {
-    "name": "THE BIZARRE BAZAAR",
-    "@type": [
-      "art",
-      "music",
-      "decor"
-    ],
-    "url": "",
-    "hours": [
-      "Fri 3pm-9pm",
-      "Sat 10am-9pm",
-      "Sun 11am-7pm"
-    ],
-    "telephone": "",
-    "logo": "",
-    "description": ""
-  },
-  "C22": {
-    "name": "WONDERLAND IN SOCAL",
-    "@type": [
-      "art",
-      "music",
-      "decor"
-    ],
-    "url": "",
-    "hours": [
-      "Fri 3pm-9pm",
-      "Sat 10am-9pm",
-      "Sun 11am-7pm"
-    ],
-    "telephone": "",
-    "logo": "",
-    "description": ""
-  },
-  "C54": {
-    "name": "MICHAEL SEEWALD GALLERIES",
-    "@type": [
-      "art",
-      "music",
-      "decor"
-    ],
-    "url": "",
-    "hours": [
-      "Fri 3pm-9pm",
-      "Sat 10am-9pm",
-      "Sun 11am-7pm"
-    ],
-    "telephone": "",
-    "logo": "",
-    "description": ""
-  },
-  "D14": {
-    "name": "MJ2 HANDMADE CREATIONS",
-    "@type": [
-      "art",
-      "music",
-      "decor"
-    ],
-    "url": "",
-    "hours": [
-      "Fri 3pm-9pm",
-      "Sat 10am-9pm",
-      "Sun 11am-7pm"
-    ],
-    "telephone": "",
-    "logo": "",
-    "description": ""
-  },
-  "D23": {
-    "name": "KROUNED BODY CARE",
-    "@type": [
-      "art",
-      "music",
-      "decor"
-    ],
-    "url": "",
-    "hours": [
-      "Fri 3pm-9pm",
-      "Sat 10am-9pm",
-      "Sun 11am-7pm"
-    ],
-    "telephone": "",
-    "logo": "",
-    "description": ""
-  },
   "A1": {
-    "name": "SUPER AUTO TOYS",
+    "name": "Super Auto Toys",
     "@type": [
       "toys",
       "collectibles",
@@ -867,8 +35,271 @@
     "logo": "",
     "description": ""
   },
+  "A12": {
+    "name": "Li-Li Fashion Boutique",
+    "@type": [
+      "fashion apparel"
+    ],
+    "url": "",
+    "hours": [
+      "Fri 3pm-9pm",
+      "Sat 10am-9pm",
+      "Sun 11am-7pm"
+    ],
+    "telephone": "",
+    "logo": "",
+    "description": ""
+  },
+  "A14": {
+    "name": "Spencer Horn",
+    "@type": [
+      "toys",
+      "collectibles",
+      "games"
+    ],
+    "url": "",
+    "hours": [
+      "Fri 3pm-9pm",
+      "Sat 10am-9pm",
+      "Sun 11am-7pm"
+    ],
+    "telephone": "",
+    "logo": "",
+    "description": ""
+  },
+  "A15": {
+    "name": "Mega Diode",
+    "@type": [
+      "custom jewelry",
+			"accessories"
+    ],
+    "url": "",
+    "hours": [
+      "Fri 3pm-9pm",
+      "Sat 10am-9pm",
+      "Sun 11am-7pm"
+    ],
+    "telephone": "",
+    "logo": "",
+    "description": ""
+  },
+  "A16": {
+    "name": "AuroraRain Jewelry ",
+    "@type": [
+      "custom jewelry",
+			"accessories"
+    ],
+    "url": "",
+    "hours": [
+      "Fri 3pm-9pm",
+      "Sat 10am-9pm",
+      "Sun 11am-7pm"
+    ],
+    "telephone": "",
+    "logo": "",
+    "description": ""
+  },
+  "A18": {
+    "name": "TEE'S 4 JESUS",
+    "@type": [
+      "fashion apparel"
+    ],
+    "url": "",
+    "hours": [
+      "Fri 3pm-9pm",
+      "Sat 10am-9pm",
+      "Sun 11am-7pm"
+    ],
+    "telephone": "",
+    "logo": "",
+    "description": ""
+  },
+  "A19": {
+    "name": "EvoCard Emporium",
+    "@type": [
+      "trading cards"
+    ],
+    "url": "",
+    "hours": [
+      "Fri 3pm-9pm",
+      "Sat 10am-9pm",
+      "Sun 11am-7pm"
+    ],
+    "telephone": "",
+    "logo": "",
+    "description": ""
+  },
   "A2": {
-    "name": "RIPZ N HITZ",
+    "name": "Ripz n Hitz",
+    "@type": [
+      "trading cards"
+    ],
+    "url": "",
+    "hours": [
+      "Fri 3pm-9pm",
+      "Sat 10am-9pm",
+      "Sun 11am-7pm"
+    ],
+    "telephone": "",
+    "logo": "",
+    "description": ""
+  },
+  "A26": {
+    "name": "UnitedTCG",
+    "@type": [
+      "trading cards"
+    ],
+    "url": "",
+    "hours": [
+      "Fri 3pm-9pm",
+      "Sat 10am-9pm",
+      "Sun 11am-7pm"
+    ],
+    "telephone": "",
+    "logo": "",
+    "description": ""
+  },
+  "A27": {
+    "name": "RYloved Vintage",
+    "@type": [
+      "y2k/vintage"
+    ],
+    "url": "",
+    "hours": [
+      "Fri 3pm-9pm",
+      "Sat 10am-9pm",
+      "Sun 11am-7pm"
+    ],
+    "telephone": "",
+    "logo": "",
+    "description": ""
+  },
+  "A28": {
+    "name": "Chill Collectibles",
+    "@type": [
+      "toys",
+      "collectibles",
+      "games"
+    ],
+    "url": "",
+    "hours": [
+      "Fri 3pm-9pm",
+      "Sat 10am-9pm",
+      "Sun 11am-7pm"
+    ],
+    "telephone": "",
+    "logo": "",
+    "description": ""
+  },
+  "A29": {
+    "name": "Realz&Stealz",
+    "@type": [
+      "trading cards"
+    ],
+    "url": "",
+    "hours": [
+      "Fri 3pm-9pm",
+      "Sat 10am-9pm",
+      "Sun 11am-7pm"
+    ],
+    "telephone": "",
+    "logo": "",
+    "description": ""
+  },
+  "A30": {
+    "name": "GDUP Studios",
+    "@type": [
+      "fashion apparel"
+    ],
+    "url": "",
+    "hours": [
+      "Fri 3pm-9pm",
+      "Sat 10am-9pm",
+      "Sun 11am-7pm"
+    ],
+    "telephone": "",
+    "logo": "",
+    "description": ""
+  },
+  "A33": {
+    "name": "Pandaspopz",
+    "@type": [
+      "toys",
+      "collectibles",
+      "games"
+    ],
+    "url": "",
+    "hours": [
+      "Fri 3pm-9pm",
+      "Sat 10am-9pm",
+      "Sun 11am-7pm"
+    ],
+    "telephone": "",
+    "logo": "",
+    "description": ""
+  },
+  "A39": {
+    "name": "619 collectibles",
+    "@type": [
+      "trading cards"
+    ],
+    "url": "",
+    "hours": [
+      "Fri 3pm-9pm",
+      "Sat 10am-9pm",
+      "Sun 11am-7pm"
+    ],
+    "telephone": "",
+    "logo": "",
+    "description": ""
+  },
+  "A40": {
+    "name": "Mankey Doodle",
+    "@type": [
+      "trading cards"
+    ],
+    "url": "",
+    "hours": [
+      "Fri 3pm-9pm",
+      "Sat 10am-9pm",
+      "Sun 11am-7pm"
+    ],
+    "telephone": "",
+    "logo": "",
+    "description": ""
+  },
+  "A41": {
+    "name": "EQUAL APPAREL",
+    "@type": [
+      "fashion apparel"
+    ],
+    "url": "",
+    "hours": [
+      "Fri 3pm-9pm",
+      "Sat 10am-9pm",
+      "Sun 11am-7pm"
+    ],
+    "telephone": "",
+    "logo": "",
+    "description": ""
+  },
+  "A43": {
+    "name": "Timeless Finds",
+    "@type": [
+      "y2k/vintage"
+    ],
+    "url": "",
+    "hours": [
+      "Fri 3pm-9pm",
+      "Sat 10am-9pm",
+      "Sun 11am-7pm"
+    ],
+    "telephone": "",
+    "logo": "",
+    "description": ""
+  },
+  "A44": {
+    "name": "RRatedGoods",
     "@type": [
       "toys",
       "collectibles",
@@ -885,7 +316,7 @@
     "description": ""
   },
   "A5": {
-    "name": "SHIPWRECKED",
+    "name": "Shipwrecked",
     "@type": [
       "toys",
       "collectibles",
@@ -901,12 +332,10 @@
     "logo": "",
     "description": ""
   },
-  "A14": {
-    "name": "WIZARDS HAT LLC",
+  "A50": {
+    "name": "Muddie Bunnie",
     "@type": [
-      "toys",
-      "collectibles",
-      "games"
+      "pottery"
     ],
     "url": "",
     "hours": [
@@ -918,12 +347,10 @@
     "logo": "",
     "description": ""
   },
-  "A22": {
-    "name": "MINEFEST",
+  "A57": {
+    "name": "My Beauty's Conscience",
     "@type": [
-      "toys",
-      "collectibles",
-      "games"
+      "fashion apparel"
     ],
     "url": "",
     "hours": [
@@ -935,80 +362,10 @@
     "logo": "",
     "description": ""
   },
-  "A26": {
-    "name": "PANDASPOPZ",
+  "A6": {
+    "name": "Lore Alley",
     "@type": [
-      "toys",
-      "collectibles",
-      "games"
-    ],
-    "url": "",
-    "hours": [
-      "Fri 3pm-9pm",
-      "Sat 10am-9pm",
-      "Sun 11am-7pm"
-    ],
-    "telephone": "",
-    "logo": "",
-    "description": ""
-  },
-  "A28": {
-    "name": "CHILL COLLECTIBLES",
-    "@type": [
-      "toys",
-      "collectibles",
-      "games"
-    ],
-    "url": "",
-    "hours": [
-      "Fri 3pm-9pm",
-      "Sat 10am-9pm",
-      "Sun 11am-7pm"
-    ],
-    "telephone": "",
-    "logo": "",
-    "description": ""
-  },
-  "A33": {
-    "name": "NAV TOYS AND COLLECTIBLES",
-    "@type": [
-      "toys",
-      "collectibles",
-      "games"
-    ],
-    "url": "",
-    "hours": [
-      "Fri 3pm-9pm",
-      "Sat 10am-9pm",
-      "Sun 11am-7pm"
-    ],
-    "telephone": "",
-    "logo": "",
-    "description": ""
-  },
-  "A40": {
-    "name": "MANKEY DOODLE",
-    "@type": [
-      "toys",
-      "collectibles",
-      "games"
-    ],
-    "url": "",
-    "hours": [
-      "Fri 3pm-9pm",
-      "Sat 10am-9pm",
-      "Sun 11am-7pm"
-    ],
-    "telephone": "",
-    "logo": "",
-    "description": ""
-  },
-  "A44": {
-    "name": "RRATED GOODS",
-    "@type": [
-      "toys",
-      "collectibles",
-      "games"
+      "trading cards"
     ],
     "url": "",
     "hours": [
@@ -1021,11 +378,9 @@
     "description": ""
   },
   "A65": {
-    "name": "BM SHACK",
+    "name": "Phoenix TCGs",
     "@type": [
-      "toys",
-      "collectibles",
-      "games"
+      "trading cards"
     ],
     "url": "",
     "hours": [
@@ -1037,12 +392,11 @@
     "logo": "",
     "description": ""
   },
-  "B2": {
-    "name": "BNB COLLECTIBLES",
+  "A9": {
+    "name": "MyIttyBittyKickz",
     "@type": [
-      "toys",
-      "collectibles",
-      "games"
+      "custom jewelry",
+			"accessories"
     ],
     "url": "",
     "hours": [
@@ -1054,12 +408,10 @@
     "logo": "",
     "description": ""
   },
-  "B8": {
-    "name": "STANS COLLECTIBLE",
+  "B1": {
+    "name": "Daniel's Card Select",
     "@type": [
-      "toys",
-      "collectibles",
-      "games"
+      "trading cards"
     ],
     "url": "",
     "hours": [
@@ -1072,11 +424,9 @@
     "description": ""
   },
   "B12": {
-    "name": "ZH COLLECTIBLES",
+    "name": "The Secret Card",
     "@type": [
-      "toys",
-      "collectibles",
-      "games"
+      "trading cards"
     ],
     "url": "",
     "hours": [
@@ -1089,7 +439,7 @@
     "description": ""
   },
   "B15": {
-    "name": "KIMCHI'S COLLECTIBLES",
+    "name": "Kimchi's Collectibles",
     "@type": [
       "toys",
       "collectibles",
@@ -1105,7 +455,161 @@
     "logo": "",
     "description": ""
   },
+  "B18": {
+    "name": "Sicca",
+    "@type": [
+      "fashion apparel"
+    ],
+    "url": "",
+    "hours": [
+      "Fri 3pm-9pm",
+      "Sat 10am-9pm",
+      "Sun 11am-7pm"
+    ],
+    "telephone": "",
+    "logo": "",
+    "description": ""
+  },
+  "B19": {
+    "name": "The Olympus Project",
+    "@type": [
+      "trading cards"
+    ],
+    "url": "",
+    "hours": [
+      "Fri 3pm-9pm",
+      "Sat 10am-9pm",
+      "Sun 11am-7pm"
+    ],
+    "telephone": "",
+    "logo": "",
+    "description": ""
+  },
+  "B2": {
+    "name": "Bnb Collectibles",
+    "@type": [
+      "toys",
+      "collectibles",
+      "games"
+    ],
+    "url": "",
+    "hours": [
+      "Fri 3pm-9pm",
+      "Sat 10am-9pm",
+      "Sun 11am-7pm"
+    ],
+    "telephone": "",
+    "logo": "",
+    "description": ""
+  },
+  "B20": {
+    "name": "TrendrBendr",
+    "@type": [
+      "fashion apparel"
+    ],
+    "url": "",
+    "hours": [
+      "Fri 3pm-9pm",
+      "Sat 10am-9pm",
+      "Sun 11am-7pm"
+    ],
+    "telephone": "",
+    "logo": "",
+    "description": ""
+  },
+  "B25": {
+    "name": "The Wildling Wardrobe",
+    "@type": [
+      "fashion apparel"
+    ],
+    "url": "",
+    "hours": [
+      "Fri 3pm-9pm",
+      "Sat 10am-9pm",
+      "Sun 11am-7pm"
+    ],
+    "telephone": "",
+    "logo": "",
+    "description": ""
+  },
+  "B29": {
+    "name": "Made For Mystics",
+    "@type": [
+      "natural stones"
+    ],
+    "url": "",
+    "hours": [
+      "Fri 3pm-9pm",
+      "Sat 10am-9pm",
+      "Sun 11am-7pm"
+    ],
+    "telephone": "",
+    "logo": "",
+    "description": ""
+  },
   "B30": {
+    "name": "Isla Tesoro",
+    "@type": [
+      "fashion apparel"
+    ],
+    "url": "",
+    "hours": [
+      "Fri 3pm-9pm",
+      "Sat 10am-9pm",
+      "Sun 11am-7pm"
+    ],
+    "telephone": "",
+    "logo": "",
+    "description": ""
+  },
+  "B33": {
+    "name": "On-Board Gaming",
+    "@type": [
+      "toys",
+      "collectibles",
+      "games"
+    ],
+    "url": "",
+    "hours": [
+      "Fri 3pm-9pm",
+      "Sat 10am-9pm",
+      "Sun 11am-7pm"
+    ],
+    "telephone": "",
+    "logo": "",
+    "description": ""
+  },
+  "B41": {
+    "name": "AJR Collectibles",
+    "@type": [
+      "trading cards"
+    ],
+    "url": "",
+    "hours": [
+      "Fri 3pm-9pm",
+      "Sat 10am-9pm",
+      "Sun 11am-7pm"
+    ],
+    "telephone": "",
+    "logo": "",
+    "description": ""
+  },
+  "B45": {
+    "name": "Gems Parc",
+    "@type": [
+      "trading cards"
+    ],
+    "url": "",
+    "hours": [
+      "Fri 3pm-9pm",
+      "Sat 10am-9pm",
+      "Sun 11am-7pm"
+    ],
+    "telephone": "",
+    "logo": "",
+    "description": ""
+  },
+  "B47": {
     "name": "E & E BRICKS N COLLECTIBLES",
     "@type": [
       "toys",
@@ -1122,46 +626,10 @@
     "logo": "",
     "description": ""
   },
-  "B31": {
-    "name": "RICKS SHUMAN'S RACING COLLECTIBLES",
+  "B5": {
+    "name": "Clear Sky Construction",
     "@type": [
-      "toys",
-      "collectibles",
-      "games"
-    ],
-    "url": "",
-    "hours": [
-      "Fri 3pm-9pm",
-      "Sat 10am-9pm",
-      "Sun 11am-7pm"
-    ],
-    "telephone": "",
-    "logo": "",
-    "description": ""
-  },
-  "B37": {
-    "name": "YONG LIANG SHOP",
-    "@type": [
-      "toys",
-      "collectibles",
-      "games"
-    ],
-    "url": "",
-    "hours": [
-      "Fri 3pm-9pm",
-      "Sat 10am-9pm",
-      "Sun 11am-7pm"
-    ],
-    "telephone": "",
-    "logo": "",
-    "description": ""
-  },
-  "B45": {
-    "name": "GEMS PARC LLC",
-    "@type": [
-      "toys",
-      "collectibles",
-      "games"
+      "trading cards"
     ],
     "url": "",
     "hours": [
@@ -1174,7 +642,7 @@
     "description": ""
   },
   "B53": {
-    "name": "GUNNVERSE COLLECTIBLES",
+    "name": "GunnVerse Collectibles",
     "@type": [
       "toys",
       "collectibles",
@@ -1191,11 +659,43 @@
     "description": ""
   },
   "B57": {
-    "name": "STRAIGHT OUTTA DA GARAGE",
+    "name": "Straight Outta Da Garage",
     "@type": [
       "toys",
       "collectibles",
       "games"
+    ],
+    "url": "",
+    "hours": [
+      "Fri 3pm-9pm",
+      "Sat 10am-9pm",
+      "Sun 11am-7pm"
+    ],
+    "telephone": "",
+    "logo": "",
+    "description": ""
+  },
+  "B8": {
+    "name": "Stans Collectible",
+    "@type": [
+      "toys",
+      "collectibles",
+      "games"
+    ],
+    "url": "",
+    "hours": [
+      "Fri 3pm-9pm",
+      "Sat 10am-9pm",
+      "Sun 11am-7pm"
+    ],
+    "telephone": "",
+    "logo": "",
+    "description": ""
+  },
+  "B9": {
+    "name": "Señor Skante",
+    "@type": [
+      "fashion apparel"
     ],
     "url": "",
     "hours": [
@@ -1208,11 +708,118 @@
     "description": ""
   },
   "C10": {
-    "name": "838 COLLECTIBLES",
+    "name": "838 Collectibles",
     "@type": [
       "toys",
       "collectibles",
       "games"
+    ],
+    "url": "",
+    "hours": [
+      "Fri 3pm-9pm",
+      "Sat 10am-9pm",
+      "Sun 11am-7pm"
+    ],
+    "telephone": "",
+    "logo": "",
+    "description": ""
+  },
+  "C16": {
+    "name": "Trad3nplay",
+    "@type": [
+      "trading cards"
+    ],
+    "url": "",
+    "hours": [
+      "Fri 3pm-9pm",
+      "Sat 10am-9pm",
+      "Sun 11am-7pm"
+    ],
+    "telephone": "",
+    "logo": "",
+    "description": ""
+  },
+  "C18": {
+    "name": "Hardships Ease",
+    "@type": [
+      "trading cards"
+    ],
+    "url": "",
+    "hours": [
+      "Fri 3pm-9pm",
+      "Sat 10am-9pm",
+      "Sun 11am-7pm"
+    ],
+    "telephone": "",
+    "logo": "",
+    "description": ""
+  },
+  "C2": {
+    "name": "House of Nehesi",
+    "@type": [
+      "fashion apparel"
+    ],
+    "url": "",
+    "hours": [
+      "Fri 3pm-9pm",
+      "Sat 10am-9pm",
+      "Sun 11am-7pm"
+    ],
+    "telephone": "",
+    "logo": "",
+    "description": ""
+  },
+  "C26": {
+    "name": "Circle Surf Co",
+    "@type": [
+      "fashion apparel"
+    ],
+    "url": "",
+    "hours": [
+      "Fri 3pm-9pm",
+      "Sat 10am-9pm",
+      "Sun 11am-7pm"
+    ],
+    "telephone": "",
+    "logo": "",
+    "description": ""
+  },
+  "C29": {
+    "name": "Moe_Printing",
+    "@type": [
+      "toys",
+      "collectibles",
+      "games"
+    ],
+    "url": "",
+    "hours": [
+      "Fri 3pm-9pm",
+      "Sat 10am-9pm",
+      "Sun 11am-7pm"
+    ],
+    "telephone": "",
+    "logo": "",
+    "description": ""
+  },
+  "C30": {
+    "name": "ILLA MANILA",
+    "@type": [
+      "fashion apparel"
+    ],
+    "url": "",
+    "hours": [
+      "Fri 3pm-9pm",
+      "Sat 10am-9pm",
+      "Sun 11am-7pm"
+    ],
+    "telephone": "",
+    "logo": "",
+    "description": ""
+  },
+  "C34": {
+    "name": "Azteca.19",
+    "@type": [
+      "fashion apparel"
     ],
     "url": "",
     "hours": [
@@ -1225,7 +832,7 @@
     "description": ""
   },
   "C40": {
-    "name": "CHUCHOS VIDEO GAMES",
+    "name": "Chuchos Video Games",
     "@type": [
       "toys",
       "collectibles",
@@ -1241,8 +848,40 @@
     "logo": "",
     "description": ""
   },
+  "C41": {
+    "name": "AriesseirA",
+    "@type": [
+      "toys",
+      "collectibles",
+      "games"
+    ],
+    "url": "",
+    "hours": [
+      "Fri 3pm-9pm",
+      "Sat 10am-9pm",
+      "Sun 11am-7pm"
+    ],
+    "telephone": "",
+    "logo": "",
+    "description": ""
+  },
+  "C44": {
+    "name": "MJ Glam",
+    "@type": [
+      "fashion apparel"
+    ],
+    "url": "",
+    "hours": [
+      "Fri 3pm-9pm",
+      "Sat 10am-9pm",
+      "Sun 11am-7pm"
+    ],
+    "telephone": "",
+    "logo": "",
+    "description": ""
+  },
   "C46": {
-    "name": "TRADE STREET SALES",
+    "name": "Trade Street Sales",
     "@type": [
       "toys",
       "collectibles",
@@ -1259,11 +898,60 @@
     "description": ""
   },
   "C48": {
-    "name": "ADDIKTEDRC",
+    "name": "Addiktedrc ",
     "@type": [
       "toys",
       "collectibles",
       "games"
+    ],
+    "url": "",
+    "hours": [
+      "Fri 3pm-9pm",
+      "Sat 10am-9pm",
+      "Sun 11am-7pm"
+    ],
+    "telephone": "",
+    "logo": "",
+    "description": ""
+  },
+  "C52": {
+    "name": "Bad Moon Rising Comic & Collectibles",
+    "@type": [
+      "toys",
+      "collectibles",
+      "games"
+    ],
+    "url": "",
+    "hours": [
+      "Fri 3pm-9pm",
+      "Sat 10am-9pm",
+      "Sun 11am-7pm"
+    ],
+    "telephone": "",
+    "logo": "",
+    "description": ""
+  },
+  "C54": {
+    "name": "Prop Crafting",
+    "@type": [
+      "toys",
+      "collectibles",
+      "games"
+    ],
+    "url": "",
+    "hours": [
+      "Fri 3pm-9pm",
+      "Sat 10am-9pm",
+      "Sun 11am-7pm"
+    ],
+    "telephone": "",
+    "logo": "",
+    "description": ""
+  },
+  "C56": {
+    "name": "Outer Space Pass Port",
+    "@type": [
+      "fashion apparel"
     ],
     "url": "",
     "hours": [
@@ -1276,11 +964,25 @@
     "description": ""
   },
   "C58": {
-    "name": "UKNOWDEEZCARDS",
+    "name": "uKN0WdeezCards",
     "@type": [
-      "toys",
-      "collectibles",
-      "games"
+      "trading cards"
+    ],
+    "url": "",
+    "hours": [
+      "Fri 3pm-9pm",
+      "Sat 10am-9pm",
+      "Sun 11am-7pm"
+    ],
+    "telephone": "",
+    "logo": "",
+    "description": ""
+  },
+  "C6": {
+    "name": "CSCS Jewelry ",
+    "@type": [
+      "custom jewelry",
+			"accessories"
     ],
     "url": "",
     "hours": [
@@ -1293,11 +995,39 @@
     "description": ""
   },
   "C60": {
-    "name": "THECOLLECTORSALLEY.LLC",
+    "name": "TheCollectorsAlley.llc",
     "@type": [
-      "toys",
-      "collectibles",
-      "games"
+      "trading cards"
+    ],
+    "url": "",
+    "hours": [
+      "Fri 3pm-9pm",
+      "Sat 10am-9pm",
+      "Sun 11am-7pm"
+    ],
+    "telephone": "",
+    "logo": "",
+    "description": ""
+  },
+  "C62": {
+    "name": "Gorras_pc",
+    "@type": [
+      "fashion apparel"
+    ],
+    "url": "",
+    "hours": [
+      "Fri 3pm-9pm",
+      "Sat 10am-9pm",
+      "Sun 11am-7pm"
+    ],
+    "telephone": "",
+    "logo": "",
+    "description": ""
+  },
+  "C64": {
+    "name": "Trend In",
+    "@type": [
+      "fashion apparel"
     ],
     "url": "",
     "hours": [
@@ -1310,7 +1040,7 @@
     "description": ""
   },
   "D1": {
-    "name": "LUPPY'S VAULT",
+    "name": "Luppy's Vault",
     "@type": [
       "toys",
       "collectibles",
@@ -1326,12 +1056,320 @@
     "logo": "",
     "description": ""
   },
-  "D2": {
-    "name": "GASHAPON BANDAI OFFICIAL SHOP (COMING SOON)",
+  "D10": {
+    "name": "Dulce Amor Tak",
+    "@type": [
+      "fashion apparel"
+    ],
+    "url": "",
+    "hours": [
+      "Fri 3pm-9pm",
+      "Sat 10am-9pm",
+      "Sun 11am-7pm"
+    ],
+    "telephone": "",
+    "logo": "",
+    "description": ""
+  },
+  "D11": {
+    "name": "77collects",
+    "@type": [
+      "trading cards"
+    ],
+    "url": "",
+    "hours": [
+      "Fri 3pm-9pm",
+      "Sat 10am-9pm",
+      "Sun 11am-7pm"
+    ],
+    "telephone": "",
+    "logo": "",
+    "description": ""
+  },
+  "D13": {
+    "name": "High Guy Collectibles",
     "@type": [
       "toys",
       "collectibles",
       "games"
+    ],
+    "url": "",
+    "hours": [
+      "Fri 3pm-9pm",
+      "Sat 10am-9pm",
+      "Sun 11am-7pm"
+    ],
+    "telephone": "",
+    "logo": "",
+    "description": ""
+  },
+  "D14": {
+    "name": "Computer Headquarters / Evertek",
+    "@type": [
+      "computers"
+    ],
+    "url": "",
+    "hours": [
+      "Fri 3pm-9pm",
+      "Sat 10am-9pm",
+      "Sun 11am-7pm"
+    ],
+    "telephone": "",
+    "logo": "",
+    "description": ""
+  },
+  "D15": {
+    "name": "Party Wagon Arcade",
+    "@type": [
+      "toys",
+      "collectibles",
+      "games"
+    ],
+    "url": "",
+    "hours": [
+      "Fri 3pm-9pm",
+      "Sat 10am-9pm",
+      "Sun 11am-7pm"
+    ],
+    "telephone": "",
+    "logo": "",
+    "description": ""
+  },
+  "D17": {
+    "name": "A&J Trading Bros",
+    "@type": [
+      "trading cards"
+    ],
+    "url": "",
+    "hours": [
+      "Fri 3pm-9pm",
+      "Sat 10am-9pm",
+      "Sun 11am-7pm"
+    ],
+    "telephone": "",
+    "logo": "",
+    "description": ""
+  },
+  "D18": {
+    "name": "Still",
+    "@type": [
+      "candle"
+    ],
+    "url": "",
+    "hours": [
+      "Fri 3pm-9pm",
+      "Sat 10am-9pm",
+      "Sun 11am-7pm"
+    ],
+    "telephone": "",
+    "logo": "",
+    "description": ""
+  },
+  "D19": {
+    "name": "Fitgods Athletics LLC",
+    "@type": [
+      "fashion apparel"
+    ],
+    "url": "",
+    "hours": [
+      "Fri 3pm-9pm",
+      "Sat 10am-9pm",
+      "Sun 11am-7pm"
+    ],
+    "telephone": "",
+    "logo": "",
+    "description": ""
+  },
+  "D2": {
+    "name": "Berrprintz",
+    "@type": [
+      "fashion apparel"
+    ],
+    "url": "",
+    "hours": [
+      "Fri 3pm-9pm",
+      "Sat 10am-9pm",
+      "Sun 11am-7pm"
+    ],
+    "telephone": "",
+    "logo": "",
+    "description": ""
+  },
+  "D20": {
+    "name": "KM PERMANENT JEWELRY",
+    "@type": [
+      "custom jewelry",
+			"accessories"
+    ],
+    "url": "",
+    "hours": [
+      "Fri 3pm-9pm",
+      "Sat 10am-9pm",
+      "Sun 11am-7pm"
+    ],
+    "telephone": "",
+    "logo": "",
+    "description": ""
+  },
+  "D21": {
+    "name": "Crybaby",
+    "@type": [
+      "fashion apparel"
+    ],
+    "url": "",
+    "hours": [
+      "Fri 3pm-9pm",
+      "Sat 10am-9pm",
+      "Sun 11am-7pm"
+    ],
+    "telephone": "",
+    "logo": "",
+    "description": ""
+  },
+  "D23": {
+    "name": "Wicked N Wanted Comics N Collectibles",
+    "@type": [
+      "toys",
+      "collectibles",
+      "games"
+    ],
+    "url": "",
+    "hours": [
+      "Fri 3pm-9pm",
+      "Sat 10am-9pm",
+      "Sun 11am-7pm"
+    ],
+    "telephone": "",
+    "logo": "",
+    "description": ""
+  },
+  "D27": {
+    "name": "Rebo's Poke Co",
+    "@type": [
+      "trading cards"
+    ],
+    "url": "",
+    "hours": [
+      "Fri 3pm-9pm",
+      "Sat 10am-9pm",
+      "Sun 11am-7pm"
+    ],
+    "telephone": "",
+    "logo": "",
+    "description": ""
+  },
+  "D28": {
+    "name": "La Luz de Luna",
+    "@type": [
+      "custom jewelry",
+			"accessories"
+    ],
+    "url": "",
+    "hours": [
+      "Fri 3pm-9pm",
+      "Sat 10am-9pm",
+      "Sun 11am-7pm"
+    ],
+    "telephone": "",
+    "logo": "",
+    "description": ""
+  },
+  "D32": {
+    "name": "MobKittyCo",
+    "@type": [
+      "fashion apparel"
+    ],
+    "url": "",
+    "hours": [
+      "Fri 3pm-9pm",
+      "Sat 10am-9pm",
+      "Sun 11am-7pm"
+    ],
+    "telephone": "",
+    "logo": "",
+    "description": ""
+  },
+  "D38": {
+    "name": "B'pure Just Be It Clothing",
+    "@type": [
+      "fashion apparel"
+    ],
+    "url": "",
+    "hours": [
+      "Fri 3pm-9pm",
+      "Sat 10am-9pm",
+      "Sun 11am-7pm"
+    ],
+    "telephone": "",
+    "logo": "",
+    "description": ""
+  },
+  "D40": {
+    "name": "The Psychic Corvid",
+    "@type": [
+      "psychic"
+    ],
+    "url": "",
+    "hours": [
+      "Fri 3pm-9pm",
+      "Sat 10am-9pm",
+      "Sun 11am-7pm"
+    ],
+    "telephone": "",
+    "logo": "",
+    "description": ""
+  },
+  "D46": {
+    "name": "RAIZES",
+    "@type": [
+      "fashion apparel"
+    ],
+    "url": "",
+    "hours": [
+      "Fri 3pm-9pm",
+      "Sat 10am-9pm",
+      "Sun 11am-7pm"
+    ],
+    "telephone": "",
+    "logo": "",
+    "description": ""
+  },
+  "D48": {
+    "name": "TCG Bandits",
+    "@type": [
+      "trading cards"
+    ],
+    "url": "",
+    "hours": [
+      "Fri 3pm-9pm",
+      "Sat 10am-9pm",
+      "Sun 11am-7pm"
+    ],
+    "telephone": "",
+    "logo": "",
+    "description": ""
+  },
+  "D5": {
+    "name": "One more look",
+    "@type": [
+      "custom jewelry",
+			"accessories"
+    ],
+    "url": "",
+    "hours": [
+      "Fri 3pm-9pm",
+      "Sat 10am-9pm",
+      "Sun 11am-7pm"
+    ],
+    "telephone": "",
+    "logo": "",
+    "description": ""
+  },
+  "D50": {
+    "name": "PatchLand",
+    "@type": [
+      "custom jewelry",
+			"accessories"
     ],
     "url": "",
     "hours": [
@@ -1360,106 +1398,27 @@
     "logo": "",
     "description": ""
   },
-  "D17": {
-    "name": "A&J TRADING BROS",
+  "D7": {
+    "name": "Krouned Body Care",
+    "@type": [
+      "personal body care"
+    ],
+    "url": "",
+    "hours": [
+      "Fri 3pm-9pm",
+      "Sat 10am-9pm",
+      "Sun 11am-7pm"
+    ],
+    "telephone": "",
+    "logo": "",
+    "description": ""
+  },
+  "D9": {
+    "name": "Puras Gangas",
     "@type": [
       "toys",
       "collectibles",
       "games"
-    ],
-    "url": "",
-    "hours": [
-      "Fri 3pm-9pm",
-      "Sat 10am-9pm",
-      "Sun 11am-7pm"
-    ],
-    "telephone": "",
-    "logo": "",
-    "description": ""
-  },
-  "D25": {
-    "name": "WICKED N WANTED COMICS AND COLLECTIBLES",
-    "@type": [
-      "toys",
-      "collectibles",
-      "games"
-    ],
-    "url": "",
-    "hours": [
-      "Fri 3pm-9pm",
-      "Sat 10am-9pm",
-      "Sun 11am-7pm"
-    ],
-    "telephone": "",
-    "logo": "",
-    "description": ""
-  },
-  "D27": {
-    "name": "REBO'S POKÉ CO",
-    "@type": [
-      "toys",
-      "collectibles",
-      "games"
-    ],
-    "url": "",
-    "hours": [
-      "Fri 3pm-9pm",
-      "Sat 10am-9pm",
-      "Sun 11am-7pm"
-    ],
-    "telephone": "",
-    "logo": "",
-    "description": ""
-  },
-  "D15": {
-    "name": "BRIGHTBOOTH",
-    "@type": [
-      "photograph"
-    ],
-    "url": "",
-    "hours": [
-      "Fri 3pm-9pm",
-      "Sat 10am-9pm",
-      "Sun 11am-7pm"
-    ],
-    "telephone": "",
-    "logo": "",
-    "description": ""
-  },
-  "D32": {
-    "name": "SESH",
-    "@type": [
-      "tattoo"
-    ],
-    "url": "",
-    "hours": [
-      "Fri 3pm-9pm",
-      "Sat 10am-9pm",
-      "Sun 11am-7pm"
-    ],
-    "telephone": "",
-    "logo": "",
-    "description": ""
-  },
-  "A29": {
-    "name": "EMPOWERED SPARK CO.",
-    "@type": [
-      "permanent jewelry"
-    ],
-    "url": "",
-    "hours": [
-      "Fri 3pm-9pm",
-      "Sat 10am-9pm",
-      "Sun 11am-7pm"
-    ],
-    "telephone": "",
-    "logo": "",
-    "description": ""
-  },
-  "D20": {
-    "name": "KM PERMANENT JEWELRY",
-    "@type": [
-      "permanent jewelry"
     ],
     "url": "",
     "hours": [

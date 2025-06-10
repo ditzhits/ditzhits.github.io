@@ -21,12 +21,9 @@
         </header>
 
         <!-- ... rest of your HTML body from the previous good version ... -->
-        <main class="directory-main">            
+        <main class="directory-main">
             <div id="map-svg-container">
                 <div class="loading-indicator">Loading Map...</div>
-                <!-- SVG will be loaded here -->
-
-                <!-- NEW Label Toggle Button -->                
                 <button id="map-label-toggle-btn" class="map-overlay-button">Show Names</button>
                 <!-- Initial text will be "Show Names" because default is IDs -->
             </div>
@@ -52,29 +49,54 @@
         </footer>
     </div>
 
+    <!-- In index.html -->
     <div id="vendor-modal" class="modal">
         <div class="modal-content">
             <span class="modal-close-btn">×</span>
-            <div class="modal-header">
+
+            <div class="modal-header-profile"> <!-- New class for this style -->
                 <img id="modal-logo" src="" alt="Vendor Logo">
-                <h2 id="modal-name">Vendor Name</h2>
+                <div class="modal-name-categories">
+                    <h2 id="modal-name">Vendor Name</h2>
+                    <div id="modal-category-tags">
+                        <!-- Category tags will be generated here -->
+                    </div>
+                </div>
             </div>
-            <div class="modal-body">
-                <p><strong>Categories:</strong> <span id="modal-categories"></span></p>
+
+            <div class="modal-section">
+                <h4>Description</h4>
                 <p id="modal-description">Description here.</p>
-                <div class="modal-section">
-                    <h4><i class="fas fa-clock"></i> Hours:</h4>
-                    <ul id="modal-hours"></ul>
+            </div>
+
+            <div class="modal-info-grid"> <!-- For Location & Today's Hours -->
+                <div class="modal-info-item">
+                    <h4>Location</h4>
+                    <p class="icon-text"><i class="fas fa-map-marker-alt"></i> <span id="modal-location">A55</span></p>
                 </div>
-                <div class="modal-section">
-                    <h4><i class="fas fa-phone"></i> Phone:</h4>
-                    <p id="modal-telephone"></p>
-                </div>
-                <div class="modal-section">
-                    <h4><i class="fas fa-globe"></i> Website:</h4>
-                    <p><a id="modal-website" href="#" target="_blank" rel="noopener noreferrer">Visit Website</a></p>
+                <div class="modal-info-item">
+                    <h4>Today's Hours</h4>
+                    <p class="icon-text"><i class="fas fa-clock"></i> <span id="modal-today-hours">Closed</span></p>
                 </div>
             </div>
+
+            <div class="modal-section">
+                <h4>Weekly Hours</h4>
+                <div id="modal-weekly-hours-grid">
+                    <!-- Weekly hours will be generated here, e.g., -->
+                    <!-- <div class="weekly-hour-item"><span>Friday</span><span>3:00 PM - 9:00 PM</span></div> -->
+                </div>
+            </div>
+
+            <div class="modal-section">
+                <h4>Contact</h4>
+                <p class="icon-text"><i class="fas fa-phone-alt"></i> <span id="modal-telephone"></span></p>
+                <p class="icon-text website-link"> <!-- Added class for specific styling -->
+                    <i class="fas fa-external-link-alt"></i>
+                    <a id="modal-website" href="#" target="_blank" rel="noopener noreferrer">Visit Website</a>
+                </p>
+            </div>
+
         </div>
     </div>
 

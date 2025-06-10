@@ -119,29 +119,41 @@ body {
     display: flex;
     flex-direction: column;
     overflow: hidden; /* Important */
-    position: relative;
-    padding: 20px;
+    padding: 0; /* << NO PADDING on the main content area holding the map block */
     background-color: var(--kiosk-content-bg); /* Consistent dark bg */
 }
 
-#map-svg-container {
-    flex-grow: 1; /* Takes up available vertical space in .directory-main */
-    display: flex; /* Added to help center svg-render-area if needed */
-    flex-direction: column; /* Added */
-    position: relative;
-    background-color: #202020; /* Your map area background */
-    border: 1px solid var(--border-color-dark-theme);
-    border-radius: var(--border-radius-lg);
-    overflow: hidden; /* Important to clip SVG if it tries to be too big */
+#map-svg-container { /* This IS the map block now, contains SVG, button, loading indicator */
+    flex-grow: 1; /* Fills .directory-main vertically */
+    position: relative; /* For the absolute positioned button */
+    display: flex; /* To center the SVG if it's smaller due to object-fit: contain */
+    justify-content: center;
+    align-items: center;
+    overflow: hidden; /* Crucial to clip the SVG */
+
+    border: none;
+
+    margin: 0px 0px; /* << SPACE AROUND THE MAP BLOCK.
+                             Adjust these values.
+                             For edge-to-edge map content (no frame, touching header/footer):
+                             margin: 0; border-radius: 0; border: none;
+                         */
+    /* NO PADDING HERE - padding would shrink the SVG's available space */
 }
-.loading-indicator {
+.loading-indicator { /* If this is inside map-svg-container */
+    position: absolute; /* Example: Center it over the map area while loading */
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    z-index: 5; /* Below button, above map if map not loaded */
+    color: var(--text-on-dark-primary);
     font-size: 1.2rem;
     color: var(--primary-purple);
 }
 .map-overlay-button {
     position: absolute;
-    bottom: 20px;
-    right: 20px;
+    bottom: 15px;
+    right: 15px;
     padding: 10px 18px;
     background-color: rgba(45, 45, 45, 0.9); /* Dark translucent background */
     color: var(--text-on-dark-primary);
@@ -164,13 +176,12 @@ body {
 
 /* SVG specific styles */
 #mall-svg-element { /* Your actual <svg> element (id set in JS) */
-    /* Critical scaling properties */
     width: 100%;
     height: 100%;
-    object-fit: contain; /* Preserve aspect ratio, fit entirely within bounds */
-                           /* Alternatives: 'cover' (might crop), 'fill' (might distort) */
-    max-width: 100%;   /* Redundant if width:100% but good practice */
-    max-height: 100%;  /* Redundant if height:100% but good practice */
+    object-fit: contain; /* Scales SVG content to FIT INSIDE #map-svg-container */
+    display: block; /* Helps with some layout quirks */
+    /* The SVG content itself will scale respecting its viewBox and object-fit,
+       filling the bounds of #map-svg-container (which has the background, border, radius). */
 }
 .store-shape {
     stroke: #606060; /* Lighter stroke for definition on dark map bg */
@@ -180,6 +191,11 @@ body {
 }
 #mall-svg-element .store-map-content {
     pointer-events: none; /* <<< THIS IS KEY FOR CLICK-THROUGH */
+}
+#mall-svg-element.map-has-focus .store-shape:not(.highlighted) {
+    opacity: 0.3; /* Or your preferred dim opacity */
+    /* You might also want to transition this opacity */
+    transition: opacity 0.2s ease-in-out; /* If not already on .store-shape */
 }
 #mall-svg-element .store-shape:hover:not(.dimmed) {
     opacity: 0.9;
@@ -215,6 +231,7 @@ body {
 
 /* Footer - Categories and Vendor List */
 .directory-footer {
+    padding: 0 10px; /* Example: Horizontal padding for footer content */
     display: flex;
     height: 400px; /* << CONTROLS FOOTER HEIGHT - Adjust this for mockup proportion */ /* 300px, 350px, etc. */
     flex-shrink: 0;
@@ -223,20 +240,20 @@ body {
 }
 
 .categories-zone {
-    flex-basis: 33%; /* << CONTROLS CATEGORY WIDTH - Adjust for mockup */ 
+    flex-basis: 33%; /* << CONTROLS CATEGORY WIDTH - Adjust for mockup */
     /* ... other styles ... */
     display: flex;
     flex-direction: column;
 }
 
 .vendors-zone {
-    flex-basis: 67%; /* << CONTROLS VENDOR LIST WIDTH - Adjust for mockup */
+    flex-basis: 66%; /* << CONTROLS VENDOR LIST WIDTH - Adjust for mockup */
     /* ... other styles ... */
     display: flex;
     flex-direction: column;
 }
 .footer-zone-header {
-    padding: 15px 20px;
+    padding: 15px 0px;
     border-bottom: 1px solid var(--border-color-dark-theme);
     flex-shrink: 0;
 }
@@ -311,75 +328,117 @@ body {
 }
 
 /* Vendor List Items */
-.vendor-item {
+
+
+.vendor-item-v2 {
     display: flex;
     align-items: center;
     padding: 12px 15px;
     margin-bottom: 10px;
-    border-radius: var(--border-radius-md);
-    background-color: var(--element-bg-dark); /* Dark background for items */
+    border-radius: var(--border-radius-lg); /* More rounded corners like mockup */
+    background-color: var(--element-bg-dark); /* Your dark theme card background */
+    /* background-color: #393E46; */ /* Or a specific grey like mockup if different */
     cursor: pointer;
     transition: background-color 0.2s ease, transform 0.2s ease, box-shadow 0.2s ease, opacity 0.3s ease;
-    border: 1px solid var(--border-color-dark-theme);
+    border: 1px solid var(--border-color-dark-theme); /* Subtle border */
+    gap: 12px; /* Spacing between logo, info, location */
 }
-.vendor-item:last-child { margin-bottom: 0; }
+.vendor-item-v2:last-child {
+    margin-bottom: 0;
+}
 
-.vendor-item:hover:not(.dimmed):not(.selected-in-list) {
+.vendor-item-v2:hover:not(.dimmed):not(.selected-in-list) {
     background-color: var(--element-bg-dark-hover);
-    transform: translateY(-2px);
+    /* transform: translateY(-2px); */ /* Optional: keep or remove hover transform */
     box-shadow: var(--shadow-sm-dark);
     border-color: var(--border-color-dark-theme-light);
 }
-.vendor-item.selected-in-list {
-    background-color: var(--primary-purple);
+
+.vendor-item-v2.selected-in-list {
+    background-color: var(--primary-purple); /* Purple background when selected */
     border-color: var(--primary-purple-darker);
     box-shadow: var(--shadow-md-dark);
 }
-.vendor-item.selected-in-list .vendor-item-name,
-.vendor-item.selected-in-list .vendor-item-categories {
-    color: var(--logo-black); /* Black text on purple selection */
+/* Text colors for selected state */
+.vendor-item-v2.selected-in-list .vendor-item-name-v2 {
+    color: var(--logo-black); /* Black or very dark text on purple */
 }
-.vendor-item.selected-in-list .vendor-item-location {
+.vendor-item-v2.selected-in-list .vendor-category-tag-list {
+    background-color: rgba(0,0,0,0.2); /* Darker tags on purple bg */
+    color: var(--text-on-dark-primary); /* Light text on tags */
+    border: 1px solid rgba(255,255,255,0.3);
+}
+.vendor-item-v2.selected-in-list .vendor-item-location-v2 {
     background-color: var(--logo-black); /* Black circle */
     color: var(--primary-purple); /* Purple text in circle */
 }
-.vendor-item.dimmed {
-    opacity: 0.3;
+
+
+.vendor-item-v2.dimmed {
+    opacity: 0.35; /* Or your preferred dim opacity */
     pointer-events: none;
-    background-color: #181818; /* Very dark for dimmed items */
+    background-color: #181818;
     border-color: #282828;
 }
 
-.vendor-item-logo {
-    width: 45px; height: 45px; object-fit: cover;
-    border-radius: 50%; margin-right: 15px;
-    border: 2px solid var(--element-bg-dark); /* Border matching item bg */
-    box-shadow: var(--shadow-sm-dark);
-    background-color: #404040; /* Darker placeholder bg */
+.vendor-item-logo-v2 {
+    width: 40px; /* Adjust size */
+    height: 40px;
+    object-fit: cover; /* Or contain */
+    border-radius: 50%; /* Circular */
+    background-color: #555; /* Placeholder background for image element */
+    flex-shrink: 0;
+    border: 1px solid var(--border-color-dark-theme-light); /* Subtle border around logo */
 }
 
-.vendor-item-info { flex-grow: 1; }
+.vendor-item-info-v2 {
+    flex-grow: 1; /* Takes up available space between logo and location ID */
+    display: flex;
+    flex-direction: column;
+    gap: 4px; /* Space between name and category tags */
+    min-width: 0; /* Important for flex children to allow text truncation if needed */
+}
 
-.vendor-item-name {
-    font-weight: 600; font-size: 1.05rem;
+.vendor-item-name-v2 {
+    font-weight: 600;
+    font-size: 1rem; /* Or 0.95rem */
     color: var(--text-on-dark-primary);
-    margin-bottom: 2px;
-}
-.vendor-item-categories {
-    font-size: 0.8rem;
-    color: var(--text-on-dark-secondary);
-    overflow: hidden; text-overflow: ellipsis; white-space: nowrap;
-    max-width: 200px;
+    margin: 0;
+    white-space: nowrap; /* Prevent name from wrapping */
+    overflow: hidden;    /* Hide overflow */
+    text-overflow: ellipsis; /* Add ... if too long */
 }
 
-.vendor-item-location {
-    display: inline-block;
-    background-color: var(--accent-highlight); /* Purple circle */
-    color: var(--logo-black); /* Black text in circle for contrast */
-    font-size: 0.8rem; font-weight: 700;
-    width: 32px; height: 32px; border-radius: 50%;
-    text-align: center; line-height: 32px;
-    margin-left: 15px; flex-shrink: 0;
+.vendor-item-category-tags-v2 {
+    display: flex;
+    flex-wrap: wrap; /* Allow tags to wrap if many */
+    gap: 6px;
+}
+
+.vendor-category-tag-list { /* Style for category tags within the list item */
+    background-color: var(--primary-purple); /* Match mockup tag color */
+    /* background-color: #4F5D75; */ /* Or a more muted tag color */
+    color: var(--logo-black); /* Or var(--text-on-dark-primary) if bg is dark */
+    padding: 3px 8px;
+    border-radius: 10px; /* Rounded tags */
+    font-size: 0.7rem;
+    font-weight: 500;
+    line-height: 1.2;
+    text-transform: capitalize;
+}
+
+.vendor-item-location-v2 { /* The ID circle on the right */
+    background-color: var(--primary-purple);
+    color: var(--logo-black); /* Or var(--text-on-dark-primary) for contrast */
+    font-size: 0.75rem;
+    font-weight: 700;
+    width: 30px; /* Adjust size */
+    height: 30px;
+    border-radius: 50%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-shrink: 0;
     box-shadow: var(--shadow-sm-dark);
 }
 
@@ -392,20 +451,29 @@ body {
 }
 
 .modal-content {
-    background-color: var(--element-bg-dark); /* Dark modal background */
-    color: var(--text-on-dark-primary); /* Light text in modal */
-    margin: auto; padding: 30px 35px;
-    border-radius: var(--border-radius-lg);
-    width: 90%; max-width: 680px;
-    box-shadow: 0 10px 50px rgba(0,0,0,0.4); /* Shadow for dark modal */
+    background-color: var(--element-bg-dark); /* Your dark theme element background */
+    color: var(--text-on-dark-primary);
+    margin: auto;
+    padding: 25px 30px; /* Adjusted padding */
+    border-radius: var(--border-radius-lg); /* Larger radius for modern look */
+    width: 90%;
+    max-width: 550px; /* Slightly narrower than before for this design */
+    box-shadow: 0 10px 50px rgba(0,0,0,0.4);
     position: relative;
-    animation: fadeInModal 0.3s ease-out;
+    animation: fadeInModal 0.3s ease-out; /* Keep animation */
     border: 1px solid var(--border-color-dark-theme-light);
+    display: flex; /* Added to make children flex items */
+    flex-direction: column; /* Stack sections vertically */
+    gap: 20px; /* Space between main sections */
 }
 
 .modal-close-btn {
-    color: #999; position: absolute;
-    top: 15px; right: 20px; font-size: 32px;
+    color: var(--text-on-dark-secondary); /* Lighter than primary for less emphasis */
+    position: absolute;
+    top: 15px;
+    right: 20px;
+    font-size: 28px; /* Ensure good size */
+    line-height: 1;
     font-weight: 300; cursor: pointer; transition: color 0.2s ease;
 }
 .modal-close-btn:hover,
@@ -413,22 +481,107 @@ body {
     color: var(--primary-purple);
 }
 
-.modal-header {
-    display: flex; align-items: center;
-    margin-bottom: 25px; padding-bottom: 20px;
+.modal-header-profile {
+    display: flex;
+    align-items: center;
+    gap: 20px; /* Space between logo and name/categories */
+    padding-bottom: 20px;
     border-bottom: 1px solid var(--border-color-dark-theme);
 }
 
 #modal-logo {
-    width: 100px; height: 100px; object-fit: contain;
-    margin-right: 25px; border-radius: var(--border-radius-md);
-    background-color: #383838; /* Dark placeholder for logo bg */
-    border: 1px solid var(--border-color-dark-theme);
+    width: 70px; /* Adjust size as per mockup */
+    height: 70px;
+    object-fit: cover; /* Or contain, depending on logo shapes */
+    border-radius: 50%; /* Circular logo */
+    border: 2px solid var(--border-color-dark-theme-light); /* Subtle border */
+    background-color: #383838; /* Placeholder bg for logo if transparent */
+    flex-shrink: 0;
+}
+.modal-name-categories {
+    display: flex;
+    flex-direction: column;
+    gap: 8px; /* Space between name and category tags */
+}
+/* In style.css */
+
+/* ... (Keep your existing modal styles for .modal background, animation, .modal-close-btn) ... */
+
+.modal-content {
+    background-color: var(--element-bg-dark); /* Your dark theme element background */
+    color: var(--text-on-dark-primary);
+    margin: auto;
+    padding: 25px 30px; /* Adjusted padding */
+    border-radius: var(--border-radius-lg); /* Larger radius for modern look */
+    width: 90%;
+    max-width: 550px; /* Slightly narrower than before for this design */
+    box-shadow: 0 10px 50px rgba(0,0,0,0.4);
+    position: relative;
+    /* animation: fadeInModal 0.3s ease-out; */ /* Keep animation */
+    border: 1px solid var(--border-color-dark-theme-light);
+    display: flex; /* Added to make children flex items */
+    flex-direction: column; /* Stack sections vertically */
+    gap: 20px; /* Space between main sections */
+}
+
+.modal-close-btn {
+    /* position: absolute; top: 15px; right: 20px; ... keep existing */
+    /* Ensure it's easily tappable and contrasts */
+    color: var(--text-on-dark-secondary); /* Lighter than primary for less emphasis */
+    font-size: 28px; /* Ensure good size */
+    line-height: 1;
+}
+.modal-close-btn:hover {
+    color: var(--primary-purple);
+}
+
+
+/* New Header Profile Section */
+.modal-header-profile {
+    display: flex;
+    align-items: center;
+    gap: 20px; /* Space between logo and name/categories */
+    padding-bottom: 20px;
+    border-bottom: 1px solid var(--border-color-dark-theme);
+}
+
+#modal-logo {
+    width: 70px; /* Adjust size as per mockup */
+    height: 70px;
+    object-fit: cover; /* Or contain, depending on logo shapes */
+    border-radius: 50%; /* Circular logo */
+    border: 2px solid var(--border-color-dark-theme-light); /* Subtle border */
+    background-color: #383838; /* Placeholder bg for logo if transparent */
+    flex-shrink: 0;
+}
+
+.modal-name-categories {
+    display: flex;
+    flex-direction: column;
+    gap: 8px; /* Space between name and category tags */
 }
 
 #modal-name {
-    color: var(--primary-purple);
-    font-size: 2.2rem; font-weight: 700;
+    color: var(--text-on-dark-primary); /* Brighter for name */
+    font-size: 1.8rem; /* Adjust as per mockup */
+    font-weight: 700;
+    line-height: 1.2;
+}
+
+#modal-category-tags {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+}
+
+.category-tag { /* Style for individual category tags */
+    background-color: var(--primary-purple); /* Use your primary accent color */
+    color: var(--logo-black); /* Or white if primary-purple is light */
+    padding: 5px 12px;
+    border-radius: 15px; /* Pill shape */
+    font-size: 0.75rem;
+    font-weight: 500;
+    text-transform: capitalize;
 }
 
 .modal-body p, .modal-body ul, .modal-body .modal-section {
@@ -439,15 +592,93 @@ body {
     color: var(--text-on-dark-primary);
 }
 .modal-section h4 {
-    font-size: 1.15rem; font-weight: 600;
-    color: var(--primary-purple-darker);
-    margin-bottom: 10px; display: flex; align-items: center;
+    font-size: 0.9rem; /* Smaller heading for sections like Description, Location etc. */
+    font-weight: 600;
+    color: var(--text-on-dark-secondary); /* Muted heading color */
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    margin-bottom: 10px;
 }
 .modal-section h4 i {
     margin-right: 10px;
     color: var(--accent-highlight);
     font-size: 1.1em;
 }
+.modal-section p, .modal-section ul { /* For description text, etc. */
+    font-size: 0.95rem;
+    line-height: 1.6;
+    color: var(--text-on-dark-primary);
+    margin-bottom: 0; /* Remove default p margin if using gap */
+}
+.modal-section p:not(:last-child) {
+     margin-bottom: 8px; /* Space between paragraphs in description if any */
+}
+
+/* Info Grid (Location & Today's Hours) */
+.modal-info-grid {
+    display: flex;
+    justify-content: space-between; /* Puts items at ends */
+    gap: 20px; /* Space between items if they wrap */
+    padding: 10px 0; /* Some vertical padding for this section */
+    /* border-top: 1px solid var(--border-color-dark-theme); */ /* Optional separator */
+    /* border-bottom: 1px solid var(--border-color-dark-theme); */ /* Optional separator */
+}
+.modal-info-item {
+    flex-basis: calc(50% - 10px); /* Each takes roughly half, accounting for gap */
+}
+.modal-info-item h4 { /* Already styled by .modal-section h4 */
+    margin-bottom: 8px;
+}
+
+/* Icon Text Styling */
+.icon-text {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    font-size: 0.95rem !important; /* Ensure consistent size */
+    color: var(--text-on-dark-primary) !important;
+}
+.icon-text i { /* Font Awesome icons */
+    color: var(--primary-purple); /* Accent color for icons */
+    font-size: 1.1em; /* Slightly larger icons */
+    width: 20px; /* Ensure consistent icon alignment */
+    text-align: center;
+}
+
+/* Weekly Hours Grid */
+#modal-weekly-hours-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); /* Responsive columns */
+    gap: 10px;
+}
+.weekly-hour-item {
+    background-color: var(--element-bg-dark-hover); /* Slightly different bg for hour items */
+    padding: 10px 12px;
+    border-radius: var(--border-radius-md);
+    display: flex;
+    justify-content: space-between;
+    font-size: 0.9rem;
+}
+.weekly-hour-item span:first-child { /* Day */
+    font-weight: 500;
+    color: var(--text-on-dark-secondary);
+}
+.weekly-hour-item span:last-child { /* Time */
+    color: var(--text-on-dark-primary);
+}
+
+/* Contact Section Specifics */
+.website-link a { /* Styling the actual link */
+    color: var(--primary-purple) !important; /* Make link stand out */
+    text-decoration: none;
+    font-weight: 500;
+}
+.website-link a:hover {
+    text-decoration: underline;
+    color: var(--primary-purple-darker) !important;
+}
+
+
 #modal-hours { list-style: none; padding-left: 0; }
 #modal-hours li {
     padding-left: 5px; position: relative;
@@ -470,26 +701,106 @@ body {
 
 /* Mobile Friendliness (will adapt to dark theme due to CSS vars) */
 @media (max-width: 768px), (max-height: 800px) {
-    body {
-        align-items: flex-start;
-        overflow-y: auto;
-        background-color: var(--kiosk-content-bg); /* Dark bg for mobile body too */
+    .directory-main {
+        padding: 0; /* No padding here either on mobile for full bleed map */
     }
-    .kiosk-container {
-        border-radius: 0; width: 100vw; height: auto;
-        min-height: 100vh; box-shadow: none;
+
+    .directory-footer {
+        display: flex; /* Ensures it's flex for children alignment */
+        flex-direction: row; /* << CHANGED: Explicitly row for side-by-side */
+        height: 35%;         /* << ADJUST: Might need more or less height.
+                                   Consider what % of the mobile screen this footer should take.
+                                   Or use a fixed pixel height if preferred, e.g., 200px. */
+        max-height: 250px;   /* Example max height */
+        flex-shrink: 0;      /* Keep this */
+        overflow: hidden;    /* Footer itself should not scroll */
+        /* border-top: 1px solid var(--border-color-dark-theme); /* From dark theme */
     }
-    .directory-header { flex-direction: column; padding: 15px; }
-    #mall-logo { margin-bottom: 15px; height: 45px; }
-    .search-container { width: 100%; max-width: 400px; }
-    .directory-main { padding: 15px; min-height: 300px; }    
-    .directory-footer { flex-direction: column; height: auto; max-height: 60vh; }
-    .categories-zone, .vendors-zone { flex-basis: auto; border-right: none; }
-    .categories-zone { border-bottom: 1px solid var(--border-color-dark-theme); min-height: 180px; }
-    .vendors-zone { min-height: 250px; }
-    .scrollable-content { padding: 10px 15px; }
-    .modal-content { width: 95%; padding: 20px; max-height: 90vh; overflow-y: auto; }
-    #modal-name { font-size: 1.6rem; }
+
+    #map-svg-container {
+        border-radius: 0; /* Edge-to-edge on mobile */
+        border-left: none;
+        border-right: none;
+        /* border-top: none; */ /* Optional: if you want it to touch header */
+        /* border-bottom: none; */ /* Optional: if you want it to touch footer */
+        margin: 0; /* Map container takes full width/height of .directory-main on mobile */
+                   /* Or specific margins if needed, e.g., margin: 10px 0; for top/bottom spacing */
+    }
+
+    .categories-zone {
+        flex-basis: 40%; /* << Example: Categories take 40% of footer width */
+        /* width: 40%; */   /* Alternative to flex-basis if parent is not flex, but footer IS */
+        height: 95%;
+        border-right: 1px solid var(--border-color-dark-theme); /* Separator between zones */
+        border-bottom: none; /* << REMOVE: No longer needed as they are not stacked */
+
+        display: flex;       /* Still needed for .scrollable-content to fill height */
+        flex-direction: column;
+        overflow: hidden;    /* Zone itself doesn't scroll */
+    }
+
+    .vendors-zone {
+        flex-basis: 60%; /* << Example: Vendors take 60% of footer width */
+        /* width: 60%; */
+        height: 95%;
+        display: flex;       /* Still needed for .scrollable-content to fill height */
+        flex-direction: column;
+        overflow: hidden;    /* Zone itself doesn't scroll */
+    }
+
+    .footer-zone-header {
+        padding: 8px 10px; /* Smaller padding for smaller zones */
+        flex-shrink: 0;
+    }
+    .footer-zone-header h3 {
+        font-size: 0.9rem; /* Smaller titles */
+    }
+
+    .scrollable-content { /* This is inside categories-zone AND vendors-zone */
+        padding: 8px 10px; /* Smaller padding */
+        flex-grow: 1;      /* Fills available vertical space in its parent zone */
+        overflow-y: auto;  /* THIS MAKES THE LISTS SCROLL VERTICALLY */
+    }
+
+    /* Adjustments for content within the now narrower zones */
+    #category-filters {
+        gap: 6px; /* Smaller gap between category buttons */
+        /* Consider justify-content: center; if buttons don't fill width */
+    }
+    .category-btn {
+        padding: 6px 10px; /* Smaller category buttons */
+        font-size: 0.75rem; /* Smaller font for category buttons */
+        /* white-space: nowrap; */ /* Prevent wrapping if names are long, might need overflow hidden */
+    }
+
+    .vendor-item-v2 {
+        padding: 8px; /* Smaller padding for vendor items */
+        margin-bottom: 6px;
+        /* Consider flex-direction: column; align-items: flex-start;
+           if horizontal space is very tight for logo + text + ID */
+    }
+    .vendor-item-logo-v2 {
+        width: 30px; /* Smaller vendor logos */
+        height: 30px;
+        margin-right: 8px;
+    }
+    .vendor-item-info-v2 {
+        /* Allow text to wrap if needed */
+    }
+    .vendor-item-name-v2 {
+        font-size: 0.85rem; /* Smaller vendor name */
+    }
+    .vendor-item-categories-v2 {
+        font-size: 0.7rem; /* Smaller sub-text */
+    }
+    .vendor-item-location-v2 { /* The ID circle */
+        width: 24px;
+        height: 24px;
+        line-height: 24px;
+        font-size: 0.65rem;
+        margin-left: 8px;
+        flex-shrink: 0; /* Prevent it from shrinking too much */
+    }
 }
 
 /* Optional: Specific tweaks for very narrow screens if needed */
@@ -507,4 +818,62 @@ body {
         font-size: 0.9rem;
     }
     /* Further reduce font sizes if needed */
+    .modal-header-profile {
+        flex-direction: column;
+        align-items: flex-start; /* Or center */
+        gap: 12px;
+    }
+    #modal-name {
+        font-size: 1.5rem;
+    }
+    .modal-info-grid {
+        flex-direction: column; /* Stack Location and Today's Hours */
+        gap: 15px;
+    }
+    .modal-info-item {
+        flex-basis: auto; /* Full width when stacked */
+    }
+    #modal-weekly-hours-grid {
+        grid-template-columns: 1fr; /* Single column for weekly hours */
+    }
+}
+
+@media (min-width: 1600px) {
+    .kiosk-container {
+        /* ... sizing ... */
+        width: 95vw; /* Example: Take up 90% of the viewport width */
+        display: grid;
+        grid-template-columns: 65% 35%; /* Map column, Info column */
+        grid-template-rows: auto 1fr; /* Header row, Content row takes rest of space */
+        height: 95vh; /* Or var(--kiosk-height) */
+    }
+    .directory-header {
+        grid-column: 1 / -1; /* Span both columns */
+        grid-row: 1;
+    }
+    .directory-main { /* Map */
+        grid-column: 1;
+        grid-row: 2;
+        height: 100%; /* Fill grid cell height */
+        overflow: hidden; /* Important */
+        /* padding might need to be on #map-svg-container now */
+    }
+    #map-svg-container{ height: 100%;}
+
+    .directory-footer { /* Info sidebar */
+        grid-column: 2;
+        grid-row: 2;
+        display: flex;
+        flex-direction: column; /* Stack categories/vendors */
+        height: 100%; /* Fill grid cell height */
+        overflow: hidden;
+        border-left: 1px solid var(--border-color-dark-theme);
+    }
+    .categories-zone { /* Full width of sidebar, part of its height */
+        width: 100%; height: 45%; border-right: none;
+        border-bottom: 1px solid var(--border-color-dark-theme);
+    }
+    .vendors-zone { /* Full width of sidebar, rest of its height */
+        width: 100%; height: 55%;
+    }
 }

@@ -16,37 +16,54 @@ document.addEventListener('DOMContentLoaded', () => {
     let selectedVendorItemInList = null;
     let focusedVendorId = null;
 
-    // In script.js, replace your existing CATEGORY_COLORS constant with this:
     const CATEGORY_COLORS = {
-        "electronics": "#00BFFF",      // DeepSkyBlue
-        "technology": "#1E90FF",       // DodgerBlue
-        "fashion": "#FF69B4",          // HotPink
-        "apparel": "#FF1493",          // DeepPink
-        "accessories": "#DA70D6",      // Orchid
-        "food": "#FFD700",             // Gold
-        "restaurant": "#FFA500",       // Orange
-        "cafe": "#FF8C00",             // DarkOrange
-        "books": "#32CD32",            // LimeGreen
-        "gifts": "#00FA9A",            // MediumSpringGreen
-        "stationery": "#40E0D0",       // Turquoise
-        "home": "#8A2BE2",             // BlueViolet
-        "decor": "#9932CC",            // DarkOrchid
-        "toys": "#FF4500",             // OrangeRed
-        "kids": "#FF6347",             // Tomato
-        "games": "#C71585",            // MediumVioletRed
-        "sports": "#ADFF2F",           // GreenYellow
-        "health": "#FA8072",           // Salmon
-        "beauty": "#FFB6C1",           // LightPink (keeping one softer for contrast if needed)
-        "cosmetics": "#DB7093",        // PaleVioletRed
-        "entertainment": "#4682B4",    // SteelBlue
-        "cinema": "#2F4F4F",           // DarkSlateGray (still good for a dark, distinct cinema)
-        "services": "#7B68EE",         // MediumSlateBlue
-        "repairs": "#6495ED",          // CornflowerBlue
-        "pets": "#F4A460",             // SandyBrown
-        "amenities": "#708090",        // SlateGray (good neutral for amenities)
-        "collectibles": "#BA55D3",     // MediumOrchid
-        "default": "#A9A9A9"           // DarkGray (a bit darker default for better contrast if used)
+        // From your CSV
+        "toys": "#FF4500",
+        "collectibles": "#FF69B4",
+        "games": "#DA70D6",
+        "fashion apparel": "#6c5ce7",
+        "custom jewelry": "#FFD700",
+        "accessories": "#FFD700",
+        "trading cards": "#ff6b6b",
+        "y2k/vintage": "#FF7F50",
+        "pottery": "#A0522D",
+        "natural stones": "#d79456",
+        "computers": "#4682B4",
+        "candles": "#FFA500",
+        "psychic": "#8A2BE2",
+        "personal body care": "#20B2AA",
+        "sports": "#ff8c00",
+
+        // For Amenities and Default
+        "amenities": "#B0E0E6",        // PowderBlue (Light, neutral)
+        "unknown": "#A9A9A9"           // DarkGray (Good neutral default)
     };
+
+    function getCategoryColor(category) {
+        const lowerCategory = category ? category.toLowerCase().trim() : 'unknown'; // Handle null/undefined category
+
+        // 1. Check if the category is explicitly defined in CATEGORY_COLORS
+        if (CATEGORY_COLORS.hasOwnProperty(lowerCategory)) {
+            return CATEGORY_COLORS[lowerCategory];
+        }
+
+        // 2. If not defined, use the HSL generation algorithm as the default
+        let hash = 0;
+        // Use a slightly more robust seed for empty or very short strings
+        const strToHash = lowerCategory.length > 2 ? lowerCategory : lowerCategory + "defaultSeed";
+
+        for (let i = 0; i < strToHash.length; i++) {
+            hash = strToHash.charCodeAt(i) + ((hash << 5) - hash);
+            hash = hash & hash; // Convert to 32bit integer
+        }
+
+        const h = Math.abs(hash % 360); // Hue (0-359)
+        // Using slightly adjusted saturation and lightness for better vibrancy and contrast on dark theme
+        const s = 65 + (Math.abs(hash % 10)); // Saturation between 65-75%
+        const l = 55 + (Math.abs(hash % 11) - 5); // Lightness between 50-60%
+
+        return `hsl(${h}, ${s}%, ${l}%)`;
+    }
 
     async function loadData() {
         console.log("loadData called");
@@ -70,7 +87,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
             const svgText = await svgResponse.text();
             console.log("SVG Text loaded (length):", svgText.length);
-            
+
             if (jsonResponse.ok) {
                 try {
                     vendorData = await jsonResponse.json();
@@ -92,10 +109,10 @@ document.addEventListener('DOMContentLoaded', () => {
                 console.error("SVG Parser Error Details:", errorDetails);
                 throw new Error(`Error parsing SVG map: ${errorDetails}`);
             }
-            
+
             svgDoc = LsvgDoc; // Assign to global svgDoc
             svgDoc.id = "mall-svg-element"; // Ensure the SVG has the ID for CSS targeting
-            
+
             // Selectively remove only the loading indicator if it exists
             const currentLoadingIndicator = mapSvgContainer.querySelector('.loading-indicator');
             if (currentLoadingIndicator) {
@@ -138,17 +155,17 @@ document.addEventListener('DOMContentLoaded', () => {
             const vendorId = shape.id;
             const vendor = vendorData[vendorId];
             if (vendor) { // Apply category color
-                const primaryCategory = vendor['@type']?.[0] || 'default';
-                shape.style.fill = CATEGORY_COLORS[primaryCategory.toLowerCase()] || CATEGORY_COLORS.default;
+                const primaryCategory = vendor['@type']?.[0] || 'unknown';
+                shape.style.fill = getCategoryColor(primaryCategory);
             } else {
-                shape.style.fill = CATEGORY_COLORS.default;
+                shape.style.fill = getCategoryColor();
             }
 
             shape.addEventListener('click', () => handleMapShapeClick(vendorId));
-            
+
             shape.addEventListener('mouseover', () => {
                 if (shape.classList.contains('dimmed') || shape.classList.contains('highlighted')) return;
-                
+
                 bringToFront(shape); // 1. Shape
                 const contentId = currentMapLabelType === 'id' ? `content-text-${vendorId}` : `content-logo-${vendorId}`;
                 const contentElement = svgDoc.getElementById(contentId);
@@ -211,7 +228,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
         return { x: cx, y: cy };
     }
-    
+
     function getShapeCenter(shape) {
         const shapeId = shape.id;
         const tagName = shape.tagName.toLowerCase();
@@ -370,7 +387,7 @@ document.addEventListener('DOMContentLoaded', () => {
         textElement.setAttribute("x", center.x);
         textElement.setAttribute("y", center.y);
         textElement.setAttribute("class", "store-text");
-        
+
         let labelContent = vendorId;
         if (type === 'name' && vendor && vendor.name) {
             // Smart abbreviation for names
@@ -385,7 +402,7 @@ document.addEventListener('DOMContentLoaded', () => {
             }
         }
         textElement.textContent = labelContent;
-        
+
         const bbox = shape.getBBox();
         const minDim = Math.min(bbox.width, bbox.height);
         let fontSize = Math.max(5, Math.min(14, minDim / (labelContent.length > 5 ? 4.5 : 3.5)));
@@ -395,7 +412,7 @@ document.addEventListener('DOMContentLoaded', () => {
         // Insert text after the shape so it's rendered on top, but within SVG structure
         shape.parentNode.appendChild(textElement); // Append to parent of shape
     }
-    
+
     function updateMapLabels(type) {
         if (!svgDoc) return;
         currentMapLabelType = type;
@@ -429,7 +446,7 @@ document.addEventListener('DOMContentLoaded', () => {
             btn.classList.add('category-btn');
             btn.textContent = category.charAt(0).toUpperCase() + category.slice(1);
             btn.dataset.category = category;
-            btn.style.backgroundColor = CATEGORY_COLORS[category] || CATEGORY_COLORS.default;
+            btn.style.backgroundColor = getCategoryColor(category) || CATEGORY_COLORS.unknown;
             btn.addEventListener('click', () => handleCategorySelect(category, btn));
             categoryFiltersContainer.appendChild(btn);
         });
@@ -438,109 +455,98 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 
     function populateVendorList(filterCategory = 'all', searchTerm = '') {
-        vendorListContainer.innerHTML = '';
+        vendorListContainer.innerHTML = ''; // Clear existing list
         let count = 0;
 
-        // Clear any lingering 'selected-in-list' from a previous focus if general filters are changing
-        // This might be redundant if clearFocusStateAndApplyGeneralFilters handles it, but safe.
-        if (selectedVendorItemInList && !focusedVendorId) { // Only if no active focus
-            selectedVendorItemInList.classList.remove('selected-in-list');
-            selectedVendorItemInList = null;
-        }
-
         Object.entries(vendorData).forEach(([id, vendor]) => {
-            if (!vendor.name) return;
+            if (!vendor.name) return; // Skip items without names
 
             const vendorItem = document.createElement('div');
-            vendorItem.classList.add('vendor-item');
+            vendorItem.classList.add('vendor-item-v2'); // New class for the new style
             vendorItem.dataset.vendorId = id;
 
-            const logo = document.createElement('img');
-            logo.classList.add('vendor-item-logo');
-            logo.src = vendor.logo || `https://placehold.co/45x45/eee/ccc?text=${vendor.name[0] || '?'}`;
-            logo.alt = vendor.name;
-            logo.onerror = function() { this.src = `https://placehold.co/45x45/eee/ccc?text=${vendor.name[0] || '?'}`; };
+            // 1. Logo
+            const logoEl = document.createElement('img');
+            logoEl.classList.add('vendor-item-logo-v2');
+            const logoSrc = vendor.logo || `https://placehold.co/45x45/555/ccc?text=${vendor.name ? vendor.name[0] : '?'}`;
+            logoEl.src = logoSrc;
+            logoEl.alt = vendor.name;
+            logoEl.onerror = function() { this.src = `https://placehold.co/45x45/555/ccc?text=${vendor.name ? vendor.name[0] : '?'}`; this.onerror=null; };
+            vendorItem.appendChild(logoEl);
 
-            const itemInfo = document.createElement('div');
-            itemInfo.classList.add('vendor-item-info');
-            
+            // 2. Info Container (for Name and Category Tags)
+            const infoContainer = document.createElement('div');
+            infoContainer.classList.add('vendor-item-info-v2');
+
             const nameEl = document.createElement('p');
-            nameEl.classList.add('vendor-item-name');
+            nameEl.classList.add('vendor-item-name-v2');
             nameEl.textContent = vendor.name;
-            itemInfo.appendChild(nameEl);
+            infoContainer.appendChild(nameEl);
 
-            if(vendor['@type'] && vendor['@type'].length > 0){
-                const catP = document.createElement('p');
-                catP.classList.add('vendor-item-categories');
-                catP.textContent = vendor['@type'].slice(0,2).map(c => c.charAt(0).toUpperCase() + c.slice(1)).join(', ');
-                itemInfo.appendChild(catP);
+            if (vendor['@type'] && vendor['@type'].length > 0) {
+                const categoryTagsContainer = document.createElement('div');
+                categoryTagsContainer.classList.add('vendor-item-category-tags-v2');
+                vendor['@type'].slice(0, 3).forEach(catType => { // Show max 3 category tags
+                    const tag = document.createElement('span');
+                    tag.classList.add('vendor-category-tag-list'); // Re-use/adapt modal tag style or new one
+                    tag.textContent = catType;
+                    categoryTagsContainer.appendChild(tag);
+                });
+                infoContainer.appendChild(categoryTagsContainer);
             }
+            vendorItem.appendChild(infoContainer);
 
-            const location = document.createElement('span');
-            location.classList.add('vendor-item-location');
-            location.textContent = id;
+            // 3. Location ID Bubble
+            const locationEl = document.createElement('span');
+            locationEl.classList.add('vendor-item-location-v2');
+            locationEl.textContent = id;
+            vendorItem.appendChild(locationEl);
 
-            vendorItem.appendChild(logo);
-            vendorItem.appendChild(itemInfo);
-            vendorItem.appendChild(location);
-
+            // Event listener
             vendorItem.addEventListener('click', () => handleVendorListSelect(id, vendorItem));
-            
-            // Apply general filter dimming (category and search)
-            let isDimmedByGeneralFilter = false;
+
+            // Dimming logic (same as before)
+            let isDimmedByFilter = false;
             if (filterCategory && filterCategory !== 'all') {
                 const categories = vendor['@type'] ? vendor['@type'].map(c => c.toLowerCase()) : [];
-                if (!categories.includes(filterCategory)) {
-                    isDimmedByGeneralFilter = true;
-                }
+                if (!categories.includes(filterCategory)) isDimmedByFilter = true;
             }
-
-            if (searchTerm && !isDimmedByGeneralFilter) {
+            if (searchTerm && !isDimmedByFilter) {
                 const searchLower = searchTerm.toLowerCase();
                 const nameLower = vendor.name.toLowerCase();
                 const idLower = id.toLowerCase();
                 const descLower = vendor.description ? vendor.description.toLowerCase() : '';
                 const catsLower = vendor['@type'] ? vendor['@type'].join(' ').toLowerCase() : '';
-
                 if (!nameLower.includes(searchLower) && !idLower.includes(searchLower) &&
                     !descLower.includes(searchLower) && !catsLower.includes(searchLower)) {
-                    isDimmedByGeneralFilter = true;
+                    isDimmedByFilter = true;
                 }
             }
-
-            if (isDimmedByGeneralFilter) {
-                vendorItem.classList.add('dimmed');
-            }
-            
-            // If this item is the currently focused one (focusedVendorId is set),
-            // the handleVendorListSelect or handleMapShapeClick would have already set
-            // its 'selected-in-list' and removed 'dimmed' (if it was clicked).
-            // If a filter changes WHILE an item is focused, clearFocusStateAndApplyGeneralFilters
-            // should reset focusedVendorId, so this part will just apply general dimming.
-            // However, to ensure a focused item *stays* selected and undimmed if the list is repopulated
-            // for a reason other than focus changing (e.g., window resize triggering a redraw - though unlikely here),
-            // you might add a small check:
-            if (focusedVendorId && id === focusedVendorId) {
-                vendorItem.classList.remove('dimmed'); // Ensure focused item is not dimmed by general filters
-                vendorItem.classList.add('selected-in-list'); // And ensure it has selection style
-                if (selectedVendorItemInList && selectedVendorItemInList !== vendorItem) {
-                    selectedVendorItemInList.classList.remove('selected-in-list');
+            if (focusedVendorId) {
+                if (id === focusedVendorId) {
+                    vendorItem.classList.remove('dimmed');
+                    vendorItem.classList.add('selected-in-list');
+                    if(selectedVendorItemInList && selectedVendorItemInList !== vendorItem) selectedVendorItemInList.classList.remove('selected-in-list');
+                    selectedVendorItemInList = vendorItem;
+                } else {
+                    vendorItem.classList.add('dimmed');
+                    vendorItem.classList.remove('selected-in-list');
                 }
-                selectedVendorItemInList = vendorItem; // Make sure this reference is current
+            } else {
+                if (isDimmedByFilter) vendorItem.classList.add('dimmed');
             }
-
 
             vendorListContainer.appendChild(vendorItem);
             count++;
         });
 
         if (count === 0 && (filterCategory !== 'all' || searchTerm)) {
-            vendorListContainer.innerHTML = `<p style="padding: 20px; text-align: center; color: var(--text-on-dark-secondary);">No vendors match your current filter.</p>`;
+            vendorListContainer.innerHTML = `<p style="padding: 20px; text-align: center; color: var(--text-on-dark-secondary);">No vendors match.</p>`;
         } else if (count === 0) {
-            vendorListContainer.innerHTML = `<p style="padding: 20px; text-align: center; color: var(--text-on-dark-secondary);">No vendor data found or loaded.</p>`;
+            vendorListContainer.innerHTML = `<p style="padding: 20px; text-align: center; color: var(--text-on-dark-secondary);">No vendors found.</p>`;
         }
     }
-    
+
     function handleCategorySelect(category, clickedButton) {
         clearFocusStateAndApplyGeneralFilters(); // Clear any active focus first
 
@@ -558,7 +564,7 @@ document.addEventListener('DOMContentLoaded', () => {
             activeCategoryButton = clickedButton;
             activeCategoryButton.classList.add('active');
         }
-        
+
         const categoryButtons = categoryFiltersContainer.querySelectorAll('.category-btn');
         categoryButtons.forEach(btn => {
             if (btn !== activeCategoryButton) {
@@ -591,12 +597,17 @@ document.addEventListener('DOMContentLoaded', () => {
             selectedVendorItemInList = null;
         }
     }
-    
+
     function handleVendorListSelect(vendorId, listItemElement) {
+        if (focusedVendorId === vendorId && selectedVendorItemInList === listItemElement) {
+            // Clicked on the already focused/selected vendor: Unfocus it
+            clearFocusStateAndApplyGeneralFilters(); // This function reverts everything
+            return; // Important to exit after unfocusing
+        }
         focusedVendorId = vendorId; // Set the globally focused vendor
 
         // Dim all other list items and highlight the selected one
-        vendorListContainer.querySelectorAll('.vendor-item').forEach(item => {
+        vendorListContainer.querySelectorAll('.vendor-item-v2').forEach(item => {
             if (item.dataset.vendorId === vendorId) {
                 item.classList.remove('dimmed');
                 item.classList.add('selected-in-list');
@@ -620,8 +631,8 @@ document.addEventListener('DOMContentLoaded', () => {
             focusedVendorId = vendorId;
             showVendorModal(vendorId);
 
-            const listItemForMapClick = vendorListContainer.querySelector(`.vendor-item[data-vendor-id="${vendorId}"]`);
-            vendorListContainer.querySelectorAll('.vendor-item').forEach(item => {
+            const listItemForMapClick = vendorListContainer.querySelector(`.vendor-item-v2[data-vendor-id="${vendorId}"]`);
+            vendorListContainer.querySelectorAll('.vendor-item-v2').forEach(item => {
                 if (item.dataset.vendorId === vendorId) {
                     item.classList.remove('dimmed');
                     item.classList.add('selected-in-list');
@@ -643,7 +654,7 @@ document.addEventListener('DOMContentLoaded', () => {
                 selectedVendorItemInL<ctrl61>list.remove('selected-in-list');
                 selectedVendorItemInList = null;
             }
-            vendorListContainer.querySelectorAll('.vendor-item').forEach(item => {
+            vendorListContainer.querySelectorAll('.vendor-item-v2').forEach(item => {
                 item.classList.add('dimmed');
             });
         }
@@ -657,8 +668,8 @@ document.addEventListener('DOMContentLoaded', () => {
             if (shape.id === selectedVendorId) {
                 shape.classList.remove('dimmed');
                 shape.classList.add('highlighted');
-                if (vendor) shape.style.fill = CATEGORY_COLORS[vendor['@type']?.[0]?.toLowerCase() || 'default'] || CATEGORY_COLORS.default;
-                else shape.style.fill = CATEGORY_COLORS.default;
+                if (vendor) shape.style.fill = getCategoryColor(vendor['@type']?.[0]) || CATEGORY_COLORS.unknown;
+                else shape.style.fill = CATEGORY_COLORS.unknown;
 
                 bringToFront(shape); // 1. Shape
                 const contentId = currentMapLabelType === 'id' ? `content-text-${selectedVendorId}` : `content-logo-${selectedVendorId}`;
@@ -688,55 +699,100 @@ document.addEventListener('DOMContentLoaded', () => {
             svgDoc.querySelectorAll('.store-shape.highlighted').forEach(s => s.classList.remove('highlighted'));
             svgDoc.querySelectorAll('.store-shape.dimmed').forEach(s => s.classList.remove('dimmed')); // Remove general dimming
         }
-        
+
         const currentCategory = activeCategoryButton ? activeCategoryButton.dataset.category : 'all';
         const currentSearch = searchBar.value;
         filterMapAndList(currentCategory, currentSearch); // Re-apply general filters (which will dim map and list appropriately)
+    }
+
+    function getTodaysHours(vendorHoursArray) {
+        if (!vendorHoursArray || vendorHoursArray.length === 0) return "Not Available";
+
+        const today = new Date().toLocaleDateString('en-US', { weekday: 'long' });
+        return vendorHoursArray[today] || 'Closed';
     }
 
     function showVendorModal(vendorId) {
         const vendor = vendorData[vendorId];
         if (!vendor) return;
 
-        document.getElementById('modal-logo').src = vendor.logo || `https://placehold.co/90x90/eee/ccc?text=${vendor.name[0] || '?'}`;
-        document.getElementById('modal-logo').alt = vendor.name;
-        document.getElementById('modal-logo').onerror = function() { this.src = `https://placehold.co/90x90/eee/ccc?text=${vendor.name[0] || '?'}`; };
+        // Header Profile
+        const logoSrc = vendor.logo || `https://placehold.co/70x70/383838/EAEAEA?text=${vendor.name ? vendor.name[0] : '?'}`;
+        document.getElementById('modal-logo').src = logoSrc;
+        document.getElementById('modal-logo').alt = vendor.name || 'Vendor Logo';
+        document.getElementById('modal-logo').onerror = function() { this.src = `https://placehold.co/70x70/383838/EAEAEA?text=${vendor.name ? vendor.name[0] : '?'}`; this.onerror=null; };
 
+        document.getElementById('modal-name').textContent = vendor.name || 'N/A';
 
-        document.getElementById('modal-name').textContent = vendor.name;
-        
-        const categoriesText = vendor['@type'] ? vendor['@type'].map(c => c.charAt(0).toUpperCase() + c.slice(1)).join(', ') : 'N/A';
-        document.getElementById('modal-categories').textContent = categoriesText;
-        
-        document.getElementById('modal-description').textContent = vendor.description || 'No description available.';
-        
-        const hoursList = document.getElementById('modal-hours');
-        hoursList.innerHTML = '';
-        if (vendor.hours && vendor.hours.length > 0) {
-            vendor.hours.forEach(h => {
-                const li = document.createElement('li');
-                li.textContent = h;
-                hoursList.appendChild(li);
+        const categoryTagsContainer = document.getElementById('modal-category-tags');
+        categoryTagsContainer.innerHTML = ''; // Clear previous tags
+        if (vendor['@type'] && vendor['@type'].length > 0) {
+            vendor['@type'].slice(0, 4).forEach(catType => { // Show max 4 category tags
+                const tag = document.createElement('span');
+                tag.classList.add('category-tag');
+                tag.textContent = catType;
+                // Optional: if you want tag colors to match map category colors:
+                // tag.style.backgroundColor = getCategoryColor(catType);
+                // You might need a helper to ensure text color contrasts with dynamic bg
+                categoryTagsContainer.appendChild(tag);
             });
-        } else {
-            hoursList.innerHTML = '<li>Hours not available.</li>';
         }
 
-        document.getElementById('modal-telephone').textContent = vendor.telephone || 'N/A';
-        
+        // Description
+        document.getElementById('modal-description').textContent = vendor.description || 'No description available.';
+
+        // Location & Today's Hours
+        document.getElementById('modal-location').textContent = vendorId; // Booth number is the location
+        document.getElementById('modal-today-hours').textContent = getTodaysHours(vendor.hours); // Use helper
+
+        // Weekly Hours
+        const weeklyHoursGrid = document.getElementById('modal-weekly-hours-grid');
+        weeklyHoursGrid.innerHTML = ''; // Clear previous
+        if (vendor.hours && vendor.hours.length > 0) {
+            vendor.hours.forEach(hourEntry => {
+                // Assuming format "Day Open-Close" e.g., "Fri 3pm-9pm"
+                const parts = hourEntry.match(/^(\w+)\s+(.*)$/); // Simple split: Day and TheRest
+                if (parts && parts.length === 3) {
+                    const day = parts[1];
+                    const time = parts[2];
+                    const item = document.createElement('div');
+                    item.classList.add('weekly-hour-item');
+                    item.innerHTML = `<span>${day}</span><span>${time}</span>`;
+                    weeklyHoursGrid.appendChild(item);
+                } else { // Fallback for non-matching format
+                    const item = document.createElement('div');
+                    item.classList.add('weekly-hour-item');
+                    item.innerHTML = `<span></span><span>${hourEntry}</span>`; // Display full string if format unknown
+                    weeklyHoursGrid.appendChild(item);
+                }
+            });
+        } else {
+            weeklyHoursGrid.innerHTML = '<p style="grid-column: 1 / -1; text-align: center;">Hours not available.</p>';
+        }
+
+        // Contact
+        const telephoneEl = document.getElementById('modal-telephone');
+        if (vendor.telephone) {
+            telephoneEl.textContent = vendor.telephone;
+            telephoneEl.parentElement.style.display = 'flex'; // Show the P tag for phone
+        } else {
+            telephoneEl.textContent = 'N/A';
+            telephoneEl.parentElement.style.display = 'none'; // Hide if no phone
+        }
+
         const websiteLink = document.getElementById('modal-website');
-        const websiteP = websiteLink.parentElement; // The <p> tag
+        const websiteP = websiteLink.closest('.website-link'); // Get the parent P with class 'website-link'
         if (vendor.url) {
             websiteLink.href = vendor.url;
-            websiteLink.textContent = vendor.url.length > 50 ? vendor.url.substring(0,47)+'...' : vendor.url; // Display URL or "Visit Website"
-            websiteP.style.display = 'block';
+            websiteLink.textContent = vendor.url.replace(/^(https?:\/\/)?(www\.)?/, '').split('/')[0]; // Display domain
+            if (websiteP) websiteP.style.display = 'flex';
         } else {
-            websiteP.style.display = 'none';
+            if (websiteP) websiteP.style.display = 'none';
         }
 
         modal.style.display = 'flex';
     }
-    
+
     function clearMapHighlights() {
         if (!svgDoc) return;
         svgDoc.querySelectorAll('.store-shape').forEach(s => {
@@ -745,10 +801,10 @@ document.addEventListener('DOMContentLoaded', () => {
             if (!s.classList.contains('dimmed')) {
                 const vendor = vendorData[s.id];
                 if (vendor) {
-                    const primaryCategory = vendor['@type'] && vendor['@type'].length > 0 ? vendor['@type'][0] : 'default';
-                    s.style.fill = CATEGORY_COLORS[primaryCategory.toLowerCase()] || CATEGORY_COLORS.default;
+                    const primaryCategory = vendor['@type'] && vendor['@type'].length > 0 ? vendor['@type'][0] : 'unknown';
+                    s.style.fill = getCategoryColor(primaryCategory) || CATEGORY_COLORS.unknown;
                 } else {
-                    s.style.fill = CATEGORY_COLORS.default;
+                    s.style.fill = CATEGORY_COLORS.unknown;
                 }
             }
         });
@@ -756,7 +812,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
     function highlightVendorOnMap(selectedVendorId) {
         if (!svgDoc) return;
-        
+
         // Dim all shapes first that are not part of current category/search filter
         const currentCategory = activeCategoryButton ? activeCategoryButton.dataset.category : 'all';
         const currentSearch = searchBar.value;
@@ -767,14 +823,14 @@ document.addEventListener('DOMContentLoaded', () => {
         if (selectedShape) {
             selectedShape.classList.remove('dimmed'); // Ensure it's not dimmed
             selectedShape.classList.add('highlighted');
-            
+
             // Bring to front (SVG doesn't have z-index for elements, so re-append)
             selectedShape.parentNode.appendChild(selectedShape);
             const textLabel = svgDoc.getElementById(`text-${selectedVendorId}`);
             if(textLabel) textLabel.parentNode.appendChild(textLabel);
         }
     }
-    
+
     function filterMapAndList(category, searchTerm, excludeFromDimmingId = null) {
         if (!svgDoc) return;
         const searchLower = searchTerm.toLowerCase();
@@ -789,12 +845,12 @@ document.addEventListener('DOMContentLoaded', () => {
                 shape.classList.remove('dimmed');
                 // Ensure it gets its category color if not highlighted
                 if (!shape.classList.contains('highlighted')) {
-                     const primaryCategory = vendor && vendor['@type'] && vendor['@type'].length > 0 ? vendor['@type'][0] : 'default';
-                     shape.style.fill = CATEGORY_COLORS[primaryCategory.toLowerCase()] || CATEGORY_COLORS.default;
+                     const primaryCategory = vendor && vendor['@type'] && vendor['@type'].length > 0 ? vendor['@type'][0] : 'unknown';
+                     shape.style.fill = getCategoryColor(primaryCategory) || CATEGORY_COLORS.unknown;
                 }
                 return; // Skip further dimming checks for this one
             }
-            
+
             shape.classList.remove('highlighted'); // Clear old highlights not matching current selection
 
             if (vendor) {
@@ -821,15 +877,15 @@ document.addEventListener('DOMContentLoaded', () => {
                     shape.classList.add('dimmed');
                 } else {
                     shape.classList.remove('dimmed');
-                    const primaryCategory = vendor['@type'] && vendor['@type'].length > 0 ? vendor['@type'][0] : 'default';
-                    shape.style.fill = CATEGORY_COLORS[primaryCategory.toLowerCase()] || CATEGORY_COLORS.default;
+                    const primaryCategory = vendor['@type'] && vendor['@type'].length > 0 ? vendor['@type'][0] : 'unknown';
+                    shape.style.fill = getCategoryColor(primaryCategory) || CATEGORY_COLORS.unknown;
                 }
             } else { // Shape has no vendor data
                 if ((category && category !== 'all') || searchTerm) {
                      shape.classList.add('dimmed');
                 } else {
                      shape.classList.remove('dimmed');
-                     shape.style.fill = CATEGORY_COLORS.default;
+                     shape.style.fill = CATEGORY_COLORS.unknown;
                 }
             }
         });
@@ -847,7 +903,7 @@ document.addEventListener('DOMContentLoaded', () => {
                 clearFocusStateAndApplyGeneralFilters();
             } else if (focusedVendorId && modal.style.display !== 'flex') {
                 const target = event.target;
-                if (!target.closest('.vendor-item') && !target.closest('.store-shape') && !(svgDoc && target.closest && target.closest('#mall-svg-element .store-map-content')) && !target.closest('.category-btn') && !target.closest('#search-bar') && !target.closest('#map-label-toggle-btn')) {
+                if (!target.closest('.vendor-item-v2') && !target.closest('.store-shape') && !(svgDoc && target.closest && target.closest('#mall-svg-element .store-map-content')) && !target.closest('.category-btn') && !target.closest('#search-bar') && !target.closest('#map-label-toggle-btn')) {
                     clearFocusStateAndApplyGeneralFilters();
                 }
             }
@@ -876,7 +932,7 @@ document.addEventListener('DOMContentLoaded', () => {
             const selectedCategory = activeCategoryButton ? activeCategoryButton.dataset.category : 'all';
             filterMapAndList(selectedCategory, '');
         });
-        
+
         if (mapLabelToggleButton) {
             mapLabelToggleButton.addEventListener('click', () => {
                 const newType = currentMapLabelType === 'id' ? 'logo' : 'id';

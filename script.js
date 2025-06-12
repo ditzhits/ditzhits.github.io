@@ -13,6 +13,15 @@ document.addEventListener('DOMContentLoaded', () => {
     const legendItemsContainer = document.getElementById('legend-items-container');
     const legendToggleText = document.querySelector('.legend-toggle-text'); // For changing button text
 
+    const KIOSK_SVG_LOCATION = { x: 203.3, y: 410 };
+    const yahMarker = document.getElementById('you-are-here-marker');
+
+    let resizeTimeout;
+    window.addEventListener('resize', () => {
+        clearTimeout(resizeTimeout);
+        resizeTimeout = setTimeout(updateYouAreHereMarkerPosition, 100); // Debounce
+    });
+
     let vendorData = {};
     let svgDoc; // This will be the <svg> HTML element
     let currentMapLabelType = 'id';
@@ -21,52 +30,26 @@ document.addEventListener('DOMContentLoaded', () => {
     let focusedVendorId = null;
 
     const CATEGORY_COLORS = {
-        // From your CSV
-        "toys": "#FF4500",
-        "collectibles": "#FF69B4",
-        "games": "#DA70D6",
-        "fashion apparel": "#6c5ce7",
-        "custom jewelry": "#FFD700",
-        "accessories": "#FFD700",
-        "trading cards": "#ff6b6b",
-        "y2k/vintage": "#FF7F50",
-        "pottery": "#A0522D",
+        "toys": "#028391",
+        "trading cards": "#f0756d", // f0756d // f85525
+        "collectibles": "#028391",
+        "fashion apparel": "#b09ffd", // e9d8a6 // 6fcac4 // b09ffd
+        "custom jewelry": "#FFA500 ",
+        "y2k/vintage": "#01204e",
         "natural stones": "#d79456",
-        "computers": "#4682B4",
-        "candles": "#FFA500",
         "psychic": "#8A2BE2",
+        "pottery": "#A0522D",
+        "candles": "#FFA500",
+
+        "games": "#DA70D6",
+        "accessories": "#FFD700",
+        "computers": "#4682B4",
         "personal body care": "#20B2AA",
         "sports": "#ff8c00",
 
         // For Amenities and Default
-        "unknown": "#A9A9A9"           // DarkGray (Good neutral default)
+        "unknown": "#a9a9a9"
     };
-
-    function getCategoryColor(category) {
-        const lowerCategory = category ? category.toLowerCase().trim() : 'unknown'; // Handle null/undefined category
-
-        // 1. Check if the category is explicitly defined in CATEGORY_COLORS
-        if (CATEGORY_COLORS.hasOwnProperty(lowerCategory)) {
-            return CATEGORY_COLORS[lowerCategory];
-        }
-
-        // 2. If not defined, use the HSL generation algorithm as the default
-        let hash = 0;
-        // Use a slightly more robust seed for empty or very short strings
-        const strToHash = lowerCategory.length > 2 ? lowerCategory : lowerCategory + "defaultSeed";
-
-        for (let i = 0; i < strToHash.length; i++) {
-            hash = strToHash.charCodeAt(i) + ((hash << 5) - hash);
-            hash = hash & hash; // Convert to 32bit integer
-        }
-
-        const h = Math.abs(hash % 360); // Hue (0-359)
-        // Using slightly adjusted saturation and lightness for better vibrancy and contrast on dark theme
-        const s = 65 + (Math.abs(hash % 10)); // Saturation between 65-75%
-        const l = 55 + (Math.abs(hash % 11) - 5); // Lightness between 50-60%
-
-        return `hsl(${h}, ${s}%, ${l}%)`;
-    }
 
     async function loadData() {
         console.log("loadData called");
@@ -136,6 +119,7 @@ document.addEventListener('DOMContentLoaded', () => {
             populateVendorList();
             addGlobalEventListeners();
             populateMapLegend();
+            updateYouAreHereMarkerPosition();
 
         } catch (error) {
             console.error("Error in loadData function:", error);
@@ -143,6 +127,86 @@ document.addEventListener('DOMContentLoaded', () => {
         } finally {
             if (loadingIndicator) loadingIndicator.style.display = 'none';
         }
+    }
+
+    function updateYouAreHereMarkerPosition() {
+        if (!svgDoc || !yahMarker || !mapSvgContainer.offsetParent) { // Ensure elements are ready and container is positioned
+            if (yahMarker) yahMarker.style.display = 'none'; // Hide if prerequisites not met
+            return;
+        }
+
+        // 1. Get the main SVG element and its container
+        // const svgRenderAreaRect = (svgRenderArea || mapSvgContainer).getBoundingClientRect();
+        // Using mapSvgContainer directly as the reference for positioning the marker
+        const mapContainerRect = mapSvgContainer.getBoundingClientRect();
+
+
+        // 2. Get the CTM (Current Transformation Matrix) of the SVG content
+        // This matrix maps SVG user units to screen pixels.
+        // We need a point in the SVG that we know the coordinates of, e.g., (0,0) of the viewBox.
+        const svgPoint = svgDoc.createSVGPoint();
+        svgPoint.x = KIOSK_SVG_LOCATION.x;
+        svgPoint.y = KIOSK_SVG_LOCATION.y;
+
+        // Get the CTM of the <svg> element itself, or a main <g> group if you have one.
+        // If svgDoc is the root <svg> element and it has a viewBox, its CTM
+        // maps its internal coordinate system to its own bounding box on screen.
+        let ctm = svgDoc.getScreenCTM();
+
+        if (!ctm) {
+            console.warn("Could not get Screen CTM from SVG document.");
+            yahMarker.style.display = 'none';
+            return;
+        }
+
+        // If your SVG has preserveAspectRatio="xMidYMid meet" (default for `object-fit: contain`),
+        // the CTM correctly gives transformed points.
+
+        // 3. Transform the SVG point to screen coordinates
+        let screenPoint = svgPoint.matrixTransform(ctm);
+
+        // 4. Calculate position relative to the mapSvgContainer's top-left corner
+        // screenPoint.x/y are relative to the viewport. mapContainerRect.left/top are also viewport relative.
+        let markerLeft = screenPoint.x - mapContainerRect.left;
+        let markerTop = screenPoint.y - mapContainerRect.top;
+
+        // --- Adjustments if using #svg-render-area and object-fit: contain ---
+        // If the SVG is letterboxed/pillarboxed within svg-render-area due to object-fit: contain
+        // we need to account for the offset of the actual rendered SVG within svg-render-area.
+        const actualSvgRect = svgDoc.getBoundingClientRect(); // Bounding box of the <svg> element
+        markerLeft = (actualSvgRect.left - mapContainerRect.left) + (KIOSK_SVG_LOCATION.x * (actualSvgRect.width / svgDoc.viewBox.baseVal.width));
+        markerTop = (actualSvgRect.top - mapContainerRect.top) + (KIOSK_SVG_LOCATION.y * (actualSvgRect.height / svgDoc.viewBox.baseVal.height));
+        // --- End Adjustment ---
+
+        yahMarker.style.left = `${markerLeft}px`;
+        yahMarker.style.top = `${markerTop}px`;
+        yahMarker.style.display = 'flex'; // Make it visible
+    }
+
+    function getCategoryColor(category) {
+        const lowerCategory = category ? category.toLowerCase().trim() : 'unknown'; // Handle null/undefined category
+
+        // 1. Check if the category is explicitly defined in CATEGORY_COLORS
+        if (CATEGORY_COLORS.hasOwnProperty(lowerCategory)) {
+            return CATEGORY_COLORS[lowerCategory];
+        }
+
+        // 2. If not defined, use the HSL generation algorithm as the default
+        let hash = 0;
+        // Use a slightly more robust seed for empty or very short strings
+        const strToHash = lowerCategory.length > 2 ? lowerCategory : lowerCategory + "defaultSeed";
+
+        for (let i = 0; i < strToHash.length; i++) {
+            hash = strToHash.charCodeAt(i) + ((hash << 5) - hash);
+            hash = hash & hash; // Convert to 32bit integer
+        }
+
+        const h = Math.abs(hash % 360); // Hue (0-359)
+        // Using slightly adjusted saturation and lightness for better vibrancy and contrast on dark theme
+        const s = 65 + (Math.abs(hash % 10)); // Saturation between 65-75%
+        const l = 55 + (Math.abs(hash % 11) - 5); // Lightness between 50-60%
+
+        return `hsl(${h}, ${s}%, ${l}%)`;
     }
 
     function bringToFront(svgElement) {

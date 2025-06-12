@@ -24,7 +24,12 @@
             <div id="map-svg-container">
                 <div id="svg-render-area">
                     <!-- SVG will be dynamically loaded here -->
+                    <div id="you-are-here-marker" style="display: none;"> <!-- Initially hidden -->
+                        <div class="yah-pulse"></div>
+                        <span class="yah-text">YOU ARE HERE</span>
+                    </div>
                 </div>
+
                 <div class="loading-indicator">Loading Map...</div>
                 <button id="map-label-toggle-btn" class="map-overlay-button">Show Logos</button> <!-- Your existing button -->
 

@@ -11,7 +11,7 @@
 <body>
     <div class="kiosk-container">
         <header class="directory-header">
-            <!-- USE YOUR ACTUAL LOGO FILE HERE -->
+            <!-- USE ACTUAL LOGO FILE HERE -->
             <img src="cultured_vibe_logo.png" alt="Cultured Vibe Logo" id="mall-logo">
             <div class="search-container">
                 <i class="fas fa-search search-icon"></i>
@@ -20,12 +20,23 @@
             </div>
         </header>
 
-        <!-- ... rest of your HTML body from the previous good version ... -->
         <main class="directory-main">
             <div id="map-svg-container">
+                <div id="svg-render-area">
+                    <!-- SVG will be dynamically loaded here -->
+                </div>
                 <div class="loading-indicator">Loading Map...</div>
-                <button id="map-label-toggle-btn" class="map-overlay-button">Show Names</button>
-                <!-- Initial text will be "Show Names" because default is IDs -->
+                <button id="map-label-toggle-btn" class="map-overlay-button">Show Logos</button> <!-- Your existing button -->
+
+                <div id="map-legend" class="map-overlay-element collapsed"> <!-- Start collapsed -->
+                    <button id="legend-toggle-btn" aria-expanded="false" aria-controls="legend-items-container">
+                        <span class="legend-toggle-text">Show Legend</span>
+                        <i class="fas fa-chevron-up legend-arrow"></i> <!-- Icon for toggle -->
+                    </button>
+                    <div id="legend-items-container" class="legend-items scrollable-content-legend">
+                        <!-- Legend items will be populated by JavaScript -->
+                    </div>
+                </div>
             </div>
         </main>
 

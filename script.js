@@ -8,6 +8,10 @@ document.addEventListener('DOMContentLoaded', () => {
     const modalCloseBtn = document.querySelector('.modal-close-btn');
     const mapLabelToggleButton = document.getElementById('map-label-toggle-btn');
     const loadingIndicator = document.querySelector('.loading-indicator');
+    const mapLegend = document.getElementById('map-legend');
+    const legendToggleBtn = document.getElementById('legend-toggle-btn');
+    const legendItemsContainer = document.getElementById('legend-items-container');
+    const legendToggleText = document.querySelector('.legend-toggle-text'); // For changing button text
 
     let vendorData = {};
     let svgDoc; // This will be the <svg> HTML element
@@ -35,7 +39,6 @@ document.addEventListener('DOMContentLoaded', () => {
         "sports": "#ff8c00",
 
         // For Amenities and Default
-        "amenities": "#B0E0E6",        // PowderBlue (Light, neutral)
         "unknown": "#A9A9A9"           // DarkGray (Good neutral default)
     };
 
@@ -132,6 +135,7 @@ document.addEventListener('DOMContentLoaded', () => {
             populateCategories();
             populateVendorList();
             addGlobalEventListeners();
+            populateMapLegend();
 
         } catch (error) {
             console.error("Error in loadData function:", error);
@@ -423,6 +427,52 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     }
 
+    function populateMapLegend() {
+        if (!legendItemsContainer || !vendorData) return;
+
+        legendItemsContainer.innerHTML = ''; // Clear existing items
+
+        // Get all unique categories used by vendors
+        const uniqueCategories = new Set();
+        Object.values(vendorData).forEach(vendor => {
+            if (vendor['@type']) {
+                vendor['@type'].forEach(cat => uniqueCategories.add(cat.toLowerCase()));
+            }
+        });
+
+        // You might also want to include categories that are in CATEGORY_COLORS
+        // but not currently used by any vendor, if those colors appear on the map for other reasons.
+        // For now, focusing on categories from actual vendors.
+        // Or, iterate through CATEGORY_COLORS keys if that's more representative of map colors.
+        // Let's iterate CATEGORY_COLORS keys for a more complete legend of defined colors.
+
+        const sortedCategoryKeys = Object.keys(CATEGORY_COLORS)
+                                    .filter(key => key !== 'default' && key !== 'unknown_shape' && key !== 'all_categories_button_default') // Exclude special keys
+                                    .sort();
+
+        sortedCategoryKeys.forEach(categoryKey => {
+            const color = getCategoryColor(categoryKey); // Use your existing function
+
+            const legendItem = document.createElement('div');
+            legendItem.classList.add('legend-item');
+
+            const colorSwatch = document.createElement('div');
+            colorSwatch.classList.add('legend-color-swatch');
+            colorSwatch.style.backgroundColor = color;
+
+            const categoryName = document.createElement('span');
+            categoryName.classList.add('legend-category-name');
+            // Capitalize for display
+            categoryName.textContent = categoryKey.split(' ')
+                                            .map(word => word.charAt(0).toUpperCase() + word.slice(1))
+                                            .join(' ');
+
+            legendItem.appendChild(colorSwatch);
+            legendItem.appendChild(categoryName);
+            legendItemsContainer.appendChild(legendItem);
+        });
+    }
+
     function populateCategories() {
         const allCategories = new Set();
         Object.values(vendorData).forEach(vendor => {
@@ -435,31 +485,52 @@ document.addEventListener('DOMContentLoaded', () => {
         categoryFiltersContainer.innerHTML = '';
 
         const allBtn = document.createElement('button');
-        allBtn.classList.add('category-btn');
+        allBtn.classList.add('category-btn'); // Base class
         allBtn.textContent = 'All Categories';
         allBtn.dataset.category = 'all';
+        // No direct style.backgroundColor needed here, CSS handles default for [data-category="all"]
         allBtn.addEventListener('click', () => handleCategorySelect('all', allBtn));
         categoryFiltersContainer.appendChild(allBtn);
 
-        sortedCategories.forEach(category => {
+        sortedCategories.forEach(categoryKey => {
             const btn = document.createElement('button');
-            btn.classList.add('category-btn');
-            btn.textContent = category.charAt(0).toUpperCase() + category.slice(1);
-            btn.dataset.category = category;
-            btn.style.backgroundColor = getCategoryColor(category) || CATEGORY_COLORS.unknown;
-            btn.addEventListener('click', () => handleCategorySelect(category, btn));
+            btn.classList.add('category-btn'); // Base class
+            const displayName = categoryKey.split(' ')
+                                    .map(word => word.charAt(0).toUpperCase() + word.slice(1))
+                                    .join(' ');
+            btn.textContent = displayName;
+            btn.dataset.category = categoryKey;
+            // btn.style.backgroundColor = getCategoryColor(categoryKey); // <<<< REMOVE THIS LINE
+            btn.addEventListener('click', () => handleCategorySelect(categoryKey, btn));
             categoryFiltersContainer.appendChild(btn);
         });
-        // Activate "All Categories" by default
-        if (allBtn) handleCategorySelect('all', allBtn);
+
+        if (allBtn) handleCategorySelect('all', allBtn); // Select "All" by default
     }
 
     function populateVendorList(filterCategory = 'all', searchTerm = '') {
         vendorListContainer.innerHTML = ''; // Clear existing list
         let count = 0;
 
-        Object.entries(vendorData).forEach(([id, vendor]) => {
-            if (!vendor.name) return; // Skip items without names
+        // 1. Convert vendorData object to an array of [id, vendorObject] pairs
+        let vendorEntries = Object.entries(vendorData);
+
+        // 2. Filter out vendors without a name (if any, though your check later handles it)
+        vendorEntries = vendorEntries.filter(([id, vendor]) => vendor && vendor.name);
+
+        // 3. Sort the array alphabetically by vendor name (case-insensitive)
+        vendorEntries.sort(([, vendorA], [, vendorB]) => {
+            const nameA = vendorA.name.toLowerCase();
+            const nameB = vendorB.name.toLowerCase();
+            if (nameA < nameB) return -1;
+            if (nameA > nameB) return 1;
+            return 0;
+        });
+
+        // 4. Iterate over the SORTED array to create and append list items
+        vendorEntries.forEach(([id, vendor]) => {
+            // The rest of your existing vendor item creation logic...
+            // if (!vendor.name) return; // This check is now less critical due to pre-filtering
 
             const vendorItem = document.createElement('div');
             vendorItem.classList.add('vendor-item-v2'); // New class for the new style
@@ -522,18 +593,21 @@ document.addEventListener('DOMContentLoaded', () => {
                     isDimmedByFilter = true;
                 }
             }
-            if (focusedVendorId) {
-                if (id === focusedVendorId) {
-                    vendorItem.classList.remove('dimmed');
-                    vendorItem.classList.add('selected-in-list');
-                    if(selectedVendorItemInList && selectedVendorItemInList !== vendorItem) selectedVendorItemInList.classList.remove('selected-in-list');
-                    selectedVendorItemInList = vendorItem;
-                } else {
-                    vendorItem.classList.add('dimmed');
-                    vendorItem.classList.remove('selected-in-list');
+            // Apply dimming based on general filters (not focus)
+            if (isDimmedByFilter) {
+                vendorItem.classList.add('dimmed');
+            }
+
+            // If a vendor is currently focused, ensure its list item reflects that selection
+            // This part ensures that if populateVendorList is called while an item *is* focused
+            // (e.g., due to a subtle filter change that doesn't clear focus), the focused item maintains its style.
+            if (focusedVendorId && id === focusedVendorId) {
+                vendorItem.classList.remove('dimmed'); // Focused item is never dimmed by general filters
+                vendorItem.classList.add('selected-in-list'); // And ensure it has selection style
+                if (selectedVendorItemInList && selectedVendorItemInList !== vendorItem) {
+                    selectedVendorItemInList.classList.remove('selected-in-list');
                 }
-            } else {
-                if (isDimmedByFilter) vendorItem.classList.add('dimmed');
+                selectedVendorItemInList = vendorItem; // Keep this reference current
             }
 
             vendorListContainer.appendChild(vendorItem);
@@ -939,6 +1013,23 @@ document.addEventListener('DOMContentLoaded', () => {
                 updateMapContentDisplay(newType);
                 mapLabelToggleButton.textContent = newType === 'id' ? 'Show Logos' : 'Show IDs';
             });
+        }
+
+        if (legendToggleBtn && mapLegend && legendToggleText) {
+            legendToggleBtn.addEventListener('click', () => {
+                const isCollapsed = mapLegend.classList.contains('collapsed');
+                if (isCollapsed) {
+                    mapLegend.classList.remove('collapsed');
+                    legendToggleBtn.setAttribute('aria-expanded', 'true');
+                    legendToggleText.textContent = 'Hide Legend';
+                } else {
+                    mapLegend.classList.add('collapsed');
+                    legendToggleBtn.setAttribute('aria-expanded', 'false');
+                    legendToggleText.textContent = 'Show Legend';
+                }
+            });
+        } else {
+            console.warn("Legend toggle button or container not found.");
         }
 
         const allCatBtn = categoryFiltersContainer.querySelector('.category-btn[data-category="all"]');

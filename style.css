@@ -174,6 +174,97 @@ body {
     background-color: rgba(30, 30, 30, 0.95);
 }
 
+.map-overlay-element {
+    position: absolute;
+    background-color: rgba(45, 45, 45, 0.9); /* Dark translucent background */
+    color: var(--text-on-dark-primary);
+    border: 1px solid var(--border-color-dark-theme-light);
+    border-radius: var(--border-radius-md);
+    box-shadow: var(--shadow-md-dark);
+    z-index: 10; /* Ensure it's above map SVG, but below modal */
+    transition: all 0.3s ease-in-out; /* For smooth collapse/expand */
+}
+
+/* Map Legend Specific Styles */
+#map-legend {
+    bottom: 20px;
+    left: 20px;
+    width: 200px; /* Default width, can adjust */
+    max-height: 40px; /* Height when collapsed (just the button) */
+    overflow: hidden; /* Key for collapse animation */
+}
+
+#map-legend:not(.collapsed) {
+    max-height: 300px; /* Max height when expanded, adjust as needed */
+    /* Or use: max-height: 40vh; */
+    padding-bottom: 10px; /* Space below the list before border */
+}
+
+#legend-toggle-btn {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
+    background-color: transparent; /* Button itself is part of the legend bg */
+    color: var(--text-on-dark-primary);
+    border: none;
+    padding: 10px 15px;
+    font-family: var(--font-primary);
+    font-size: 0.9rem;
+    font-weight: 500;
+    cursor: pointer;
+    text-align: left;
+}
+#legend-toggle-btn:hover {
+    background-color: rgba(60, 60, 60, 0.95); /* Subtle hover if needed */
+}
+
+.legend-arrow {
+    transition: transform 0.3s ease-in-out;
+}
+
+#map-legend:not(.collapsed) .legend-arrow {
+    transform: rotate(180deg); /* Point down when expanded */
+}
+
+#legend-items-container {
+    padding: 0 15px; /* Horizontal padding for items */
+    max-height: calc(300px - 40px - 10px); /* Max height of legend minus button and padding */
+                                       /* Or calc(40vh - 40px - 10px); */
+    /* This will be scrollable due to .scrollable-content-legend if content exceeds this */
+}
+
+.scrollable-content-legend { /* For the legend items list */
+    overflow-y: auto;
+    /* Custom scrollbar styles (can reuse your existing .scrollable-content scrollbar styles) */
+}
+.scrollable-content-legend::-webkit-scrollbar { width: 6px; }
+.scrollable-content-legend::-webkit-scrollbar-track { background: #2c2c2c; border-radius: 10px; }
+.scrollable-content-legend::-webkit-scrollbar-thumb { background: #555; border-radius: 10px; }
+.scrollable-content-legend::-webkit-scrollbar-thumb:hover { background: #777; }
+
+
+.legend-item {
+    display: flex;
+    align-items: center;
+    padding: 6px 0; /* Vertical padding for each item */
+    font-size: 0.85rem;
+}
+
+.legend-color-swatch {
+    width: 16px;
+    height: 16px;
+    border-radius: 3px; /* Slightly rounded square or 50% for circle */
+    margin-right: 10px;
+    border: 1px solid rgba(255,255,255,0.2); /* Subtle border for very light swatches */
+    flex-shrink: 0;
+}
+
+.legend-category-name {
+    color: var(--text-on-dark-secondary);
+    text-transform: capitalize;
+}
+
 /* SVG specific styles */
 #mall-svg-element { /* Your actual <svg> element (id set in JS) */
     width: 100%;
@@ -286,45 +377,60 @@ body {
     cursor: pointer;
     font-size: 0.9rem;
     font-weight: 500;
-    transition: all 0.2s ease-in-out;
-    color: var(--primary-purple);
-    background-color: var(--element-bg-dark); /* Dark bg for buttons */
+    transition: background-color 0.2s ease-in-out, color 0.2s ease-in-out, box-shadow 0.2s ease-in-out, opacity 0.2s ease-in-out;
+    text-align: center;
+    border: 2px solid var(--primary-purple); /* Border now matches the primary purple */
+    /* Default state for non-"All" buttons */
+    background-color: var(--element-bg-dark); /* Your dark theme element background - for unselected state */
+    color: var(--primary-purple);             /* Purple text when unselected */
     box-shadow: var(--shadow-sm-dark);
-    letter-spacing: 0.5px;
 }
-.category-btn:hover:not(.active) {
-    background-color: var(--element-bg-dark-hover);
-    color: var(--primary-purple-darker);
+.category-btn:hover:not(.active):not(.inactive) {
+    background-color: var(--primary-purple-darker); /* Darker purple on hover */
+    color: var(--logo-black);                       /* Black text on hover */
     border-color: var(--primary-purple-darker);
-    transform: translateY(-1px);
+    box-shadow: var(--shadow-md-dark);
 }
+
+/* Active state - solid primary purple with black text */
 .category-btn.active {
-    background-color: var(--primary-purple);
-    color: var(--logo-black); /* Black text on solid purple button */
-    border-color: var(--primary-purple);
-    /* font-weight: 700; */
+    background-color: var(--primary-purple) !important; /* Ensure it overrides */
+    color: var(--logo-black) !important;                /* Black text */
+    border-color: var(--primary-purple) !important;     /* Border matches background */
+    font-weight: 600; /* Slightly bolder for active state, if desired and doesn't shift layout */
+    box-shadow: inset 0 1px 3px rgba(0,0,0,0.3), var(--shadow-sm-dark); /* Subtle inset shadow */
 }
+
+/* Inactive state (when another category is active and this one is not "All") */
 .category-btn.inactive {
-    opacity: 0.4; /* More opacity for inactive on dark mode */
-    background-color: #202020 !important;
-    color: #777 !important;
-    border-color: #404040 !important;
+    background-color: #282828 !important; /* Darker, muted background */
+    color: #666 !important;               /* Muted text */
+    border-color: #404040 !important;      /* Muted border */
+    opacity: 0.6;
     box-shadow: none;
     cursor: default;
 }
+
+/* "All Categories" button - can have its own distinct default style */
 .category-btn[data-category="all"] {
-    background-color: #4A4A4A; /* Neutral dark grey for "All" button */
-    color: var(--text-on-dark-primary);
-    border-color: #4A4A4A;
+    background-color: #4A4A4A; /* Neutral dark grey for default "All" */
+    color: var(--text-on-dark-primary); /* Light text for "All" */
+    border-color: #5A5A5A;
 }
-.category-btn[data-category="all"].active {
-    background-color: var(--primary-purple);
-    color: var(--logo-black);
-    border-color: var(--primary-purple);
-}
+
 .category-btn[data-category="all"]:hover:not(.active) {
-     background-color: #5A5A5A;
-     border-color: #5A5A5A;
+     background-color: #5A5A5A; /* Slightly lighter grey on hover */
+     border-color: #6A6A6A;
+     color: var(--text-on-dark-primary);
+}
+
+/* "All Categories" button when it IS the active one */
+.category-btn[data-category="all"].active {
+    background-color: var(--primary-purple) !important; /* Same purple as other active buttons */
+    color: var(--logo-black) !important;                /* Black text */
+    border-color: var(--primary-purple) !important;
+    font-weight: 600; /* Optional */
+    box-shadow: inset 0 1px 3px rgba(0,0,0,0.3), var(--shadow-sm-dark);
 }
 
 /* Vendor List Items */

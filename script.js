@@ -881,7 +881,8 @@ document.addEventListener('DOMContentLoaded', () => {
 
         // Location & Today's Hours
         document.getElementById('modal-location').textContent = vendorId; // Booth number is the location
-        document.getElementById('modal-today-hours').textContent = getTodaysHours(vendor.hours); // Use helper
+        // TODO: Fix today's hour parsing
+        // document.getElementById('modal-today-hours').textContent = getTodaysHours(vendor.hours); // Use helper
 
         // Weekly Hours
         const weeklyHoursGrid = document.getElementById('modal-weekly-hours-grid');

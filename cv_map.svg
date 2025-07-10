@@ -34,7 +34,10 @@
   <text x="203.8" y="470" class="map-feature-label entrance-label" style="fill:rgb(37, 225, 50); text-anchor: middle;">Entrance</text>
   <!-- You might use an icon + text, or just text -->
   <!-- <path d="..." class="entrance-icon" fill="#E0E0E0"/> -->
-  <text x="204" y="233" class="map-feature-label event-space-label" style="fill:rgb(255, 255, 255); text-anchor: middle;">Event Space</text>
+  <text x="204" y="233" class="map-feature-label" style="fill:rgb(255, 255, 255); text-anchor: middle;">Event Space</text>
+
+  <text x="377" y="81" class="community-space-label" style="fill:rgb(255, 255, 255); text-anchor: middle;">Community Space</text>
+  <!-- <rect id="A57" class="store-shape" x="358.96" y="69.39" width="43.76" height="19.56"/> -->
 
   <!-- Vendor Zones -->
   <rect id="D50" class="store-shape" x=".5" y="28.94" width="54.22" height="40.44"/>
@@ -44,7 +47,8 @@
   <rect id="D25" class="store-shape" x="96.65" y="48.32" width="19.56" height="21.07"/>
   <rect id="D23" class="store-shape" x="76.32" y="96.35" width="43.73" height="15.05"/>
   <rect id="D21" class="store-shape" x="76.32" y="111.4" width="43.73" height="25.1"/>
-  <rect id="C48" class="store-shape" x="120.06" y="96.35" width="33.42" height="40.15"/>
+  <rect id="C48" class="store-shape" x="120.06" y="116.42" width="33.42" height="20.08"/>
+  <rect id="C50" class="store-shape" x="120.06" y="96.37" width="33.42" height="20.08"/>
   <rect id="D19" class="store-shape" x="76.32" y="136.5" width="43.73" height="42.31"/>
   <rect id="C46" class="store-shape" x="120.06" y="136.5" width="33.42" height="28.8"/>
   <rect id="C44" class="store-shape" x="120.06" y="165.3" width="33.42" height="13.51"/>
@@ -74,8 +78,7 @@
   <polygon id="D2" class="store-shape" points="148.86 407.61 136.07 421.97 99.09 389.64 112.59 374.72 148.86 407.61"/>
   <polygon id="C2" class="store-shape" points="175.17 475.17 175.17 435.52 147.65 435.52 148.06 475.17 175.17 475.17"/>
   <path id="C6" class="store-shape" d="m147.65,435.52c-.07-6.7-.14-13.39-.21-20.09h27.73v20.09s-27.52,0-27.52,0Z"/>
-  <rect id="A50" class="store-shape" x="307.79" y="14.72" width="29.69" height="14.04"/>
-  <rect id="B57" class="store-shape" x="276.32" y="14.72" width="31.47" height="14.04"/>
+  <rect id="B57" class="store-shape" x="276.32" y="14.72" width="61.21" height="14.04"/>
   <rect id="B46" class="store-shape" x="211.08" y="14.72" width="43.38" height="14.04"/>
   <rect id="C58" class="store-shape" x="174.72" y="14.72" width="36.36" height="14.04"/>
   <rect id="C60" class="store-shape" x="153.48" y=".5" width="21.24" height="28.27"/>
@@ -84,7 +87,6 @@
   <rect id="D33" class="store-shape" x="93.69" y=".5" width="19.56" height="28.27"/>
   <rect id="B18" class="store-shape" x="175.17" y="141.83" width="57.42" height="36.98"/>
   <rect id="C29" class="store-shape" x="175.17" y="123.88" width="28.71" height="17.96"/>
-  <rect id="B20" class="store-shape" x="203.88" y="123.88" width="28.71" height="17.96"/>
   <rect id="B2" class="store-shape" x="175.17" y="337.92" width="57.42" height="58.67"/>
   <rect id="B8" class="store-shape" x="175.17" y="304.5" width="57.42" height="33.42"/>
   <rect id="B12" class="store-shape" x="175.17" y="276.06" width="57.42" height="28.44"/>
@@ -133,11 +135,11 @@
   <rect id="A55" class="store-shape" x="358.96" y="88.94" width="43.76" height="52.89"/>
   <polygon id="A65" class="store-shape" points="358.96 28.77 402.72 28.94 402.72 69.39 358.96 69.39 358.96 28.77"/>
   <rect id="A43" class="store-shape" x="358.96" y="141.83" width="43.76" height="56.53"/>
-  <rect id="A57" class="store-shape" x="358.96" y="69.39" width="43.76" height="19.56"/>
 
   <!-- Harcode a center for this shape -->
   <polygon id="B30" class="store-shape" points="232.59 48.32 203.88 48.32 203.88 88.94 193.12 88.94 193.12 123.88 232.59 123.88 232.59 48.32"/>
-  <circle id="B30-label-anchor" cx="214" cy="105" r="1" fill="none" stroke="none" pointer-events="none" />
+  <rect id="B30" class="store-shape" x="203.88" y="123.88" width="28.71" height="17.96"/>
+  <circle id="B30-label-anchor" cx="214" cy="108" r="1" fill="none" stroke="none" pointer-events="none" />
 
   <!-- Harcode a center for this shape -->
   <polygon id="C41" class="store-shape" points="175.17 48.32 203.88 48.32 203.88 88.94 193.12 88.94 193.12 123.88 175.17 123.88 175.17 48.32"/>

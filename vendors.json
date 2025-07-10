@@ -8,15 +8,15 @@
       "games",
       "sports"
     ],
-    "url": "",
+    "url": "https://www.ditzhits.com/",
     "hours": [
       "Fri 3pm-9pm",
       "Sat 10am-9pm",
       "Sun 11am-7pm"
     ],
     "telephone": "(844) 651-3489",
-    "logo": "https://static.wixstatic.com/media/55dd7b_9954b7617f20491abccb35a6d4c6034a~mv2.png/v1/fill/w_864,h_864,al_c,q_90,enc_avif,quality_auto/Ditz___HITS_transparent.png",
-    "description": "We’re passionate about connecting collectors with rare Pokémon Cards, top-tier Sports Cards, and exclusive finds. Stop by, explore our inventory, and level up your collection today!"
+    "logo": "logos/Ditz Hits.png",
+    "description": "We got it all: Pokémon, One Piece, MTG, Sports, Lego, Comics, and more. Stop by, explore our inventory, and come say hi!"
   },
   "A1": {
     "name": "Super Auto Toys",
@@ -332,36 +332,6 @@
     "logo": "",
     "description": ""
   },
-  "A50": {
-    "name": "Muddie Bunnie",
-    "@type": [
-      "pottery"
-    ],
-    "url": "",
-    "hours": [
-      "Fri 3pm-9pm",
-      "Sat 10am-9pm",
-      "Sun 11am-7pm"
-    ],
-    "telephone": "",
-    "logo": "",
-    "description": ""
-  },
-  "A57": {
-    "name": "My Beauty's Conscience",
-    "@type": [
-      "fashion apparel"
-    ],
-    "url": "",
-    "hours": [
-      "Fri 3pm-9pm",
-      "Sat 10am-9pm",
-      "Sun 11am-7pm"
-    ],
-    "telephone": "",
-    "logo": "",
-    "description": ""
-  },
   "A6": {
     "name": "Lore Alley",
     "@type": [
@@ -393,10 +363,9 @@
     "description": ""
   },
   "A9": {
-    "name": "MyIttyBittyKickz",
+    "name": "THRIFTDGARMNTS",
     "@type": [
-      "custom jewelry",
-			"accessories"
+      "Y2K/Vintage Apparel"
     ],
     "url": "",
     "hours": [
@@ -502,25 +471,25 @@
     "logo": "",
     "description": ""
   },
-  "B20": {
-    "name": "TrendrBendr",
+  "B46": {
+    "name": "The Wildling Wardrobe",
     "@type": [
       "fashion apparel"
     ],
-    "url": "",
+    "url": "https://www.instagram.com/thewildlingwardrobe",
     "hours": [
       "Fri 3pm-9pm",
       "Sat 10am-9pm",
       "Sun 11am-7pm"
     ],
     "telephone": "",
-    "logo": "",
-    "description": ""
+    "logo": "logos/Wildling Wardrobe.png",
+    "description": "The Wildling Wardrobe offers curated, pre-loved children’s clothing with a boho-chic flair, perfect for little free spirits. We focus on sustainability, affordability, and style, featuring quality pieces from brands like Zara, Kate Quinn, Angel Dear, Baby Gap, Nike and Cotton On. At this Cultured Vibe location, you’ll find a special collection of character plushies and kids’ apparel featuring favorites like Disney, Pokémon, anime, and gaming icons. With every item, we aim to minimize textile waste and make eco-conscious fashion accessible to all."
   },
   "B25": {
-    "name": "The Wildling Wardrobe",
+    "name": "Candy Land",
     "@type": [
-      "fashion apparel"
+      "Candy"
     ],
     "url": "",
     "hours": [
@@ -770,26 +739,9 @@
     "description": ""
   },
   "C26": {
-    "name": "Circle Surf Co",
+    "name": "Midnite Creations",
     "@type": [
-      "fashion apparel"
-    ],
-    "url": "",
-    "hours": [
-      "Fri 3pm-9pm",
-      "Sat 10am-9pm",
-      "Sun 11am-7pm"
-    ],
-    "telephone": "",
-    "logo": "",
-    "description": ""
-  },
-  "C29": {
-    "name": "Moe_Printing",
-    "@type": [
-      "toys",
-      "collectibles",
-      "games"
+      "Trading Cards"
     ],
     "url": "",
     "hours": [
@@ -897,8 +849,8 @@
     "logo": "",
     "description": ""
   },
-  "C48": {
-    "name": "Addiktedrc ",
+  "C50": {
+    "name": "Rudzinski Collectibles",
     "@type": [
       "toys",
       "collectibles",
@@ -995,9 +947,11 @@
     "description": ""
   },
   "C60": {
-    "name": "TheCollectorsAlley.llc",
+    "name": "Isla Tesoro",
     "@type": [
-      "trading cards"
+      "Toys",
+      "Collectibles",
+      "Games"
     ],
     "url": "",
     "hours": [
@@ -1025,9 +979,9 @@
     "description": ""
   },
   "C64": {
-    "name": "Trend In",
+    "name": "AG133 Rips",
     "@type": [
-      "fashion apparel"
+      "Trading Cards"
     ],
     "url": "",
     "hours": [
@@ -1087,7 +1041,7 @@
     "description": ""
   },
   "D13": {
-    "name": "High Guy Collectibles",
+    "name": "BLESSED",
     "@type": [
       "toys",
       "collectibles",
@@ -1196,7 +1150,7 @@
     "description": ""
   },
   "D20": {
-    "name": "KM PERMANENT JEWELRY",
+    "name": "Larisa's Shop",
     "@type": [
       "custom jewelry",
 			"accessories"
@@ -1212,9 +1166,9 @@
     "description": ""
   },
   "D21": {
-    "name": "Crybaby",
+    "name": "Rogue Rivals",
     "@type": [
-      "fashion apparel"
+      "Trading Cards"
     ],
     "url": "",
     "hours": [
@@ -1275,9 +1229,11 @@
     "description": ""
   },
   "D32": {
-    "name": "MobKittyCo",
+    "name": "MyIttyBittyKickz",
     "@type": [
-      "fashion apparel"
+      "toys",
+      "collectibles",
+      "games"
     ],
     "url": "",
     "hours": [
@@ -1320,9 +1276,10 @@
     "description": ""
   },
   "D46": {
-    "name": "RAIZES",
+    "name": "PatchLand",
     "@type": [
-      "fashion apparel"
+      "Custom Jewelry",
+      "Accessories"
     ],
     "url": "",
     "hours": [
@@ -1334,7 +1291,7 @@
     "logo": "",
     "description": ""
   },
-  "D48": {
+  "C29": {
     "name": "TCG Bandits",
     "@type": [
       "trading cards"
@@ -1366,10 +1323,11 @@
     "description": ""
   },
   "D50": {
-    "name": "PatchLand",
+    "name": "Addiktedrc",
     "@type": [
-      "custom jewelry",
-			"accessories"
+      "Toys",
+      "Collectibles",
+      "Games"
     ],
     "url": "",
     "hours": [
@@ -1419,6 +1377,21 @@
       "toys",
       "collectibles",
       "games"
+    ],
+    "url": "",
+    "hours": [
+      "Fri 3pm-9pm",
+      "Sat 10am-9pm",
+      "Sun 11am-7pm"
+    ],
+    "telephone": "",
+    "logo": "",
+    "description": ""
+  },
+  "D37": {
+    "name": "SoCal Boutique",
+    "@type": [
+      "Fashion Apparel"
     ],
     "url": "",
     "hours": [

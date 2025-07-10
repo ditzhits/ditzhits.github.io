@@ -56,7 +56,7 @@ document.addEventListener('DOMContentLoaded', () => {
         if (loadingIndicator) loadingIndicator.style.display = 'block';
         try {
             const [svgResponse, jsonResponse] = await Promise.all([
-                fetch('mall_map.svg'),
+                fetch('cv_map.svg'),
                 fetch('vendors.json')
             ]);
 
@@ -222,25 +222,30 @@ document.addEventListener('DOMContentLoaded', () => {
         shapes.forEach(shape => {
             const vendorId = shape.id;
             const vendor = vendorData[vendorId];
-            if (vendor) { // Apply category color
+            if (vendor && vendor.name) { // Check for vendor and a name to be considered "occupied"
+                // This is an occupied, interactive zone. Remove 'unavailable-zone' if it was there before.
+                shape.classList.remove('unavailable-zone');
+
+                // Apply category color
                 const primaryCategory = vendor['@type']?.[0] || 'unknown';
                 shape.style.fill = getCategoryColor(primaryCategory);
+
+                shape.addEventListener('click', () => handleMapShapeClick(vendorId));
+
+                shape.addEventListener('mouseover', () => {
+                    if (shape.classList.contains('dimmed') || shape.classList.contains('highlighted')) return;
+
+                    bringToFront(shape); // 1. Shape
+                    const contentId = currentMapLabelType === 'id' ? `content-text-${vendorId}` : `content-logo-${vendorId}`;
+                    const contentElement = svgDoc.getElementById(contentId);
+                    if (contentElement) {
+                        bringToFront(contentElement); // 2. Its content
+                    }
+                });
             } else {
-                shape.style.fill = getCategoryColor();
+                // This is an unavailable/unoccupied zone
+                shape.classList.add('unavailable-zone');
             }
-
-            shape.addEventListener('click', () => handleMapShapeClick(vendorId));
-
-            shape.addEventListener('mouseover', () => {
-                if (shape.classList.contains('dimmed') || shape.classList.contains('highlighted')) return;
-
-                bringToFront(shape); // 1. Shape
-                const contentId = currentMapLabelType === 'id' ? `content-text-${vendorId}` : `content-logo-${vendorId}`;
-                const contentElement = svgDoc.getElementById(contentId);
-                if (contentElement) {
-                    bringToFront(contentElement); // 2. Its content
-                }
-            });
         });
 
         updateMapContentDisplay(currentMapLabelType); // Initial display of IDs or Logos
@@ -397,6 +402,11 @@ document.addEventListener('DOMContentLoaded', () => {
             elementToDisplay.setAttribute("y", center.y);
             elementToDisplay.setAttribute("class", "store-map-content store-text"); // CSS will handle font-size
             elementToDisplay.textContent = vendorId;
+
+            if (shape.classList.contains('unavailable-zone')) {
+                elementToDisplay.classList.add('unavailable-text');
+            }
+
             // NO JavaScript font sizing for IDs here
         } else if (displayType === 'logo') {
             // ... (logo creation logic remains the same as your last working version)
@@ -765,6 +775,12 @@ document.addEventListener('DOMContentLoaded', () => {
 
     function handleMapShapeClick(vendorId) {
         const vendor = vendorData[vendorId];
+        const shape = svgDoc.getElementById(vendorId);
+
+        if (shape && shape.classList.contains('unavailable-zone')){
+            return; // Do nothing if clicking an unavailable zone
+        }
+
         if (vendor && vendor.name) {
             focusedVendorId = vendorId;
             showVendorModal(vendorId);

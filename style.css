@@ -362,6 +362,43 @@ body {
     text-anchor: middle;
     pointer-events: none; /* So they don't interfere with clicks */
 }
+#mall-svg-element .community-space-label {
+    font-family: var(--font-primary); /* Or a specific font */
+    font-size: 5px; /* Adjust */
+    fill: var(--text-on-dark-secondary); /* Or a color that stands out but isn't a store color */
+    text-anchor: middle;
+    pointer-events: none; /* So they don't interfere with clicks */
+}
+#mall-svg-element .unavailable-zone {
+    fill: url(#unavailable-pattern); /* Apply the striped pattern */
+    stroke: #444; /* Muted stroke color */
+    stroke-width: 1px;
+    /* stroke-dasharray: 2 2; */ /* optional dash border */
+    cursor: not-allowed;
+    opacity: 0.8; /* Slightly faded */
+}
+#mall-svg-element .unavailable-text {
+    fill: #666; /* A muted grey color for the text */
+    opacity: 0.55; /* Optional: Make it slightly transparent as well */
+    font-weight: 400; /* Lighter font weight than active IDs */
+    /* You could also consider a less prominent stroke or no stroke */
+    /* stroke: none; */
+}
+
+/* Make sure unavailable zones don't have hover effects */
+#mall-svg-element .unavailable-zone:hover {
+    opacity: 0.8; /* Keep opacity same on hover */
+    stroke-width: 1px; /* Do not increase stroke width on hover */
+    /* Any other hover effects should be negated here */
+}
+
+/* Also ensure dimming logic doesn't clash.
+   When another item is focused, unavailable zones should also be dimmed.
+   The .map-has-focus CSS rule will dim them via opacity, which is fine.
+*/
+#mall-svg-element.map-has-focus .unavailable-zone {
+    opacity: 0.3; /* Use the same dim opacity */
+}
 
 /* Footer - Categories and Vendor List */
 .directory-footer {

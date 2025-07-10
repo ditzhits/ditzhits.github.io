@@ -31,7 +31,7 @@
   <path fill="rgb(12, 12, 12)"  d="m.5.5h174.22v14.22h228v261.33h-43.56l-.44,61.78-82.67,77.33.44,60h-128.44l-.44-43.11L9.83,311.61c.3-69.33.59-138.67.89-208-3.41.06-6.81.12-10.22.18V.5Z"/>
 
   <!-- Entrance Label -->
-  <text x="203.8" y="470" class="map-feature-label entrance-label" style="fill:rgb(37, 225, 50); text-anchor: middle;">Entrance</text>
+  <text x="203.8" y="460" class="map-feature-label entrance-label" style="fill:rgb(37, 225, 50); text-anchor: middle;">Entrance</text>
   <!-- You might use an icon + text, or just text -->
   <!-- <path d="..." class="entrance-icon" fill="#E0E0E0"/> -->
   <text x="204" y="233" class="map-feature-label" style="fill:rgb(255, 255, 255); text-anchor: middle;">Event Space</text>

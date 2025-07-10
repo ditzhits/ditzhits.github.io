@@ -13,15 +13,6 @@ document.addEventListener('DOMContentLoaded', () => {
     const legendItemsContainer = document.getElementById('legend-items-container');
     const legendToggleText = document.querySelector('.legend-toggle-text'); // For changing button text
 
-    const KIOSK_SVG_LOCATION = { x: 203.3, y: 410 };
-    const yahMarker = document.getElementById('you-are-here-marker');
-
-    let resizeTimeout;
-    window.addEventListener('resize', () => {
-        clearTimeout(resizeTimeout);
-        resizeTimeout = setTimeout(updateYouAreHereMarkerPosition, 100); // Debounce
-    });
-
     let vendorData = {};
     let svgDoc; // This will be the <svg> HTML element
     let currentMapLabelType = 'id';
@@ -119,7 +110,6 @@ document.addEventListener('DOMContentLoaded', () => {
             populateVendorList();
             addGlobalEventListeners();
             populateMapLegend();
-            updateYouAreHereMarkerPosition();
 
         } catch (error) {
             console.error("Error in loadData function:", error);
@@ -127,60 +117,6 @@ document.addEventListener('DOMContentLoaded', () => {
         } finally {
             if (loadingIndicator) loadingIndicator.style.display = 'none';
         }
-    }
-
-    function updateYouAreHereMarkerPosition() {
-        if (!svgDoc || !yahMarker || !mapSvgContainer.offsetParent) { // Ensure elements are ready and container is positioned
-            if (yahMarker) yahMarker.style.display = 'none'; // Hide if prerequisites not met
-            return;
-        }
-
-        // 1. Get the main SVG element and its container
-        // const svgRenderAreaRect = (svgRenderArea || mapSvgContainer).getBoundingClientRect();
-        // Using mapSvgContainer directly as the reference for positioning the marker
-        const mapContainerRect = mapSvgContainer.getBoundingClientRect();
-
-
-        // 2. Get the CTM (Current Transformation Matrix) of the SVG content
-        // This matrix maps SVG user units to screen pixels.
-        // We need a point in the SVG that we know the coordinates of, e.g., (0,0) of the viewBox.
-        const svgPoint = svgDoc.createSVGPoint();
-        svgPoint.x = KIOSK_SVG_LOCATION.x;
-        svgPoint.y = KIOSK_SVG_LOCATION.y;
-
-        // Get the CTM of the <svg> element itself, or a main <g> group if you have one.
-        // If svgDoc is the root <svg> element and it has a viewBox, its CTM
-        // maps its internal coordinate system to its own bounding box on screen.
-        let ctm = svgDoc.getScreenCTM();
-
-        if (!ctm) {
-            console.warn("Could not get Screen CTM from SVG document.");
-            yahMarker.style.display = 'none';
-            return;
-        }
-
-        // If your SVG has preserveAspectRatio="xMidYMid meet" (default for `object-fit: contain`),
-        // the CTM correctly gives transformed points.
-
-        // 3. Transform the SVG point to screen coordinates
-        let screenPoint = svgPoint.matrixTransform(ctm);
-
-        // 4. Calculate position relative to the mapSvgContainer's top-left corner
-        // screenPoint.x/y are relative to the viewport. mapContainerRect.left/top are also viewport relative.
-        let markerLeft = screenPoint.x - mapContainerRect.left;
-        let markerTop = screenPoint.y - mapContainerRect.top;
-
-        // --- Adjustments if using #svg-render-area and object-fit: contain ---
-        // If the SVG is letterboxed/pillarboxed within svg-render-area due to object-fit: contain
-        // we need to account for the offset of the actual rendered SVG within svg-render-area.
-        const actualSvgRect = svgDoc.getBoundingClientRect(); // Bounding box of the <svg> element
-        markerLeft = (actualSvgRect.left - mapContainerRect.left) + (KIOSK_SVG_LOCATION.x * (actualSvgRect.width / svgDoc.viewBox.baseVal.width));
-        markerTop = (actualSvgRect.top - mapContainerRect.top) + (KIOSK_SVG_LOCATION.y * (actualSvgRect.height / svgDoc.viewBox.baseVal.height));
-        // --- End Adjustment ---
-
-        yahMarker.style.left = `${markerLeft}px`;
-        yahMarker.style.top = `${markerTop}px`;
-        yahMarker.style.display = 'flex'; // Make it visible
     }
 
     function getCategoryColor(category) {

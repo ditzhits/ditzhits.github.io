@@ -632,7 +632,7 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 
     function handleCategorySelect(category, clickedButton) {
-        clearFocusStateAndApplyGeneralFilters(); // Clear any active focus first
+        clearAllSelectionsAndFilters(); // Clear any active focus first
 
         // --- Existing category button logic ---
         if (activeCategoryButton === clickedButton && category !== 'all') {
@@ -669,9 +669,6 @@ document.addEventListener('DOMContentLoaded', () => {
         // --- End of existing category button logic ---
 
         const currentSearchTerm = searchBar.value;
-        // `filterMapAndList` is now called by `clearFocusStateAndApplyGeneralFilters` if needed,
-        // or directly if no focus was active.
-        // Let's ensure it's always called to reflect the category change.
         filterMapAndList(category, currentSearchTerm);
     }
 
@@ -685,7 +682,7 @@ document.addEventListener('DOMContentLoaded', () => {
     function handleVendorListSelect(vendorId, listItemElement) {
         if (focusedVendorId === vendorId && selectedVendorItemInList === listItemElement) {
             // Clicked on the already focused/selected vendor: Unfocus it
-            clearFocusStateAndApplyGeneralFilters(); // This function reverts everything
+            clearAllSelectionsAndFilters(); // This function reverts everything
             return; // Important to exit after unfocusing
         }
         focusedVendorId = vendorId; // Set the globally focused vendor
@@ -774,25 +771,58 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     }
 
-    // NEW function to clear the focused state and revert to general filters
-    function clearFocusStateAndApplyGeneralFilters() {
+    function clearAllSelectionsAndFilters() {
+        // 1. Clear vendor focus state
         focusedVendorId = null;
         if (selectedVendorItemInList) {
             selectedVendorItemInList.classList.remove('selected-in-list');
             selectedVendorItemInList = null;
         }
-        // vendorListContainer.querySelectorAll('.vendor-item.dimmed').forEach(item => item.classList.remove('dimmed'));
-        // vendorListContainer.querySelectorAll('.vendor-item.selected-in-list').forEach(item => item.classList.remove('selected-in-list'));
+        // No need to touch .dimmed on list items, populateVendorList will handle it
 
-
-        if (svgDoc) {
-            svgDoc.querySelectorAll('.store-shape.highlighted').forEach(s => s.classList.remove('highlighted'));
-            svgDoc.querySelectorAll('.store-shape.dimmed').forEach(s => s.classList.remove('dimmed')); // Remove general dimming
+        // 2. Reset Category Button UI and global state variable
+        if (categoryFiltersContainer) {
+            categoryFiltersContainer.querySelectorAll('.category-btn').forEach(btn => {
+                btn.classList.remove('active', 'inactive');
+            });
+            const allCatBtn = categoryFiltersContainer.querySelector('.category-btn[data-category="all"]');
+            if (allCatBtn) {
+                allCatBtn.classList.add('active');
+                activeCategoryButton = allCatBtn; // Update the global state reference
+            } else {
+                activeCategoryButton = null;
+            }
         }
 
-        const currentCategory = activeCategoryButton ? activeCategoryButton.dataset.category : 'all';
+        // 3. Reset Map UI state
+        if (svgDoc) {
+            svgDoc.classList.remove('map-has-focus');
+            svgDoc.querySelectorAll('.store-shape').forEach(s => {
+                s.classList.remove('highlighted', 'dimmed'); // Remove all specific styling
+            });
+        }
+
+        // 4. Finally, re-filter everything based on the now-reset state
+        //    Pass 'all' explicitly to ensure the correct filter is used.
         const currentSearch = searchBar.value;
-        filterMapAndList(currentCategory, currentSearch); // Re-apply general filters (which will dim map and list appropriately)
+        filterMapAndList('all', currentSearch);
+    }
+
+    function handleClickOnEmptySpace(event) {
+        if (modal.style.display === 'flex') return; // Do nothing if modal is open
+
+        const target = event.target;
+        const isInteractive = target.closest('.vendor-item-v2') ||
+                            target.closest('.store-shape') ||
+                            (svgDoc && target.closest && target.closest('.store-map-content')) ||
+                            target.closest('.category-btn') || // Clicking a category button is NOT an "empty space" click
+                            target.closest('#search-bar') ||
+                            target.closest('#map-label-toggle-btn') ||
+                            target.closest('#legend-toggle-btn');
+
+        if (!isInteractive) {
+            clearAllSelectionsAndFilters();
+        }
     }
 
     function getTodaysHours(vendorHoursArray) {
@@ -931,20 +961,12 @@ document.addEventListener('DOMContentLoaded', () => {
             const vendor = vendorData[vendorId];
             let isDimmed = false;
 
-            // If this is the specifically selected vendor, don't dim it.
-            if (vendorId === excludeFromDimmingId) {
-                shape.classList.remove('dimmed');
-                // Ensure it gets its category color if not highlighted
-                if (!shape.classList.contains('highlighted')) {
-                     const primaryCategory = vendor && vendor['@type'] && vendor['@type'].length > 0 ? vendor['@type'][0] : 'unknown';
-                     shape.style.fill = getCategoryColor(primaryCategory) || CATEGORY_COLORS.unknown;
-                }
-                return; // Skip further dimming checks for this one
-            }
-
-            shape.classList.remove('highlighted'); // Clear old highlights not matching current selection
-
-            if (vendor) {
+            if (svgDoc.classList.contains('map-has-focus') && shape.id !== focusedVendorId) {
+                // If another element is focused, this one should just be dimmed by the focus state.
+                // Let the highlightFocusedVendorOnMap logic handle this.
+                // The general filter dimming shouldn't apply on top.
+            } else if (vendor) {
+                // Apply dimming based on passed-in category and search term
                 if (category && category !== 'all') {
                     const vendorCategories = vendor['@type'] ? vendor['@type'].map(c => c.toLowerCase()) : [];
                     if (!vendorCategories.includes(category)) {
@@ -964,96 +986,76 @@ document.addEventListener('DOMContentLoaded', () => {
                     }
                 }
 
-                if (isDimmed) {
-                    shape.classList.add('dimmed');
-                } else {
-                    shape.classList.remove('dimmed');
-                    const primaryCategory = vendor['@type'] && vendor['@type'].length > 0 ? vendor['@type'][0] : 'unknown';
-                    shape.style.fill = getCategoryColor(primaryCategory) || CATEGORY_COLORS.unknown;
+                // Apply the dimming class
+                shape.classList.toggle('dimmed', isDimmed);
+
+                // Restore color if it's not dimmed and not highlighted
+                if (!isDimmed && !shape.classList.contains('highlighted')) {
+                    const primaryCategory = vendor['@type']?.[0];
+                    shape.style.fill = getCategoryColor(primaryCategory);
                 }
             } else { // Shape has no vendor data
-                if ((category && category !== 'all') || searchTerm) {
-                     shape.classList.add('dimmed');
-                } else {
-                     shape.classList.remove('dimmed');
-                     shape.style.fill = CATEGORY_COLORS.unknown;
-                }
+                shape.classList.add('dimmed'); // Always dim unavailable zones during filtering
             }
         });
+        // Call populateVendorList with the same parameters
         populateVendorList(category, searchTerm); // Repopulate list based on filters
     }
 
     function addGlobalEventListeners() {
-        modalCloseBtn.addEventListener('click', () => {
-            modal.style.display = 'none';
-            clearFocusStateAndApplyGeneralFilters();
-        });
-        window.addEventListener('click', (event) => {
-            if (modal.style.display === 'flex' && event.target === modal) {
-                modal.style.display = 'none';
-                clearFocusStateAndApplyGeneralFilters();
-            } else if (focusedVendorId && modal.style.display !== 'flex') {
+        const kioskContainer = document.querySelector('.kiosk-container');
+
+        // --- Main Click Handler for the Entire Kiosk ---
+        if (kioskContainer) {
+            kioskContainer.addEventListener('click', (event) => {
                 const target = event.target;
-                if (!target.closest('.vendor-item-v2') && !target.closest('.store-shape') && !(svgDoc && target.closest && target.closest('#mall-svg-element .store-map-content')) && !target.closest('.category-btn') && !target.closest('#search-bar') && !target.closest('#map-label-toggle-btn')) {
-                    clearFocusStateAndApplyGeneralFilters();
+
+                // Define elements that, when clicked, should NOT trigger a reset.
+                const isCategoryButton = target.closest('.category-btn');
+                const isVendorItem = target.closest('.vendor-item-v2');
+                const isMapShape = target.closest('.store-shape') || (svgDoc && target.closest && target.closest('.store-map-content'));
+                const isLegendToggle = target.closest('#legend-toggle-btn');
+                const isLabelToggle = target.closest('#map-label-toggle-btn');
+                const isModalContent = target.closest('.modal-content');
+                const isSearchBar = target.closest('.search-container');
+
+                // If the click landed on any of these interactive elements, do nothing and exit.
+                if (isCategoryButton || isVendorItem || isMapShape || isLegendToggle || isLabelToggle || isModalContent || isSearchBar) {
+                    // If a vendor item was clicked, it has its own handler that runs, so we just exit here.
+                    // Same for category buttons, etc.
+                    return;
                 }
+
+                // --- If the code reaches here, it means an "empty space" was clicked ---
+                // (e.g., the background of the footer, the main area, etc.)
+
+                // Call the master reset function.
+                console.log("Empty space click detected. Resetting filters and focus.");
+                clearAllSelectionsAndFilters();
+            });
+        }
+
+        // --- Specific Listener for Modal Backdrop ---
+        // This is still useful for specifically clicking the dark overlay.
+        modal.addEventListener('click', (event) => {
+            if (event.target === modal) { // Only if the click is on the .modal backdrop itself
+                modal.style.display = 'none';
+                clearAllSelectionsAndFilters();
             }
         });
 
+        // --- Other listeners that DON'T use the main click handler ---
+        // The search bar input uses an 'input' event, not 'click', so it's separate and fine.
         searchBar.addEventListener('input', (e) => {
-            focusedVendorId = null;
-            if (selectedVendorItemInList) selectedVendorItemInList.classList.remove('selected-in-list');
-            selectedVendorItemInList = null;
-            if (svgDoc) svgDoc.querySelectorAll('.store-shape.highlighted').forEach(s => s.classList.remove('highlighted'));
-
+            clearAllSelectionsAndFilters(); // Or just clear focus and re-filter
             const searchTerm = e.target.value;
-            clearSearchBtn.style.display = searchTerm ? 'inline-block' : 'none';
             const selectedCategory = activeCategoryButton ? activeCategoryButton.dataset.category : 'all';
             filterMapAndList(selectedCategory, searchTerm);
         });
 
-        clearSearchBtn.addEventListener('click', () => {
-            focusedVendorId = null;
-            if (selectedVendorItemInList) selectedVendorItemInList.classList.remove('selected-in-list');
-            selectedVendorItemInList = null;
-            if (svgDoc) svgDoc.querySelectorAll('.store-shape.highlighted').forEach(s => s.classList.remove('highlighted'));
-
-            searchBar.value = '';
-            clearSearchBtn.style.display = 'none';
-            const selectedCategory = activeCategoryButton ? activeCategoryButton.dataset.category : 'all';
-            filterMapAndList(selectedCategory, '');
-        });
-
-        if (mapLabelToggleButton) {
-            mapLabelToggleButton.addEventListener('click', () => {
-                const newType = currentMapLabelType === 'id' ? 'logo' : 'id';
-                updateMapContentDisplay(newType);
-                mapLabelToggleButton.textContent = newType === 'id' ? 'Show Logos' : 'Show IDs';
-            });
-        }
-
-        if (legendToggleBtn && mapLegend && legendToggleText) {
-            legendToggleBtn.addEventListener('click', () => {
-                const isCollapsed = mapLegend.classList.contains('collapsed');
-                if (isCollapsed) {
-                    mapLegend.classList.remove('collapsed');
-                    legendToggleBtn.setAttribute('aria-expanded', 'true');
-                    legendToggleText.textContent = 'Hide Legend';
-                } else {
-                    mapLegend.classList.add('collapsed');
-                    legendToggleBtn.setAttribute('aria-expanded', 'false');
-                    legendToggleText.textContent = 'Show Legend';
-                }
-            });
-        } else {
-            console.warn("Legend toggle button or container not found.");
-        }
-
-        const allCatBtn = categoryFiltersContainer.querySelector('.category-btn[data-category="all"]');
-        if (allCatBtn && !activeCategoryButton) {
-            allCatBtn.classList.add('active');
-            activeCategoryButton = allCatBtn;
-        }
+        // We don't need a separate window listener anymore, the .kiosk-container one is better.
+        // Ensure all other specific event listeners (like for legend toggle, map label toggle) are still in place
+        // if they were outside this function.
     }
 
     loadData();

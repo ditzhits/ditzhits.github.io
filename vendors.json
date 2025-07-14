@@ -191,21 +191,6 @@
     "logo": "",
     "description": ""
   },
-  "A29": {
-    "name": "Realz&Stealz",
-    "@type": [
-      "trading cards"
-    ],
-    "url": "",
-    "hours": [
-      "Fri 3pm-9pm",
-      "Sat 10am-9pm",
-      "Sun 11am-7pm"
-    ],
-    "telephone": "",
-    "logo": "",
-    "description": ""
-  },
   "A30": {
     "name": "GDUP Studios",
     "@type": [
@@ -738,7 +723,7 @@
     "logo": "",
     "description": ""
   },
-  "C26": {
+  "C34": {
     "name": "Midnite Creations",
     "@type": [
       "Trading Cards"
@@ -768,7 +753,7 @@
     "logo": "",
     "description": ""
   },
-  "C34": {
+  "A29": {
     "name": "Azteca.19",
     "@type": [
       "fashion apparel"
@@ -1026,9 +1011,11 @@
     "description": ""
   },
   "D11": {
-    "name": "77collects",
+    "name": "Orange Garden",
     "@type": [
-      "trading cards"
+      "toys",
+      "collectibles",
+      "games"
     ],
     "url": "",
     "hours": [
@@ -1392,6 +1379,38 @@
     "name": "SoCal Boutique",
     "@type": [
       "Fashion Apparel"
+    ],
+    "url": "",
+    "hours": [
+      "Fri 3pm-9pm",
+      "Sat 10am-9pm",
+      "Sun 11am-7pm"
+    ],
+    "telephone": "",
+    "logo": "",
+    "description": ""
+  },
+  "C22": {
+    "name": "BoneSaw Studios",
+    "@type": [
+      "Trading Cards"
+    ],
+    "url": "",
+    "hours": [
+      "Fri 3pm-9pm",
+      "Sat 10am-9pm",
+      "Sun 11am-7pm"
+    ],
+    "telephone": "",
+    "logo": "",
+    "description": ""
+  },
+  "D25": {
+    "name": "GET-A-POW",
+    "@type": [
+      "toys",
+      "collectibles",
+      "games"
     ],
     "url": "",
     "hours": [

@@ -652,38 +652,6 @@ body {
     flex-direction: column;
     gap: 8px; /* Space between name and category tags */
 }
-/* In style.css */
-
-/* ... (Keep your existing modal styles for .modal background, animation, .modal-close-btn) ... */
-
-.modal-content {
-    background-color: var(--element-bg-dark); /* Your dark theme element background */
-    color: var(--text-on-dark-primary);
-    margin: auto;
-    padding: 25px 30px; /* Adjusted padding */
-    border-radius: var(--border-radius-lg); /* Larger radius for modern look */
-    width: 90%;
-    max-width: 550px; /* Slightly narrower than before for this design */
-    box-shadow: 0 10px 50px rgba(0,0,0,0.4);
-    position: relative;
-    /* animation: fadeInModal 0.3s ease-out; */ /* Keep animation */
-    border: 1px solid var(--border-color-dark-theme-light);
-    display: flex; /* Added to make children flex items */
-    flex-direction: column; /* Stack sections vertically */
-    gap: 20px; /* Space between main sections */
-}
-
-.modal-close-btn {
-    /* position: absolute; top: 15px; right: 20px; ... keep existing */
-    /* Ensure it's easily tappable and contrasts */
-    color: var(--text-on-dark-secondary); /* Lighter than primary for less emphasis */
-    font-size: 28px; /* Ensure good size */
-    line-height: 1;
-}
-.modal-close-btn:hover {
-    color: var(--primary-purple);
-}
-
 
 /* New Header Profile Section */
 .modal-header-profile {

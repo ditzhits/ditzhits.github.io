@@ -191,10 +191,10 @@
     "logo": "",
     "description": ""
   },
-  "A30": {
-    "name": "GDUP Studios",
+  "A40": {
+    "name": "Mankey Doodle",
     "@type": [
-      "fashion apparel"
+      "trading cards"
     ],
     "url": "",
     "hours": [
@@ -238,22 +238,7 @@
     "logo": "",
     "description": ""
   },
-  "A40": {
-    "name": "Mankey Doodle",
-    "@type": [
-      "trading cards"
-    ],
-    "url": "",
-    "hours": [
-      "Fri 3pm-9pm",
-      "Sat 10am-9pm",
-      "Sun 11am-7pm"
-    ],
-    "telephone": "",
-    "logo": "",
-    "description": ""
-  },
-  "A41": {
+  "D21": {
     "name": "EQUAL APPAREL",
     "@type": [
       "fashion apparel"
@@ -282,24 +267,7 @@
     "telephone": "",
     "logo": "",
     "description": ""
-  },
-  "A44": {
-    "name": "RRatedGoods",
-    "@type": [
-      "toys",
-      "collectibles",
-      "games"
-    ],
-    "url": "",
-    "hours": [
-      "Fri 3pm-9pm",
-      "Sat 10am-9pm",
-      "Sun 11am-7pm"
-    ],
-    "telephone": "",
-    "logo": "",
-    "description": ""
-  },
+  },  
   "A5": {
     "name": "Shipwrecked",
     "@type": [
@@ -364,6 +332,21 @@
   },
   "B1": {
     "name": "Daniel's Card Select",
+    "@type": [
+      "trading cards"
+    ],
+    "url": "",
+    "hours": [
+      "Fri 3pm-9pm",
+      "Sat 10am-9pm",
+      "Sun 11am-7pm"
+    ],
+    "telephone": "",
+    "logo": "",
+    "description": ""
+  },
+  "C26": {
+    "name": "The Secret Card",
     "@type": [
       "trading cards"
     ],
@@ -457,19 +440,19 @@
     "description": ""
   },
   "B46": {
-    "name": "The Wildling Wardrobe",
+    "name": "TCG Bandits",
     "@type": [
-      "fashion apparel"
+      "trading cards"
     ],
-    "url": "https://www.instagram.com/thewildlingwardrobe",
+    "url": "",
     "hours": [
       "Fri 3pm-9pm",
       "Sat 10am-9pm",
       "Sun 11am-7pm"
     ],
     "telephone": "",
-    "logo": "logos/Wildling Wardrobe.png",
-    "description": "The Wildling Wardrobe offers curated, pre-loved children’s clothing with a boho-chic flair, perfect for little free spirits. We focus on sustainability, affordability, and style, featuring quality pieces from brands like Zara, Kate Quinn, Angel Dear, Baby Gap, Nike and Cotton On. At this Cultured Vibe location, you’ll find a special collection of character plushies and kids’ apparel featuring favorites like Disney, Pokémon, anime, and gaming icons. With every item, we aim to minimize textile waste and make eco-conscious fashion accessible to all."
+    "logo": "",
+    "description": ""
   },
   "B25": {
     "name": "Candy Land",
@@ -803,22 +786,7 @@
     "description": ""
   },
   "C44": {
-    "name": "MJ Glam",
-    "@type": [
-      "fashion apparel"
-    ],
-    "url": "",
-    "hours": [
-      "Fri 3pm-9pm",
-      "Sat 10am-9pm",
-      "Sun 11am-7pm"
-    ],
-    "telephone": "",
-    "logo": "",
-    "description": ""
-  },
-  "C46": {
-    "name": "Trade Street Sales",
+    "name": "ZH Collectibles",
     "@type": [
       "toys",
       "collectibles",
@@ -834,8 +802,8 @@
     "logo": "",
     "description": ""
   },
-  "C50": {
-    "name": "Rudzinski Collectibles",
+  "C46": {
+    "name": "Trade Street Sales",
     "@type": [
       "toys",
       "collectibles",
@@ -964,9 +932,11 @@
     "description": ""
   },
   "C64": {
-    "name": "AG133 Rips",
+    "name": "Hidden City Holo's",
     "@type": [
-      "Trading Cards"
+      "Trading Cards",
+      "toys",
+      "collectibles"
     ],
     "url": "",
     "hours": [
@@ -1060,11 +1030,9 @@
     "description": ""
   },
   "D15": {
-    "name": "Party Wagon Arcade",
+    "name": "its ZachRips",
     "@type": [
-      "toys",
-      "collectibles",
-      "games"
+      "trading cards"
     ],
     "url": "",
     "hours": [
@@ -1092,9 +1060,10 @@
     "description": ""
   },
   "D18": {
-    "name": "Still",
+    "name": "Rudzinski Collectibles",
     "@type": [
-      "candles"
+      "comics",
+      "collectibles"
     ],
     "url": "",
     "hours": [
@@ -1122,9 +1091,9 @@
     "description": ""
   },
   "D2": {
-    "name": "Berrprintz",
+    "name": "Artist Collects",
     "@type": [
-      "fashion apparel"
+      "trading cards"
     ],
     "url": "",
     "hours": [
@@ -1152,7 +1121,7 @@
     "logo": "",
     "description": ""
   },
-  "D21": {
+  "A41": {
     "name": "Rogue Rivals",
     "@type": [
       "Trading Cards"
@@ -1248,9 +1217,11 @@
     "description": ""
   },
   "D40": {
-    "name": "The Psychic Corvid",
+    "name": "RRatedGoods",
     "@type": [
-      "psychic"
+      "toys",
+      "collectibles",
+      "games"
     ],
     "url": "",
     "hours": [
@@ -1263,10 +1234,25 @@
     "description": ""
   },
   "D46": {
-    "name": "PatchLand",
+    "name": "Slim Rips TCG LLC",
     "@type": [
-      "Custom Jewelry",
-      "Accessories"
+      "trading cards"
+    ],
+    "url": "",
+    "hours": [
+      "Fri 3pm-9pm",
+      "Sat 10am-9pm",
+      "Sun 11am-7pm"
+    ],
+    "telephone": "",
+    "logo": "",
+    "description": ""
+  },
+  "D48": {
+    "name": "Patchland",
+    "@type": [
+      "custom jewelry",
+			"accessories"
     ],
     "url": "",
     "hours": [
@@ -1279,9 +1265,11 @@
     "description": ""
   },
   "C29": {
-    "name": "TCG Bandits",
+    "name": "K.W Trendy Play",
     "@type": [
-      "trading cards"
+      "Toys",
+      "Collectibles",
+      "Games"
     ],
     "url": "",
     "hours": [
@@ -1411,6 +1399,39 @@
       "toys",
       "collectibles",
       "games"
+    ],
+    "url": "",
+    "hours": [
+      "Fri 3pm-9pm",
+      "Sat 10am-9pm",
+      "Sun 11am-7pm"
+    ],
+    "telephone": "",
+    "logo": "",
+    "description": ""
+  },
+  "A35": {
+    "name": "Ferrara Box",
+    "@type": [
+      "toys",
+      "collectibles",
+      "games"
+    ],
+    "url": "",
+    "hours": [
+      "Fri 3pm-9pm",
+      "Sat 10am-9pm",
+      "Sun 11am-7pm"
+    ],
+    "telephone": "",
+    "logo": "",
+    "description": ""
+  },
+  "D33": {
+    "name": "Lemon Tree Beauty",
+    "@type": [
+      "custom jewelry",
+      "accessories"
     ],
     "url": "",
     "hours": [

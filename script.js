@@ -19,6 +19,7 @@ document.addEventListener('DOMContentLoaded', () => {
     let activeCategoryButton = null;
     let selectedVendorItemInList = null;
     let focusedVendorId = null;
+    let logoViewTimeout = null;
 
     const CATEGORY_COLORS = {
         "toys": "#028391",
@@ -103,7 +104,7 @@ document.addEventListener('DOMContentLoaded', () => {
             }
 
             mapSvgContainer.appendChild(svgDoc);
-            console.log("SVG Document Element appended to container:", svgDoc);
+            // console.log("SVG Document Element appended to container:", svgDoc);
 
             initializeMapInteractions();
             populateCategories();
@@ -117,6 +118,25 @@ document.addEventListener('DOMContentLoaded', () => {
         } finally {
             if (loadingIndicator) loadingIndicator.style.display = 'none';
         }
+    }
+
+    // This centralizes the logic for reverting to the ID view.
+    function switchToIdView() {
+        if (currentMapLabelType === 'logo') { // Only switch if currently showing logos
+            console.log("Timer expired or manually switched back to IDs.");
+            updateMapContentDisplay('id');
+            if (mapLabelToggleButton) {
+                mapLabelToggleButton.textContent = 'Show Logos';
+            }
+        }
+    }
+
+    function cancelLogoViewTimerAndRevert() {
+        if (logoViewTimeout) { // Only log if there was a timer to clear
+            clearTimeout(logoViewTimeout);
+            logoViewTimeout = null;
+        }
+        switchToIdView(); // Always ensures the view is reverted to IDs
     }
 
     function getCategoryColor(category) {
@@ -437,6 +457,14 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     }
 
+    function collapseLegend() {
+        if (mapLegend && !mapLegend.classList.contains('collapsed')) {
+            mapLegend.classList.add('collapsed');
+            if (legendToggleBtn) legendToggleBtn.setAttribute('aria-expanded', 'false');
+            if (legendToggleText) legendToggleText.textContent = 'Show Legend';
+        }
+    }
+
     function populateMapLegend() {
         if (!legendItemsContainer || !vendorData) return;
 
@@ -632,6 +660,7 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 
     function handleCategorySelect(category, clickedButton) {
+        cancelLogoViewTimerAndRevert(); // Reset view to IDs if logos shown
         clearAllSelectionsAndFilters(); // Clear any active focus first
 
         // --- Existing category button logic ---
@@ -772,6 +801,8 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 
     function clearAllSelectionsAndFilters() {
+        cancelLogoViewTimerAndRevert(); // Reset view to IDs if logos shown
+
         // 1. Clear vendor focus state
         focusedVendorId = null;
         if (selectedVendorItemInList) {
@@ -819,8 +850,10 @@ document.addEventListener('DOMContentLoaded', () => {
                             target.closest('#search-bar') ||
                             target.closest('#map-label-toggle-btn') ||
                             target.closest('#legend-toggle-btn');
+                            target.closest('#map-legend');
 
         if (!isInteractive) {
+            collapseLegend(); // Collapse the legend if it's open
             clearAllSelectionsAndFilters();
         }
     }
@@ -1008,30 +1041,7 @@ document.addEventListener('DOMContentLoaded', () => {
         // --- Main Click Handler for the Entire Kiosk ---
         if (kioskContainer) {
             kioskContainer.addEventListener('click', (event) => {
-                const target = event.target;
-
-                // Define elements that, when clicked, should NOT trigger a reset.
-                const isCategoryButton = target.closest('.category-btn');
-                const isVendorItem = target.closest('.vendor-item-v2');
-                const isMapShape = target.closest('.store-shape') || (svgDoc && target.closest && target.closest('.store-map-content'));
-                const isLegendToggle = target.closest('#legend-toggle-btn');
-                const isLabelToggle = target.closest('#map-label-toggle-btn');
-                const isModalContent = target.closest('.modal-content');
-                const isSearchBar = target.closest('.search-container');
-
-                // If the click landed on any of these interactive elements, do nothing and exit.
-                if (isCategoryButton || isVendorItem || isMapShape || isLegendToggle || isLabelToggle || isModalContent || isSearchBar) {
-                    // If a vendor item was clicked, it has its own handler that runs, so we just exit here.
-                    // Same for category buttons, etc.
-                    return;
-                }
-
-                // --- If the code reaches here, it means an "empty space" was clicked ---
-                // (e.g., the background of the footer, the main area, etc.)
-
-                // Call the master reset function.
-                console.log("Empty space click detected. Resetting filters and focus.");
-                clearAllSelectionsAndFilters();
+                handleClickOnEmptySpace(event);
             });
         }
 
@@ -1044,9 +1054,66 @@ document.addEventListener('DOMContentLoaded', () => {
             }
         });
 
+        // Specific Listener for the Modal's 'X' Close Button
+        if (modalCloseBtn) {
+            modalCloseBtn.addEventListener('click', () => {
+                console.log("Modal 'X' button clicked."); // For debugging
+                modal.style.display = 'none';
+                clearAllSelectionsAndFilters(); // Use the master reset function
+            });
+        } else {
+            console.error("Modal close button (.modal-close-btn) not found in DOM!");
+        }
+
+        // Listener for the "Show Logos" / "Show IDs" toggle button
+        if (mapLabelToggleButton) {
+            mapLabelToggleButton.addEventListener('click', () => {
+                // ALWAYS clear any existing timer when the button is clicked
+                clearTimeout(logoViewTimeout);
+                logoViewTimeout = null;
+
+                if (currentMapLabelType === 'id') {
+                    // --- Switching TO Logos ---
+                    updateMapContentDisplay('logo');
+                    mapLabelToggleButton.textContent = 'Show IDs';
+
+                    // Start the timer to revert back to IDs
+                    logoViewTimeout = setTimeout(() => {
+                        switchToIdView();
+                    }, 5000); // milliseconds
+
+                } else { // currentMapLabelType is 'logo'
+                    // --- Switching back TO IDs manually ---
+                    cancelLogoViewTimerAndRevert();
+                }
+            });
+        } else {
+            console.warn("Map label toggle button not found!");
+        }
+
+        // Listener for the "Show Legend" / "Hide Legend" toggle button
+        if (legendToggleBtn && mapLegend && legendToggleText) {
+            legendToggleBtn.addEventListener('click', () => {
+                console.log("Legend toggle button clicked."); // For debugging
+                const isCollapsed = mapLegend.classList.toggle('collapsed'); // .toggle() is a cleaner way to do this
+
+                // Update text and ARIA attribute based on the new state
+                if (isCollapsed) {
+                    legendToggleBtn.setAttribute('aria-expanded', 'false');
+                    legendToggleText.textContent = 'Show Legend';
+                } else {
+                    legendToggleBtn.setAttribute('aria-expanded', 'true');
+                    legendToggleText.textContent = 'Hide Legend';
+                }
+            });
+        } else {
+            console.warn("Legend toggle button or its related elements not found.");
+        }
+
         // --- Other listeners that DON'T use the main click handler ---
         // The search bar input uses an 'input' event, not 'click', so it's separate and fine.
         searchBar.addEventListener('input', (e) => {
+            cancelLogoViewTimerAndRevert(); // Reset view to IDs if logos shown
             clearAllSelectionsAndFilters(); // Or just clear focus and re-filter
             const searchTerm = e.target.value;
             const selectedCategory = activeCategoryButton ? activeCategoryButton.dataset.category : 'all';

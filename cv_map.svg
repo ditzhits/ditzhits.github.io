@@ -140,7 +140,7 @@
   <circle id="A5-label-anchor" cx="255" cy="425" r="1" fill="none" stroke="none" pointer-events="none" />
 
   <!-- Harcode a center for this shape -->
-  <polygon id="B30" class="store-shape" points="232.59 48.32 203.88 48.32 203.88 88.94 193.12 88.94 193.12 123.88 203.88 123.88 203.88 141.84 232.59 141.84 232.59 123.88 232.59 48.32"/> 
+  <polygon id="B30" class="store-shape" points="232.59 48.32 203.88 48.32 203.88 88.94 193.12 88.94 193.12 123.88 203.88 123.88 203.88 141.84 232.59 141.84 232.59 123.88 232.59 48.32"/>
   <circle id="B30-label-anchor" cx="214" cy="108" r="1" fill="none" stroke="none" pointer-events="none" />
 
   <!-- Harcode a center for this shape -->

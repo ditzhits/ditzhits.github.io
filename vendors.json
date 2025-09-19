@@ -564,7 +564,7 @@
     "description": ""
   },
   "B5": {
-    "name": "Clear Sky Construction",
+    "name": "Collectify Universe",
     "@type": [
       "trading cards"
     ],
@@ -1059,9 +1059,27 @@
     "logo": "",
     "description": ""
   },
+  "C50": {
+    "name": "Rudzinski Collectibles",
+    "@type": [
+      "toys",
+      "comics",
+      "collectibles"
+    ],
+    "url": "",
+    "hours": [
+      "Fri 3pm-9pm",
+      "Sat 10am-9pm",
+      "Sun 11am-7pm"
+    ],
+    "telephone": "",
+    "logo": "",
+    "description": ""
+  },
   "D18": {
     "name": "Rudzinski Collectibles",
     "@type": [
+      "toys",
       "comics",
       "collectibles"
     ],

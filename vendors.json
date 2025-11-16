@@ -630,9 +630,11 @@
     "description": ""
   },
   "B9": {
-    "name": "Señor Skante",
+    "name": "Punch It Chewie Press",
     "@type": [
-      "fashion apparel"
+      "toys",
+      "collectibles",
+      "games"
     ],
     "url": "",
     "hours": [
@@ -853,21 +855,6 @@
     "logo": "",
     "description": ""
   },
-  "C56": {
-    "name": "Outer Space Pass Port",
-    "@type": [
-      "fashion apparel"
-    ],
-    "url": "",
-    "hours": [
-      "Fri 3pm-9pm",
-      "Sat 10am-9pm",
-      "Sun 11am-7pm"
-    ],
-    "telephone": "",
-    "logo": "",
-    "description": ""
-  },
   "C58": {
     "name": "uKN0WdeezCards",
     "@type": [
@@ -1030,9 +1017,10 @@
     "description": ""
   },
   "D15": {
-    "name": "its ZachRips",
+    "name": "Ocean Club Cards & Collectibles",
     "@type": [
-      "trading cards"
+      "trading cards",
+	  "sports"
     ],
     "url": "",
     "hours": [
@@ -1172,9 +1160,11 @@
     "description": ""
   },
   "D27": {
-    "name": "Rebo's Poke Co",
+    "name": "GET-A-POW",
     "@type": [
-      "trading cards"
+      "toys",
+      "collectibles",
+      "games"
     ],
     "url": "",
     "hours": [
@@ -1412,11 +1402,10 @@
     "description": ""
   },
   "D25": {
-    "name": "GET-A-POW",
+    "name": "Outer Space Pass Port",
     "@type": [
-      "toys",
-      "collectibles",
-      "games"
+      "fashion",
+      "apparel"
     ],
     "url": "",
     "hours": [
@@ -1449,6 +1438,22 @@
     "name": "Lemon Tree Beauty",
     "@type": [
       "custom jewelry",
+      "accessories"
+    ],
+    "url": "",
+    "hours": [
+      "Fri 3pm-9pm",
+      "Sat 10am-9pm",
+      "Sun 11am-7pm"
+    ],
+    "telephone": "",
+    "logo": "",
+    "description": ""
+  },
+  "C59": {
+    "name": "3MV Ventures LLC",
+    "@type": [
+      "apparel",
       "accessories"
     ],
     "url": "",

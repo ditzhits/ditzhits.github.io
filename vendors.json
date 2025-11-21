@@ -1404,8 +1404,7 @@
   "D25": {
     "name": "Outer Space Pass Port",
     "@type": [
-      "fashion",
-      "apparel"
+      "fashion apparel"
     ],
     "url": "",
     "hours": [

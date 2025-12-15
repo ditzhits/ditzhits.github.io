@@ -78,7 +78,7 @@
   <path id="C6" class="store-shape" d="m147.65,435.52c-.07-6.7-.14-13.39-.21-20.09h27.73v20.09h-27.52,0Z"/>
   <rect id="B57" class="store-shape" x="276.32" y="14.72" width="61.21" height="14.04"/>
   <rect id="B46" class="store-shape" x="211.08" y="14.72" width="43.38" height="14.04"/>
-  <rect id="C58" class="store-shape" x="174.72" y="14.72" width="36.36" height="14.04"/>
+  <rect id="C58" class="store-shape" x="192.9" y="14.72" width="18.18" height="14.04"/>
   <rect id="C60" class="store-shape" x="153.48" y=".5" width="21.24" height="28.27"/>
   <rect id="C62" class="store-shape" x="133.09" y=".5" width="20.39" height="28.27"/>
   <rect id="C64" class="store-shape" x="113.24" y=".5" width="19.85" height="28.27"/>
@@ -121,12 +121,12 @@
   <rect id="D18" class="store-shape" x="9.99" y="255.61" width="22.43" height="20.27"/>
   <rect id="C18" class="store-shape" x="120.06" y="290.46" width="33.42" height="14.04"/>
   <rect id="C52" class="store-shape" x="76.32" y="69.39" width="77.16" height="26.97"/>
-  <rect id="C54" class="store-shape" x="135.46" y="48.32" width="18.01" height="21.07"/>
-  <rect id="C56" class="store-shape" x="116.2" y="48.32" width="19.26" height="21.07"/>
+  <rect id="C54" class="store-shape" x="116.2" y="48.32" width="37.27" height="21.07"/>
   <polygon id="D37" class="store-shape" points="73.83 28.94 93.69 28.77 93.69 .5 73.83 .5 73.83 28.94"/>
   <rect id="C50" class="store-shape" x="120.06" y="96.37" width="33.42" height="20.08"/>
   <rect id="A35" class="store-shape" x="358.96" y="237.61" width="43.76" height="19.22"/>
   <polygon id="B5" class="store-shape" points="254.4 290.46 254.54 304.5 308.21 304.5 308.21 276.06 276.5 276.06 276.5 290.46 254.4 290.46"/>
+  <rect id="C59" class="store-shape" x="174.72" y="14.72" width="18.18" height="14.04"/>
 
   <!-- Harcode a center for this shape -->
   <polygon id="A40" class="store-shape" points="298.02 69.39 298.02 88.95 318.1 88.94 318.28 103.99 298.01 103.99 298.01 123.88 336.77 123.88 336.77 69.39 298.02 69.39"/>

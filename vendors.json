@@ -346,9 +346,11 @@
     "description": ""
   },
   "C26": {
-    "name": "The Secret Card",
+    "name": "K.W Trendy Play",
     "@type": [
-      "trading cards"
+      "toys",
+      "collectibles",
+      "games"
     ],
     "url": "",
     "hours": [
@@ -455,9 +457,11 @@
     "description": ""
   },
   "B25": {
-    "name": "Candy Land",
+    "name": "Time Stop Tavern",
     "@type": [
-      "Candy"
+      "toys",
+      "collectibles",
+      "games"
     ],
     "url": "",
     "hours": [
@@ -679,9 +683,11 @@
     "description": ""
   },
   "C18": {
-    "name": "Hardships Ease",
+    "name": "Rudzinski Collectibles",
     "@type": [
-      "trading cards"
+      "toys",
+      "collectibles",
+      "games"
     ],
     "url": "",
     "hours": [
@@ -739,7 +745,7 @@
     "description": ""
   },
   "A29": {
-    "name": "Azteca.19",
+    "name": "DoesiT FC",
     "@type": [
       "fashion apparel"
     ],
@@ -845,15 +851,15 @@
       "collectibles",
       "games"
     ],
-    "url": "",
+    "url": "https://propcrafting.com/",
     "hours": [
       "Fri 3pm-9pm",
       "Sat 10am-9pm",
       "Sun 11am-7pm"
     ],
     "telephone": "",
-    "logo": "",
-    "description": ""
+    "logo": "logos/Prop Crafting.jpg",
+    "description": "Prop replicas from movies, TV shows, streaming, and games! Your go-to for lightsabers and helmets. Affordable collectibles from Star Wars, Marvel, Harry Potter, Star Trek, Lord of the Rings, more!"
   },
   "C58": {
     "name": "uKN0WdeezCards",
@@ -1048,11 +1054,10 @@
     "description": ""
   },
   "C50": {
-    "name": "Rudzinski Collectibles",
+    "name": "3MV Ventures LLC",
     "@type": [
-      "toys",
-      "comics",
-      "collectibles"
+      "apparel",
+      "accessories"
     ],
     "url": "",
     "hours": [
@@ -1273,11 +1278,9 @@
     "description": ""
   },
   "C29": {
-    "name": "K.W Trendy Play",
+    "name": "Western Charro",
     "@type": [
-      "Toys",
-      "Collectibles",
-      "Games"
+      "Fashion Apparel"
     ],
     "url": "",
     "hours": [
@@ -1387,7 +1390,7 @@
     "description": ""
   },
   "C22": {
-    "name": "BoneSaw Studios",
+    "name": "The Secret Card",
     "@type": [
       "Trading Cards"
     ],
@@ -1450,10 +1453,11 @@
     "description": ""
   },
   "C59": {
-    "name": "3MV Ventures LLC",
+    "name": "Bad Moon Rising Comic & Collectibles",
     "@type": [
-      "apparel",
-      "accessories"
+      "toys",
+      "collectibles",
+      "games"
     ],
     "url": "",
     "hours": [
